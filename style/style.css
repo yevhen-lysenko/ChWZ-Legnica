@@ -537,7 +537,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header__content-inner {
   border-radius: 20px;
-  background-image: url("/img/Group 24.png");
+  background-image: url("..//img/Group 24.png");
   background-repeat: no-repeat;
   background-position: center;
 }
