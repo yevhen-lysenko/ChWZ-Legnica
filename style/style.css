@@ -400,7 +400,7 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
     height: 24px;
     width: 36px;
-    background-image: url("/img/Arrow 1.png");
+    background-image: url(".//img/Arrow 1.png");
   }
   .header_nav-item:first-child:after {
     margin-top: 5px;
@@ -418,7 +418,7 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
     height: 24px;
     width: 36px;
-    background-image: url("/img/Arrow 1.png");
+    background-image: url(".//img/Arrow 1.png");
   }
   .header_nav-item:nth-child(2):after {
     margin-top: 5px;
@@ -436,7 +436,7 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
     height: 24px;
     width: 36px;
-    background-image: url("/img/Arrow 1.png");
+    background-image: url(".//img/Arrow 1.png");
   }
   .header_nav-item:last-child:after {
     margin-top: 5px;
@@ -537,7 +537,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header__content-inner {
   border-radius: 20px;
-  background-image: url("/img/Group 24.png");
+  background-image: url(".//img/Group 24.png");
   background-repeat: no-repeat;
   background-position: center;
 }
