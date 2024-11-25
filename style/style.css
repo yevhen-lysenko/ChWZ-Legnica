@@ -674,7 +674,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 15px 35px;
   }
   .info_item-text {
-    margin: 0;
+    margin: 0 0 0 35px;
     max-height: 27px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -689,7 +689,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
   }
   .info_item-img img {
-    max-width: 75px;
+    max-width: 70px;
   }
   .info__box {
     -webkit-box-align: center;
