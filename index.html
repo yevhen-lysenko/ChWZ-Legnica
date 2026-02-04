@@ -3,215 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/mainlogo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/fonts.css">
-    <link rel="icon" href="./img/Header Logo.png" type="image/png">
     <title>ChWZ Legnica</title>
 </head>
 <body>
-   <div class="wrapper">
-    <header class="header">
-        <!-- <div class="burger"><span></span></div> -->
-        <div class="header_top">
-            <div class="container">
-                <div class="header_top-inner">
-                    <div class="header_logo">
-                        <img class="logo_img" src="./img/Nav Logo.png" alt="" >
+<header class="header">
+    <div class="header__content">
+        <div class="header_logo">
+            <img class="logo_img" src="./img/birdheader.png" alt="" >
+            <div class="logo_CHWZ">CHWZ</div>
+        </div>
+        <div class="header_links">
+            <a href="https://www.facebook.com/share/17qKNrdMnV/" class="header_link" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/@chwz_legnica" class="header_link youtube" target="_blank">YouTube</a>
+            <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="header_link instagram" target="_blank">Instagram</a>
+        </div>
+    </div>
+    <div class="header_menu" id="burger">
+        <div class="header_line top"></div>
+        <div class="header_line middle"></div>
+        <div class="header_line bottom"></div>
+    </div>
+</header>
+
+<div class="menu_board">
+        <a href="https://www.facebook.com/share/17qKNrdMnV/" class="header_link" target="_blank">Facebook</a>
+        <a href="https://www.youtube.com/@chwz_legnica" class="header_link youtube" target="_blank">YouTube</a>
+        <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="header_link instagram" target="_blank">Instagram</a>
+</div>
+
+<div class="preview">
+    <div class="preview_item">
+        <img class="preview_logo" src="./img/birdimg.png" alt="" >
+        <div class="preview_title">ChWZ zbór w Legnicy</div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="info">
+    <div class="title">Informacje</div>
+        <div class="container_info">
+            <div class="tabcontainer">
+                <div class="tabheader">
+                    <div class="tabheader__items">
+                        <div class="tabheader__item tabheader__item_active">Nabozenstwa</div>
+                        <div class="tabheader__item">Zasady wiary</div>
+                        <div class="tabheader__item">Kontakt</div>
                     </div>
-                    <div id="menu" class="header_nav-burger">
-                        <div class="header_nav">
-                            <div class="nav__burger-logo">
-                                <img src="./img/nav_burger.png" alt="">
-                            </div>
-                            <div class="header-nav-list">
-                                <div class="header_nav-item">
-                                    <div class="header_nav-link"><a href="#question">Pytania</a></div>
-                                </div>
-                                <div class="header_nav-item">
-                                    <div class="header_nav-link"><a href="#info">Info</a></div>
-                                </div>
-                                <div class="header_nav-item">
-                                    <div class="header_nav-link"><a href="#contact">Kontakt</a></div>
-                                </div>
-                            </div>
-                            <div class="burger__links">
-                                <div class="burger__links-item"><a href="https://www.instagram.com/chwz_legnica/"><img src="./img/instagram.png" alt=""></a></div>
-                                <div class="burger__links-item"><a href="https://www.facebook.com/chwzlegnica/"><img src="./img/Facebook.png" alt=""></a></div>
-                                <div class="burger__links-item"><a href="https://www.youtube.com/@chwz_legnica"><img src="./img/vecteezy_youtube-logo-png-youtube-icon-transparent_18930575 4.png" alt=""></a></div>           
-                            
+                </div> 
+                <div class="tabcontent history">
+                    <div class="tab-left">
+                        <b>Niedziela:</b>
+                        <div>- 10:00 Nabozenstwo poranne</div>
+                        <div>- 18:00 Nabozenstwo wieczorowe</div>
+                        <br>
+                        <b>Poniedziałek:</b>
+                        <div>- 19:00 Modlitwa</div>
+                        <br>
+                        <b>Czwartek:</b>
+                        <div>- 18:00 Nabozenstwo</div>
+                        <br>
+                        <b>Piątek:</b>
+                        <div>- 18:00 Młodzieżowe</div>
+                        <br>
+                        <div><b>Adres: ul. Sudecka 3, 59-220 Legnica</b></div>
+                    </div>
+                    <!-- <div class="tab-right">
+                        <div class="title">Słowo od Pastora</div>
+                            <div class="video_container">
+                                <div class="video">
+                                <iframe src="https://www.youtube.com/embed/Vxu3nt1C0Dg"
+                                    title="Witamy w Zborze w Legnicy!"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allowfullscreen>
+                                </iframe>
                             </div>
                         </div>
-
+                    </div> -->
+                </div>
+                <div class="tabcontent">
+                    <b>Wierzymy w:</b>
+                    <ol><b><li>Jedynego Wszechmocnego Boga: Ojca, Syna i Ducha Świętego.</li>
+                        <li>Pismo Święte jako Słowo Boże, natchnione przez Ducha Świętego, które jest jedynym, najważniejszym autorytetem w sprawach: prawdy, wiary i życia.</li>
+                        <li>Jezusa Chrystusa, Syna Bożego, który przyszedł w ciele na świat- narodził się z Marii dziewicy, aby przez swą męczeńską śmierć i zmartwychwstanie zbawić grzeszników. Jest On jedynym Orędownikiem i Pośrednikiem pomiędzy człowiekiem a Bogiem.</li>
+                        <li>Zbawienie z łaski jako dar Bożej miłości.</li>
+                        <li>Nowonarodzenie z wody i Ducha Świętego, aby wejść do Królestwa Bożego.</li>
+                        <li>Chrzest Duchem Świętym oraz prowadzenie i dary *(charyzmaty) Ducha Świętego.</li>
+                        <li>Konieczność przyjęcia chrztu wodnego (przez zanurzenie). Przyjmowanie Wieczerzy Pańskiej (pod postacią chleba i wina, wraz z umywaniem nóg). Pomazanie olejem (ku uzdrowieniu).</li>
+                        <li>Kościół (ciało Jezusa Chrystusa), którego głową i budowniczym jest Jezus Chrystus.</li>
+                        <li>Powszechne zmartwychwstanie (wszystkich ludzi) i sąd Boży oraz życie wieczne (zbawionych) i wieczne potępienie.</li>
+                        <li>Odrodzenie (nowe) życie chrześcijanina, to jest takie, którego w szczególności przejawami są:</li>
+                        </b>
+                    </ol>
+                    <ul>
+                        <b>
+                        <li>modlitwa za władzę i postępowanie uczciwe, sprawiedliwe i święte (w tym bez nałogów);</li>
+                        <li>poszanowanie godności każdego człowieka;</li>
+                        <li>sumienne wykonywanie obowiązków (w domu, szkole, pracy, społeczeństwie);</li>
+                        <li>dbanie o nierozerwalność małżeństwa (związek kobiety i mężczyzny), rodzinę rodzicielstwo i macierzyństwo;</li>
+                        <li>ochrona życia (w tym nieodbywanie służby wojskowej).</li>
+                        </b>
+                    </ul>
+                </div>
+                <div class="tabcontent">
+                    <div><b>Adres e-mail:</b></div>
+                    <div class="text">
+                        <div class="email">legnica@chwz.org.pl</div>
+                        <img 
+                            class="copy" 
+                            src="./img/imgCopy.png"
+                            data-default="./img/imgCopy.png"
+                            data-success="./img/imgDone.png"
+                        >
                     </div>
-                    <div class="burger"><span></span></div>    
+                    <br>
+                    <div><b>Pastorzy:</b></div>
+                    <div><b>Adam Chyży</b></div>
+                    <div class="text">
+                        <div class="email">+48 518 018 092</div>
+                        <img 
+                            class="copy" 
+                            src="./img/imgCopy.png"
+                            data-default="./img/imgCopy.png"
+                            data-success="./img/imgDone.png"
+                        >
+                    </div>
+                    <br>
+                    <div><b>Rafał Szczechowski</b></div>
+                    <div class="text">
+                        <div class="email">+48 607 979 951</div>
+                        <img 
+                            class="copy" 
+                            src="./img/imgCopy.png"
+                            data-default="./img/imgCopy.png"
+                            data-success="./img/imgDone.png"
+                        >
+                    </div>
+                    <br>
+                    <div><b>Media</b></div>
+                    <div class="text"><a href="https://www.facebook.com/share/17qKNrdMnV/" class="media_link" target="_blank">Facebook</a><img class="arrow" src="./img/arrow.png"></div>
+                    <div class="text"><a href="https://www.youtube.com/@chwz_legnica" class="media_link" target="_blank">YouTube</a><img class="arrow" src="./img/arrow.png"></div>
+                    <div class="text"><a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="media_link" target="_blank">Instagram</a><img class="arrow" src="./img/arrow.png"></div>
+                    <br>
+                    <div><b>Dane bankowe</b></div>
+                    <div class="text">
+                        <div class="email">36 1020 3017 0000 2602 0119 6518</div>
+                        <img 
+                            class="copy" 
+                            src="./img/imgCopy.png"
+                            data-default="./img/imgCopy.png"
+                            data-success="./img/imgDone.png"
+                        >
+                    </div>
+                    <br>
+                    <div class="text"><a href="https://www.youtube.com/@chwz_legnica/streams" class="media_link" target="_blank"><b>Transmisje na żywo</b></a><img class="arrow" src="./img/arrow.png"></div>
                 </div>
             </div>
         </div>
-        <div class="header__links-inner">
-            <div class="container">
-                <div class="header__links-box">
-                    <div class="header__link-item instagram"><a href="https://www.instagram.com/chwz_legnica/"><img src="./img/instagram.png" alt=""></a></div>
-                    <div class="header__link-item facebook"><a href="https://www.facebook.com/chwzlegnica/"><img src="./img/Facebook.png" alt=""></a></div>
-                    <div class="header__link-item youtube"><a href="https://www.youtube.com/@chwz_legnica"><img src="./img/vecteezy_youtube-logo-png-youtube-icon-transparent_18930575 4.png" alt=""></a></div>           
-                </div>
-            </div>
-        </div>
-        <div class="header__content">
-            <div class="container">
-                <div class="header__content-inner">
-                    <div class="header__content-logo"><img src="./img/Header Logo.png" alt=""></div>
-                    <div class="header__content-title">Witamy na stronie zboru ChWZ w Legnicy</div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <main class="main">
-        <div id="info" class="info">
-            <div class="container">
-                <div class="info-inner">
-                    <div class="title">Info</div>
+    </div>
+</div>
 
-                    <div class="info__warning">xx.xx.xx wieczorem nabozenstwa nie bedzie</div>
+<div class="divider"></div>
 
-                    <div class="info__box">
-                        <div class="info_item-box">
-                            <a href="https://www.chwz.info.pl/">
-                                <div class="info__item">
-                                    <div class="info_item-img">
-                                        <img src="./img/img who.png" alt="">
-                                    </div>
-                                    <div class="info_item-text">Kimi jestesmy?</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="info_item-box">
-                            <a href="https://www.youtube.com/@chwz_legnica">
-                                <div class="info__item">
-                                    <div class="info_item-img">
-                                        <img src="./img/youtube.png" alt="">
-                                    </div>
-                                    <div class="info_item-text">Tramsmisje online</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="info_item-box">
-                            <a href="https://www.chwz.info.pl/zasady-wiary/">
-                                <div class="info__item">
-                                    <div class="info_item-img">
-                                        <img src="./img/Zasady wiary.png" alt="">
-                                    </div>
-                                    <div class="info_item-text">Zasady wiary</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="question" class="question">
-            <div class="container">
-                <div class="question__inner">
+<div class="calendar">
+    <div class="title">kalendarz spotkań</div>
+    <div class="calendar_container">
+        <div id="calendar"></div>
+        <div class="calendar_window"></div>
+    </div>
+</div>
 
-                    <div class="title">Pytania</div>
+<div class="divider"></div>
 
-                    <div class="question__box">
-                        <div class="question__item">
-                            <div class="question__item-button">
-                                <div class="question__item-title">Gdzie sie znajdujemy?</div>   
-                                <div class="question__item-arrow"><img src="./img/icon.png" alt=""></div>
-                            </div>
-                            <div class="question__item-text">Znajdujemy sie przy ulicy Sudecka 3 59-220 Legnica</div>
-                        </div>
-                        <div  class="question__item2">
-                            <div class="question__item-button2">
-                                <div class="question__item-title">Kiedy mamy nabozenstwa?</div>   
-                                <div class="question__item-arrow2"><img src="./img/icon.png" alt=""></div>
-                            </div>
-                            <div class="question__item-text2">
-                                Niedziela: <br>  - 10:00 Nabozenstwo poranne<br>  - 18:00 Nabozenstwo wieczorowe<br> <br> Poniedziałek: <br>  - 19:00 Modlitwa <br>
-                                 <br> Czwartek: <br>  - 18:00 Nabozenstwo</div>
-                        </div>
-                        <div class="question__item3">
-                            <div class="question__item-button3">
-                                <div class="question__item-title">Czy mamy zajecia dla dzieci?</div>   
-                                <div class="question__item-arrow3"><img src="./img/icon.png" alt=""></div>
-                            </div>
-                            <div class="question__item-text3">Tak, mamy zajecia dla dzieci pod czas Nabozenstwa i kazdy poniedzilek o 17:00</div>
-                        </div>
-                        <div class="question__item2">
-                            <div class="question__item-button4">
-                                <div class="question__item-title">Nabozenstwa mlodziezowe</div>   
-                                <div class="question__item-arrow4"><img src="./img/icon.png" alt=""></div>
-                            </div>
-                            <div class="question__item-text4">Zapraszmamy na Nabozenstwa mlodziezowe kazdy piatek o 18:00</div>
-                        </div>
-                    </div>
+<footer class="footer">
+    <div class="footer__dane">
+        <div class="footer__dane-title">Dane rejestrowe</div>
+        <div class="footer__dane-text">Rejestr Kościołów i Innych Związków Wyznaniowych, dział A poz.18. Decyzja Ministerstwa Spraw Wewnętrznych i Administracji z dnia 20.06.2000 r. <br>  nr W.R./6722-6/18/2000/HG.</div>
+    </div>
+    <div class="footer_divider"></div>
+    <div class="footer__copy">
+            <div class="footer__copy-text">© 2026 ChWZ. Wszelkie prawa zastrzeżone</div>
+    </div>
+</footer>
 
-                </div>
-            </div>
-        </div>
-        <div id="contact" class="contact">
-            <div class="container">
-                <div class="contact__inner">
-                    <div class="title">Kontakt</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pl.js"></script>
 
-                    <div class="contact__info-box">
-                        <div class="contact__info-item">
-                            <div class="contact__info-title">Kontakt</div>
-
-                            <div class="contact__info-text">+48 518 018 095 <br>
-                                kontakt@chwz.org.pl <br>
-                                roman.jawdyk@chwz.org.pl</div>
-                        </div>
-                        <div class="contact__info-item">
-                            <div class="contact__info-title">Dane bankowe</div>
-
-                            <div class="contact__info-text bank">36 1020 3017 0000 2602 0119 6518</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__inner">
-                <div class="footer__box">
-                    <div class="footer__logo">
-                        <img src="./img/Header Logo.png" alt="">
-                    </div>
-                    <div class="footer__contact">
-                        <div class="footer__contact-title">Kontakt</div>
-                        <div class="footer__contact-text">+48 518 018 095 <br>
-                            kontakt@chwz.org.pl <br> <br>
-                            Zbór w Legnicy <br> ul. Sudecka 3 <br>59-220 Legnica
-                            </div>
-                    </div>
-                    <div class="footer__dane">
-                        <div class="footer__dane-title">Dane rejestrowe</div>
-                        <div class="footer__dane-text">Rejestr Kościołów i Innych Związków <br>Wyznaniowych, dział A poz.18. <br>Decyzja Ministerstwa Spraw Wewnętrznych <br>i Administracji z dnia 20.06.2000 r. <br>  nr W.R./6722-6/18/2000/HG.</div>
-                    </div>
-                    <div class="footer__links">
-                        <div class="footer__inks-item">
-                            <a href="https://www.facebook.com/chwzlegnica/"><img src="./img/Facebook.png" alt=""></a> <br>
-                            <a href="https://www.youtube.com/@chwz_legnica"><img src="./img/vecteezy_youtube-logo-png-youtube-icon-transparent_18930575 4.png" alt=""></a> <br>
-                            <a href="https://www.instagram.com/chwzlegnica/"><img src="./img/Instagram.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer__copy">
-                    <div class="footer__copy-text">© 2024 ChWZ. Wszelkie prawa zastrzeżone | Designed & Developed by <a href="#">Yevhen Lysenko</a></div>
-                </div>
-            </div>
-        </div>
-    </footer>
-   </div>
+<script src="./js/script.js"></script>
 </body>
-
-<!-- JQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-<!-- JavaScript -->
-<script src="./js/main.js"></script>
-
 </html>
