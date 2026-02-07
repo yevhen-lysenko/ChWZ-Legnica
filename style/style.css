@@ -147,7 +147,7 @@ html, body {
   background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
   background-size: 200px 200px; 
   box-shadow: 0 4px 50px rgba(0, 0, 0, 0.411);
-  margin: 0 40px;
+  margin: 0 250px;
 }
 
 .preview_logo {
@@ -163,7 +163,7 @@ html, body {
   text-align: center;
   text-shadow: 0px 0px 20px rgb(255 255 255 / 31%);
   color: #f8fef4;
-  padding: 0 40px 140px 40px;
+  padding: 20px 40px 140px 40px;
 }
 
 .calendar {
