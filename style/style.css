@@ -16,26 +16,20 @@
   display: none;
 }
 
-.preview_title {
-  font-family: 'Neultica', sans-serif;
-  font-size: 40px;
-  text-align: center;
-  text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.27);
-  color: #f8fef4;
-}
-
 .title {
   font-family: 'Neultica', sans-serif;
   font-size: 60px;
   text-align: center;
-  text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.27);
+  text-shadow: 0px 0px 20px rgb(255 255 255 / 31%);
   color: #f8fef4;
 }
 
 html, body {
+  scroll-behavior: smooth;
   margin: 0;
-  background: #1b1d20;
-  color: #fff;
+  background-color: #83766c;
+  background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+  background-size: 200px 200px; 
   font-family: system-ui, sans-serif;
 }
 
@@ -46,10 +40,17 @@ html, body {
 }
 
 .divider {
-    width: 390px;
+    width: 478px;
     height: 1px;
     margin: 0 auto;
-    background-color: rgba(0,0,0,.5)
+    background-color: #f8fef4;
+}
+
+.second_divider {
+    width: 782px;
+    height: 1px;
+    margin: 0 auto;
+    background-color: #f8fef4;
 }
 
 .container { 
@@ -67,7 +68,9 @@ html, body {
     height: 70px;
     padding: 0 30px;
     border-bottom: 1px solid rgba(0,0,0,.2);
-    background: #a39386;
+    background-color: #a39386;
+    background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+    background-size: 200px 200px; 
     z-index: 1000;
     box-shadow: 0 4px 15px rgba(0,0,0,.2); 
 }
@@ -79,8 +82,8 @@ html, body {
 }
 
 .logo_img {
-    max-width: 71px;
-    margin-right: 6px;
+    max-width: 41px;
+    margin-right: 4px;
     margin-left: 0px;
 }
 
@@ -89,7 +92,8 @@ html, body {
     font-size: 25px;
     margin-top: 6px;
     max-width: 90px;
-    text-shadow: 0px 0px 20px rgb(0 0 0 / 14%);
+    color: #f8fff4;
+    text-shadow: 0px 0px 20px rgb(255 255 255 / 31%);
 }
 
 .header__content {
@@ -130,30 +134,40 @@ html, body {
 
 .preview {
   padding: 160px 0 90px 0;
-  background:
-    radial-gradient(circle at 30% 35%, rgba(255,255,255,0.15), transparent 55%),
-    radial-gradient(circle at 70% 65%, rgba(0,0,0,0.12), transparent 60%),
-    linear-gradient(180deg, #b7aca1, #a39386);
-    background-image: url("../img/ChWZKosciol.png");
-  background-size: cover;
+}
+
+.preview_mobile {
+  display: none;
 }
 
 .preview_item {
-  margin: 100px 0;
+  display: block;
+  border-radius: 25px;
+  background-color: #a39386;
+  background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+  background-size: 200px 200px; 
+  box-shadow: 0 4px 50px rgba(0, 0, 0, 0.411);
+  margin: 0 40px;
 }
 
 .preview_logo {
   display: block;
+  padding-top: 140px;
   margin: 0 auto;
   max-width: 1000px;
 }
 
+.preview_title {
+  font-family: 'Neultica', sans-serif;
+  font-size: 54px;
+  text-align: center;
+  text-shadow: 0px 0px 20px rgb(255 255 255 / 31%);
+  color: #f8fef4;
+  padding: 0 40px 140px 40px;
+}
+
 .calendar {
   padding: 60px 0 80px;
-  background:
-  radial-gradient(circle at 30% 35%, rgba(255,255,255,0.15), transparent 55%),
-  radial-gradient(circle at 70% 65%, rgba(0,0,0,0.12), transparent 60%),
-  linear-gradient(180deg, #b7aca1, #a39386);
 }
 
 .calendar_container {
@@ -164,11 +178,15 @@ html, body {
 
 .flatpickr-calendar {
   background: #a39386;
+  background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+  background-size: 200px 200px; 
   border-radius: 17px;
+  box-shadow: 0 4px 50px rgba(0, 0, 0, 0.411);
+  border: none;
 }
 
 span.flatpickr-weekday {
-  color: #000
+  color: #fffff4;
 }
 
 .flatpickr-calendar.inline {
@@ -180,7 +198,16 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-day {
-  color: #000;
+  color: #e9e9e0;
+}
+
+.flatpickr-months .flatpickr-month {
+  color: #fffff4;
+}
+
+.flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month {
+  color: #fff;
+  fill: #fff;
 }
 
 .flatpickr-day.selected, 
@@ -189,20 +216,33 @@ span.flatpickr-weekday {
 .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, 
 .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, 
 .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDa {
-  background: #393939;
-  border-color: #000; 
+  background: #f8fef478;
+  border-color: #ffffff;
+}
+
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, 
+.flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, 
+.flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, 
+.flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, 
+.flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
+  color: #000;
 }
 
 .calendar_window {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #a39386;
+  background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+  background-size: 200px 200px; 
   width: 278px;
   height: auto;
   margin-left: 150px;
   border-radius: 17px;
-  border: 1px solid #e6e6e6;
-  color: black;
+  color: #e9e9e0;
   padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 50px rgba(0, 0, 0, 0.411);
 }
 
 .video_container {
@@ -222,12 +262,11 @@ iframe {
   box-shadow: 0 4px 30px rgba(0,0,0,.25)
 }
 
+.mobile_info {
+  display: none;
+}
 
 .info {
-  background:
-  radial-gradient(circle at 30% 35%, rgba(255,255,255,0.15), transparent 55%),
-  radial-gradient(circle at 70% 65%, rgba(0,0,0,0.12), transparent 60%),
-  linear-gradient(180deg, #b7aca1, #a39386);  
   overflow: hidden;
   padding: 60px 0 90px;
 }
@@ -235,24 +274,26 @@ iframe {
 .container_info {
     display: flex;  
     justify-content: space-between;
-    margin: 50px 150px 0 150px;
+    padding: 50px 40px 0 40px;
 }
 
 .tabcontainer {
     display: flex;
     width: 100%;
     border-radius: 25px;
-    height: 600px;
-    background: #a39386;
+    background-color: #a39386;
+    background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+    background-size: 200px 200px; 
     box-shadow: 0 4px 50px rgba(0, 0, 0, 0.411)
 }
 
 .tabheader {
-    width: 200px;
     padding: 35px 0 35px 30px;
 }
 
 .tabheader__items {
+    width: 150px;
+    padding-right: 10px;
     border-right: 1px solid #ffffff;
 }
 
@@ -267,6 +308,7 @@ iframe {
 }
 
 .tabheader__item:first-child {
+  margin-right: 10px;
   margin-top: 0;
 }
 
@@ -280,8 +322,6 @@ iframe {
   font-family: 'Panton', sans-serif;
   line-height: 27.8px;
   font-weight: 100;
-  font-size: clamp(4px, 1vw, 22px);
-  width: 1355px;
   padding: 35px;
   text-shadow: 0px 0px 20px rgb(0 0 0 / 80%);
   color: #fffff4
@@ -337,6 +377,8 @@ ol {
   }
 
 .footer {
+    background: #1b1d20;
+    color: #e6e6e6b8;
     padding: 20px 0;
     display: flex;
     justify-content: center;
@@ -352,30 +394,38 @@ ol {
 .footer_divider {
   width: 304px;
   height: 1px;
-  background: #fff;
+  background: #e6e6e6b8;
 }
 
 .footer__copy {
   margin-top: 10px;
 }
 
+.flatpickr-day.today {
+    border-color: #e6e6e6b8;
+}
+
 @media (max-width: 1000px) {
   body {
-  background:
-    radial-gradient(circle at 30% 35%, rgba(255,255,255,0.15), transparent 55%),
-    radial-gradient(circle at 70% 65%, rgba(0,0,0,0.12), transparent 60%),
-    linear-gradient(180deg, #998e83, #a39386);   
+  background-color: #83766c;
+  background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+  background-size: 200px 200px;
+  }
+  .title {
+    font-size: 40px;
+    padding: 0 20px;
   }
   .divider {
     display: none;
   }
+  .second_divider {
+    display: none;
+  }
   .header {
     height: 57px;
+    background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+    background-size: 200px 200px;
     padding: 0 10px;
-  }
-  .header.active {
-    position: absolute;
-    z-index: 0;
   }
   .header__content {
     display: flex;  
@@ -433,134 +483,200 @@ ol {
   .header_line.bottom.rotate {
     transform: translate3d(0, -8px, 0) rotateZ(45deg);
   }
-  .menu_board.active {
+  .menu_board {
+    position: fixed;
+    top: 57px;
+    width: 100%;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
     display: flex;
-    background: #000;
+    background: #00000087;
     flex-direction: column;
+    padding: 20px;
+    z-index: 1;
+  }
+  .menu_board.active {
+    transform: translateY(0);
+  }
+  .menu_links {
+    display: flex;
+    align-items: center;
+  }
+  .header_media_link {
+    position: relative;
+    font-weight: 400;
+    font-size: 17px;
+    padding: 10px 0;
+    margin: 0;
+    color: #ffffffde;
+  } 
+  .imgMedia {
+    width: 22px;
+    margin-right: 8px;
+  }  
+}
+@media (max-width: 1000px) {
+  .preview_mobile {
+    display: block;
+    background-image: none;
+    padding: 58px 0 0;
   }
   .preview {
-    background-image: none;
+    display: none;
+  }
+  .preview_mobile_item {
+    margin: 100px 0;
   }
   .preview_logo {
     max-width: 150px;
+    padding-top: 0;
   }
+  .preview_title {
+    font-size: 37px;
+    padding: 0 20px;
+    padding-bottom: 0;
+  }
+}
+@media (max-width: 1000px) {
   .info {
+    display: none;
+  }
+  .mobile_info {
+    display: block;
+    padding-bottom: 50px;
     background: none
+  }
+  .container_info {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .item_class {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #fffff4;
+    padding: 10px 5px 10px;
+  }
+  .item_class:first-child {
+    padding-top: 0;
+  }
+  .item_arrow {
+    width: 23px;
+    transition: transform 0.3s ease;
+  }
+  .item_arrow.rotate {
+      transform: rotate(180deg);
+  }
+  .tabcontainer {
+    background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+    background-size: 200px 200px; 
+    flex-direction: column;
+  }
+  ol {
+    padding-left: 20px;
+  }
+  ul {
+    padding-left: 30px;
+    margin-top: 40px;
+  }
+  .tabcontent_mobile {
+    max-height: 0;
+    overflow: hidden;
+    font-family: 'Panton', sans-serif;
+    line-height: 27.8px;
+    font-weight: 100;
+    padding: 0 35px;
+    text-shadow: 0px 0px 20px rgb(0 0 0 / 80%);
+    color: #fffff4;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  } 
+  .tabcontent_mobile.active {
+    display: block;
+    padding: 10px 5px;
+  }
+  .tabheader {
+    padding-bottom: 11px;
+    padding-right: 30px;
+    padding-top: 24px;
+  }
+  .tabheader__item {
+    margin-top: 0;
+  }
+  .tabheader__item:first-child {
+    margin-right: 0;
+  }
+  .tabheader__items {
+    display: none;
+  }
+  .tabheader__items_mobile {
+    padding-bottom: 20px;
+  }
+  .tabcontent_mobile a, a:visited {
+    text-decoration: underline;
   }
   .calendar {
-    background: none
+    background: none;
+    padding-top: 0;
   }
   .footer {
     background: #1b1d20;
+    padding-top: 13px;
+  }
+  .footer__dane-title {
+    font-size: 20px;
+  }
+  .footer__dane-text {
+    padding: 11px 20px 0;
+    font-size: 10px;
+  } 
+  .footer__copy-text {
+    font-size: 14px;
+  }
+  #cal-con {
+    transition: transform 0.3s ease;
   }
 }
-
-
-
-
 
 
 
 @media (max-width: 1000px) {
   .calendar_container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin: 50px auto 0 auto;
-    flex-flow: column;
-
+    margin: 20px auto 0 auto;
+    padding: 0 20px;
   }
-
+  .flatpickr-calendar {
+    background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+    background-size: 200px 200px; 
+  }
+  .flatpickr-input[readonly] {
+    display: contents;
+  }
   .calendar_window {
-    display: block;
-    background: #a39386;
+    display: flex;
+    background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+    background-size: 200px 200px; 
     width: 278px; 
-    height: auto;
+    height: 265px;
     margin-left: 0px;
-    margin-top: 10px;
     border-radius: 17px;
-    border: 1px solid #e6e6e6;
-    color: black;
+    color: #e9e9e0;
     padding: 15px;
+    box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.411);
+    z-index: 1;
+
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 850px) {
-  .contact__info-box {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+  @media (max-width: 695px) {
+  .calendar_container {
+    justify-content: center;
+    flex-direction: column; 
   }
-  .contact__info-item {
-    margin: 0 auto;
-    margin-bottom: 35px;
-  }
-  .contact {
-    background-color: #D9D9D9;
-    margin-top: 70px;
-    padding-bottom: 45px;
-  }
-}
-@media (max-width: 500px) {
-  .contact__info-item {
-    padding: 0 25px;
-  }
-  .contact__info-text {
-    font-size: 25px;
-    width: 332px;
-  }
-}
-@media (max-width: 400px) {
-  .contact__info-text {
-    font-size: 23px;
-    width: 290px;
-  }
-}
-@media (max-width: 370px) {
-  .contact__info-text {
-    font-size: 20px;
-    width: 270px;
-  }
-  .contact__info-title {
-    font-size: 35px;
-  }
-}
-
-@media (max-width: 500px) {
-  .footer__box {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .footer__links {
-    display: none;
-  }
-  .footer__logo {
-    margin-bottom: 40px;
-  }
-  .footer__contact-text {
-    font-size: 20px;
-    margin-bottom: 50px;
-    margin-top: 20px;
-  }
-  .footer__dane-text {
-    font-size: 20px;
-    margin-top: 20px;
-  }
-  .footer__copy-text {
-    line-height: 140%;
+  .calendar_window {
+    margin-top: 10px;
+    height: auto;
   }
 }

@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
           copy = document.querySelectorAll('.copy'),
           burger = document.getElementById('burger'),
           lines = document.querySelectorAll('.header_line'),
-          header = document.querySelector('.header'),
-          board = document.querySelector('.menu_board')
+          board = document.querySelector('.menu_board'),
+          ok = document.querySelector('.ok');
 
     function burgerAnimation() {
         lines.forEach(item => {
@@ -19,25 +19,76 @@ document.addEventListener('DOMContentLoaded', () => {
         board.classList.toggle('active');
     };
 
-    function headerFixed() {
-        header.classList.toggle('active');
-    };
-
     function burgerSecondAnimation() {
         lines.forEach(item => {
             item.classList.toggle('rotate');
         });
     };
 
-    burger.addEventListener('click', () => {
+    burger.addEventListener('click', (e) => {
+        e.stopPropagation();
         burgerAnimation();
-        headerFixed();
         showMenuBoard();
         setTimeout(() => {
             burgerSecondAnimation()
-        }, 200) 
+        }, 200)
     });
 
+    ok.addEventListener('click', () => {
+        showMenuBoard();
+        burgerAnimation();
+        burgerSecondAnimation();
+    })
+
+    document.addEventListener('click', (e) => {
+        if (
+            board.classList.contains('active') &&
+            !board.contains(e.target) &&
+            !burger.contains(e.target)
+        ) {
+            showMenuBoard();
+            burgerAnimation();
+            burgerSecondAnimation();
+        }
+    });
+
+    
+
+    //mobile version
+const items = document.querySelectorAll(".item_class");
+
+items.forEach((item, index) => {
+    const content = item.nextElementSibling;
+    const arrow = item.querySelector(".item_arrow");
+
+    if (!content || !content.classList.contains("tabcontent_mobile")) return;
+
+    // 🔹 если это первый таб и он уже active в HTML
+    if (index === 0 && content.classList.contains("active")) {
+        content.style.maxHeight = content.scrollHeight + "px";
+        arrow.classList.add("rotate");
+    }
+
+    item.addEventListener("click", () => {
+        const isOpen = content.classList.contains("active");
+
+        if (isOpen) {
+            // закрытие
+            content.style.maxHeight = null;
+            content.classList.remove("active");
+            arrow.classList.remove("rotate");
+        } else {
+            // открытие
+            content.classList.add("active");
+            content.style.maxHeight = content.scrollHeight + "px";
+            arrow.classList.add("rotate");
+        }
+    });
+});
+
+
+
+    //desktop version
     function hideTabContent() {
         tabsContent.forEach(item => {
             item.style.display = 'none';
@@ -88,6 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1000);
         });
     });
+
+    showEvents(new Date());
 });
 
 flatpickr("#calendar", {
@@ -96,14 +149,7 @@ flatpickr("#calendar", {
     weekNumbers: false, 
     enable: ["2026-02-01", "2026-02-02", "2026-02-05", "2026-02-06", "2026-02-08", "2026-02-09", "2026-02-12", "2026-02-13", "2026-02-15", "2026-02-16", "2026-02-19", "2026-02-20", "2026-02-22", "2026-02-23", "2026-02-26", "2026-02-27"],
     onChange: function(selectedDates, dateStr, instance) {
-        const el = document.querySelector(".calendar_window");
-        const event = weekend[new Date(dateStr).getDay()];
-
-        if (event) {
-            let text = '';
-            event.forEach((e) => { text += `${e.time} ${e.event}\r\n` });
-            el.innerText = text;
-        }
+        showEvents(dateStr);
     },
 });
 
@@ -128,3 +174,16 @@ const weekend = [
     [
     ]
 ]
+
+function showEvents(dateStr) {
+    const el = document.querySelector(".calendar_window");
+    const event = weekend[new Date(dateStr).getDay()];
+
+    if (event && event.length) {
+        let text = '';
+        event.forEach((e) => { text += `${e.time} ${e.event}\r\n`; });
+        el.innerText = text;
+    } else {
+        el.innerText = "Dzisiaj nabożeństw nie ma";
+    }
+}
