@@ -407,7 +407,7 @@ ol {
 
 @media (max-width: 1000px) {
   body {
-  background-color: #83766c;
+  background-color: #877465;
   background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
   background-size: 200px 200px;
   }
@@ -423,6 +423,7 @@ ol {
   }
   .header {
     height: 57px;
+    background-color: #a48f7d;
     background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
     background-size: 200px 200px;
     padding: 0 10px;
@@ -528,6 +529,7 @@ ol {
     margin: 100px 0;
   }
   .preview_logo {
+    padding-bottom: 10px;
     max-width: 120px;
     padding-top: 0;
   }
@@ -569,6 +571,7 @@ ol {
       transform: rotate(180deg);
   }
   .tabcontainer {
+    background-color: #a48f7d;
     background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
     background-size: 200px 200px; 
     flex-direction: column;
@@ -649,6 +652,7 @@ ol {
     padding: 0 20px;
   }
   .flatpickr-calendar {
+    background-color: #a48f7d;
     background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
     background-size: 200px 200px; 
   }
@@ -657,6 +661,7 @@ ol {
   }
   .calendar_window {
     display: flex;
+    background-color: #a48f7d;
     background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
     background-size: 200px 200px; 
     width: 278px; 
