@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
           burger = document.getElementById('burger'),
           lines = document.querySelectorAll('.header_line'),
           board = document.querySelector('.menu_board'),
-          ok = document.querySelector('.ok');
+          ok = document.querySelectorAll('.ok'),
+          accordion = document.querySelector('.learn_all'),
+          accordionContent = document.querySelector('.rules_text'),
+          arrow = document.querySelector('.item_arrow');
 
     function burgerAnimation() {
         lines.forEach(item => {
@@ -34,10 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 200)
     });
 
-    ok.addEventListener('click', () => {
-        showMenuBoard();
-        burgerAnimation();
-        burgerSecondAnimation();
+    ok.forEach(item => {
+        item.addEventListener('click', (e) => {
+            showMenuBoard();
+            burgerAnimation();
+            burgerSecondAnimation();
+        })
     })
 
     document.addEventListener('click', (e) => {
@@ -55,37 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     //mobile version
-const items = document.querySelectorAll(".item_class");
+    function accordionAnimation() {
+        accordionContent.classList.toggle('active');
+        arrow.classList.toggle('active');
+    };
 
-items.forEach((item, index) => {
-    const content = item.nextElementSibling;
-    const arrow = item.querySelector(".item_arrow");
-
-    if (!content || !content.classList.contains("tabcontent_mobile")) return;
-
-    // 🔹 если это первый таб и он уже active в HTML
-    if (index === 0 && content.classList.contains("active")) {
-        content.style.maxHeight = content.scrollHeight + "px";
-        arrow.classList.add("rotate");
-    }
-
-    item.addEventListener("click", () => {
-        const isOpen = content.classList.contains("active");
-
-        if (isOpen) {
-            // закрытие
-            content.style.maxHeight = null;
-            content.classList.remove("active");
-            arrow.classList.remove("rotate");
-        } else {
-            // открытие
-            content.classList.add("active");
-            content.style.maxHeight = content.scrollHeight + "px";
-            arrow.classList.add("rotate");
-        }
+    accordion.addEventListener('click', () => {
+        accordionAnimation();
     });
-});
-
 
 
     //desktop version
