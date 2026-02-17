@@ -567,6 +567,9 @@ ol {
   .tabcontent_mobile.maps {
     padding: 0;
   }
+  .tabcontent_mobile.pastors {
+    padding-top: 5px;
+  }
   .tabcontent_mobile.contact {
     padding-top: 5px;
     margin: 0;
@@ -623,6 +626,24 @@ ol {
   }
   .item_arrow.active {
       transform: rotate(180deg);
+  }
+  .pastor {
+    display: flex;
+    border-radius: 10px;
+    background-color: #87715d;
+    background-image: url('https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif');
+    background-size: 200px 200px;
+  }
+  .pastor_img {
+    padding-right: 10px;
+    height: 55px;
+  }
+  .pastor_img img {
+    border-radius: 10px;
+    width: 55px;
+  }
+  .deacon {
+    display: flex;
   }
 
 
