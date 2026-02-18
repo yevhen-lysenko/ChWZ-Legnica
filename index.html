@@ -195,6 +195,20 @@
 
 <div class="content">
     <div class="content_container">
+        <div class="tabcontent_mobile conference" data-link="https://mega.nz/folder/tE4FTBRB#PdVAytjIDheQcE1EqHxc3A">
+            <div class="header_image_conference_container">
+                <img class="header_image_conference" src="./img/mkm2026Img.png">
+            </div>
+            <div class="elements_container">
+                <div class="mkm_text">
+                    <h2>MKM 2026</h2>
+                    <div class="image_text">Zdjeńcia</div>
+                </div>
+                <div class="arrow_container">
+                    <img class="conference_arrow" src="./img/conferenceArrow.png">
+                </div>
+            </div>
+        </div>
         <div class="tabcontent_mobile services">
             <div class="video">
                 <iframe 
@@ -209,7 +223,10 @@
                 </iframe>
             </div>
             <div class="schedule">
-                <h2 class="schedule_text">Nabożenstwa</h2>
+                <div class="tabcontent_header_schedule">
+                    <img class="header_icons" src="./img/timeIcon.png">
+                    <h2 class="schedule_text">Nabożenstwa</h2>
+                </div>
                 <b>Niedziela:</b>
                 <div>- 10:00 Nabożenstwo poranne</div>
                 <div>- 18:00 Nabożenstwo wieczorowe</div>
@@ -227,7 +244,10 @@
         </div>
         <div class="tabcontent_mobile maps">
             <div class="adres_text">
-                <h2>Adres</h2>
+                <div class="tabcontent_header">
+                    <img class="header_icons" src="./img/adresIcon.png">
+                    <h2>Adres zboru</h2>
+                </div>
                 <div><b>ul. Sudecka 3, 59-220 Legnica</b></div>
             </div>
             <div class="google_maps">
@@ -241,10 +261,12 @@
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>  
             </div>
-            <div id="scroll_to_beginning_rules"></div>
         </div>
         <div class="tabcontent_mobile rules">
-            <h2 class="rules_name">Zasady wiary</h2>
+             <div class="tabcontent_header">
+                <img class="header_icons" src="./img/cross.png">
+                <h2 class="rules_name">Zasady wiary</h2>
+            </div>
             <div class="rules_text">
                 <ol><b><li>Wierzymy w Jedynego Wszechmocnego Boga: Ojca, Syna i Ducha Świętego.</li>
                     <li>Pismo Święte jako Słowo Boże, natchnione przez Ducha Świętego, które jest jedynym, najważniejszym autorytetem w sprawach: prawdy, wiary i życia.</li>
@@ -269,18 +291,24 @@
                 </ul>
             </div>
             <div class="learn_all">
-                <a href="#scroll_to_beginning_rules" class="learn_all_text" id="contact_scroll">Czytać dalej</a>
+                <div class="learn_all_text" id="contact_scroll">Czytać dalej</div>
                 <img class="item_arrow" src="./img/itemArrow.png">
             </div>
         </div>
         <div class="tabcontent_mobile pastors">
-            <h2>Pastorzy</h2>
+            <div class="tabcontent_header">
+                <img class="header_icons" src="./img/peopleIcon.png">
+                <h2>Bracia w służbie</h2>
+            </div>
             <div class="pastor">
                 <div class="pastor_img">
                     <img src="./img/Adam.png">
                 </div>
                 <div class="pastor_info">
-                    <div>Adam Chyży</div>
+                    <div class="pastor_text">
+                        <div>Adam Chyży</div>
+                        <div>Pastor</div>
+                    </div>
                     <div class="text">
                         <div class="email">+48 518 018 092</div>
                         <img 
@@ -292,12 +320,15 @@
                     </div>
                 </div>
             </div>
-            <div class="pastor">
+            <div class="pastor" id="center">
                 <div class="pastor_img">
                     <img src="./img/Rafal.png">
                 </div>
                 <div class="pastor_info">
-                    <div>Rafał Szczechowski</div>
+                    <div class="pastor_text">
+                        <div>Rafał Szczechowski</div>
+                        <div>Pastor</div>
+                    </div>
                     <div class="text">
                         <div class="email">+48 607 979 951</div>
                         <img 
@@ -309,26 +340,28 @@
                     </div>
                 </div>
             </div>
-            <div class="deacon">
+            <div class="deacon" id="center">
                 <div class="pastor_img">
                     <img src="./img/Roman.png">
                 </div>
                 <div class="pastor_info">
                     <div>Roman Jawdyk</div>
-                    <div class="text">
-                        <div class="email">+48 607 979 951</div>
-                        <img 
-                            class="copy" 
-                            src="./img/imgCopy.png"
-                            data-default="./img/imgCopy.png"
-                            data-success="./img/imgDone.png"
-                        >
-                    </div>
+                </div>
+            </div>
+            <div class="deacon" id="bottom">
+                <div class="pastor_img">
+                    <img src="./img/Slawek.png">
+                </div>
+                <div class="pastor_info">
+                    <div>Sławomir Potomski</div>
                 </div>
             </div>
         </div>
         <div class="tabcontent_mobile contact">
-            <h2>Kontakt</h2>
+            <div class="tabcontent_header">
+                <img class="header_icons" src="./img/contact_icon.png">
+                <h2>Kontakt</h2>
+            </div>
             <div><b>Adres e-mail:</b></div>
             <div class="text">
                 <div class="email">legnica@chwz.org.pl</div>
