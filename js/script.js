@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
           accordion = document.querySelector('.learn_all'),
           accordionContent = document.querySelector('.rules_text'),
           arrow = document.querySelector('.item_arrow'),
-          card = document.querySelector('.conference');
+          card = document.querySelector('.conference'),
+          rules = document.querySelector('.rules')
 
     card.addEventListener('click', () => {
         window.open(card.dataset.link, '_blank', 'noopener');
@@ -71,41 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     accordion.addEventListener('click', () => {
+        if (accordionContent.classList.contains('active')) {
+            rules.scrollIntoView({
+                top: 'start'
+            });
+        }
         accordionAnimation();
     });
 
 
     //desktop version
-    function hideTabContent() {
-        tabsContent.forEach(item => {
-            item.style.display = 'none';
-        });
-
-        tabs.forEach(item => {
-            item.classList.remove('tabheader__item_active');
-        });
-    }
-
-    function showTabsContent(i = 0) {
-        tabsContent[i].style.display = 'block';
-        tabs[i].classList.add('tabheader__item_active');
-    }
-
-    hideTabContent();
-    showTabsContent();
-
-    tabsParent.addEventListener('click', (event) => {
-        const target = event.target;
-
-        if (target && target.classList.contains('tabheader__item')) {
-            tabs.forEach((item, i) => {
-                if (target == item) {
-                    hideTabContent();
-                    showTabsContent(i);
-                }
-            })
-        }
-    }); 
 
     copy.forEach(btn => {
         btn.addEventListener('click', function () {
