@@ -29,26 +29,23 @@
     </div>
 </header>
 
+<div class="NewsBlock active  ">
+    <div class="icon_exclamation_point"></div>
+    <div class="NewsText">Dzisiaj wieczorowego nabożenstwa nie ma!</div>
+</div>
+
 <div class="menu_board">
     <div class="menu_links ok">
         <img class="imgMedia" src="./img/calendar.png">
-        <a href="#okay" class="header_media_link">Kalendarz spotkań</a>
+        <a href="#okay" class="header_media_link"><b>Kalendarz spotkań</b></a>
+    </div>
+    <div class="menu_links">
+        <img class="imgMedia" src="./img/live.png">
+        <a href="https://www.youtube.com/@chwz_legnica/streams" class="header_media_link" target="_blank"><b>Transmisje na żywo</b></a>
     </div>
     <div class="menu_links ok">
         <img class="imgMedia" src="./img/contact.png">
-        <a href="#contact_scroll" class="header_media_link">Kontakt</a>
-    </div>
-    <div class="menu_links">
-        <img class="imgMedia" src="./img/Facebook.png">
-        <a href="https://www.facebook.com/share/17qKNrdMnV/" class="header_media_link" target="_blank">Facebook</a>
-    </div>
-    <div class="menu_links">
-        <img class="imgMedia" src="./img/youtube.png">
-        <a href="https://www.youtube.com/@chwz_legnica" class="header_media_link" target="_blank">YouTube</a>
-    </div>
-    <div class="menu_links">
-        <img class="imgMedia" src="./img/instagram1.png">
-        <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="header_media_link" target="_blank">Instagram</a>
+        <a href="#contact_scroll" class="header_media_link"><b>Kontakt</b></a>
     </div>
 </div>
 
@@ -63,51 +60,43 @@
 
 <div class="content">
     <div class="content_container">
-        <div class="tabcontent_mobile conference" data-link="https://mega.nz/folder/tE4FTBRB#PdVAytjIDheQcE1EqHxc3A">
-            <div class="header_image_conference_container">
-                <img class="header_image_conference" src="./img/mkm2026Img.png">
-            </div>
-            <div class="elements_container">
-                <div class="mkm_text">
-                    <h2>MKM 2026</h2>
-                    <div class="image_text">Zdjeńcia</div>
+        <div class="container_video_and_schedule">
+            <div class="tabcontent_mobile video">
+                <div class="tabcontent_header_video">
+                    <img class="header_icons" src="./img/oNasIcon.png">
+                    <h2 class="video_text">O nas</h2>
                 </div>
-                <div class="arrow_container">
-                    <img class="conference_arrow" src="./img/conferenceArrow.png">
+                <div class="video">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube-nocookie.com/embed/Vxu3nt1C0Dg?si=9y3GLXunYz5-Gnre" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
             </div>
-        </div>
-        <div class="tabcontent_mobile services">
-            <div class="video">
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube-nocookie.com/embed/Vxu3nt1C0Dg?si=9y3GLXunYz5-Gnre" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="schedule">
-                <div class="tabcontent_header_schedule">
-                    <img class="header_icons" src="./img/timeIcon.png">
-                    <h2 class="schedule_text">Nabożenstwa</h2>
-                </div>
-                <b>Niedziela:</b>
-                <div>- 10:00 Nabożenstwo poranne</div>
-                <div>- 18:00 Nabożenstwo wieczorowe</div>
-                <br>
-                <b>Poniedziałek:</b>
-                <div>- 19:00 Modlitwa</div>
-                <br>
-                <b>Czwartek:</b>
-                <div>- 18:00 Nabożenstwo</div>
-                <br>
-                <b>Piątek:</b>
-                <div>- 18:00 Młodzieżowe</div>
-                <br>
+            <div class="tabcontent_mobile services">
+                    <div class="tabcontent_header_schedule">
+                        <img class="header_icons" src="./img/timeIcon.png">
+                        <h2 class="schedule_text">Nabożenstwa</h2>
+                    </div>
+                    <b>Niedziela:</b>
+                    <div>- 10:00 Nabożenstwo poranne</div>
+                    <div>- 18:00 Nabożenstwo wieczorowe</div>
+                    <br>
+                    <b>Poniedziałek:</b>
+                    <div>- 19:00 Modlitwa</div>
+                    <br>
+                    <b>Czwartek:</b>
+                    <div>- 18:00 Nabożenstwo</div>
+                    <br>
+                    <b>Piątek:</b>
+                    <div>- 18:00 Młodzieżowe</div>
+                    <br>
             </div>
         </div>
         <div class="container_maps_and_calendar">
@@ -135,7 +124,7 @@
             <div class="calendar_container" id="cal-con">
                 <div class="tabcontent_header calendar">
                     <img class="header_icons" src="./img/calendarIcon.png">
-                    <h2>Kalendarz</h2>
+                    <h2>Kalendarz spotkań</h2>
                 </div>
                 <div class="calendar_windows">
                     <div id="calendar"></div>
@@ -182,78 +171,81 @@
                     <img class="header_icons" src="./img/peopleIcon.png">
                     <h2>Bracia w służbie</h2>
                 </div>
-                <div class="pastor">
-                    <div class="pastor_img">
-                        <img src="./img/Adam.png">
-                    </div>
-                    <div class="pastor_info">
-                        <div class="pastor_text">
-                            <div>Adam Chyży</div>
-                            <div>Pastor</div>
+                <div class="brothers_container">
+                    <div class="brother" id="top">
+                        <div class="brother_img">
+                            <img src="./img/Adam.png">
                         </div>
-                        <div class="text">
-                            <div class="email">+48 518 018 092</div>
-                            <img 
-                                class="copy" 
-                                src="./img/imgCopy.png"
-                                data-default="./img/imgCopy.png"
-                                data-success="./img/imgDone.png"
-                            >
-                        </div>
-                    </div>
-                </div>
-                <div class="pastor" id="center">
-                    <div class="pastor_img">
-                        <img src="./img/Rafal.png">
-                    </div>
-                    <div class="pastor_info">
-                        <div class="pastor_text">
-                            <div>Rafał Szczechowski</div>
-                            <div>Pastor</div>
-                        </div>
-                        <div class="text">
-                            <div class="email">+48 607 979 951</div>
-                            <img 
-                                class="copy" 
-                                src="./img/imgCopy.png"
-                                data-default="./img/imgCopy.png"
-                                data-success="./img/imgDone.png"
-                            >
+                        <div class="brother_info">
+                            <div class="brother_text">
+                                <div class="brother_name">Adam Chyży</div>
+                                <div class="service_text">Pastor</div>
+                            </div>
+                            <div class="text">
+                                <div class="mobile_number">+48 518 018 092</div>
+                                <img 
+                                    class="copy" 
+                                    src="./img/imgCopy.png"
+                                    data-default="./img/imgCopy.png"
+                                    data-success="./img/imgDone.png"
+                                >
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="deacon">
-                    <div class="pastor_img">
-                        <img src="./img/Michal.png">
+                    <div class="brother" id="center">
+                        <div class="brother_img">
+                            <img src="./img/Rafal.png">
+                        </div>
+                        <div class="brother_info">
+                            <div class="brother_text">
+                                <div class="brother_name">Rafał Szczechowski</div>
+                                <div class="service_text">Pastor</div>
+                            </div>
+                            <div class="text">
+                                <div class="mobile_number">+48 607 979 951</div>
+                                <img 
+                                    class="copy" 
+                                    src="./img/imgCopy.png"
+                                    data-default="./img/imgCopy.png"
+                                    data-success="./img/imgDone.png"
+                                >
+                            </div>
+                        </div>
                     </div>
-                    <div class="pastor_info">
-                        <div>Michał Jawdyk</div>
+                    <div class="brother" id="center">
+                        <div class="brother_img">
+                           <img src="./img/Michal.png">
+                        </div>
+                        <div class="brother_text">
+                            <div class="brother_name">Michał Jawdyk</div>
+                            <div class="service_text">Pastor Sen.</div>
+                        </div>
                     </div>
-                </div>
-                <div class="deacon" id="center">
-                    <div class="pastor_img">
-                        <img src="./img/Roman.png">
+                    <div class="brother" id="center">
+                        <div class="brother_img">
+                            <img src="./img/Roman.png">
+                        </div>
+                        <div class="brother_text">
+                            <div class="brother_name">Roman Jawdyk</div>
+                            <div class="service_text">Pastor Sen.</div>
+                        </div>
                     </div>
-                    <div class="pastor_info">
-                        <div>Roman Jawdyk</div>
+                    <div class="brother" id="center">
+                        <div class="brother_img">
+                            <img src="./img/Slawek.png">
+                        </div>
+                        <div class="brother_text" id="contact_scroll">
+                            <div class="brother_name">Sławek Potomski</div>
+                            <div class="service_text">Diakon Ds.</div>
+                        </div>
                     </div>
-                </div>
-                <div class="deacon">
-                    <div class="pastor_img">
-                        <img src="./img/Slawek.png">
-                    </div>
-                    <div class="pastor_info" id="contact_scroll">
-                        <div>Sławomir Potomski</div>
-                    </div>
-                </div>
-                <div class="deacon" id="bottom">
-                    <div class="pastor_img">
-                        <img src="./img/Tadeusz.png">
-                    </div>
-                    <div class="pastor_info">
-                        <div class="pastor_text">
-                            <div>Tadeusz Iwanicki</div>
-                            <div>Diakon ds.</div>
+                    <div class="brother" id="bottom">
+                        <div class="brother_img">
+                            <img src="./img/Tadeusz.png">
+                        </div>
+                        <div class="brother_text">
+                            <div class="brother_name">Tadeusz Iwanicki</div>
+                            <div class="service_text">Diakon ds.</div>
                         </div>
                     </div>
                 </div>
@@ -263,7 +255,10 @@
                     <img class="header_icons" src="./img/contact_icon.png">
                     <h2>Kontakt</h2>
                 </div>
-                <div><b>Adres e-mail:</b></div>
+                <div class="text">
+                    <img class="imgMedia" src="./img/emailIcon.png">
+                    <div><b>Adres e-mail:</b></div>
+                </div>
                 <div class="text">
                     <div class="email">legnica@chwz.org.pl</div>
                     <img 
@@ -275,11 +270,23 @@
                 </div>
                 <br>
                 <div><b>Media:</b></div>
-                <div class="text"><a href="https://www.facebook.com/share/17qKNrdMnV/" class="media_link" target="_blank">Facebook</a><img class="arrow" src="./img/arrow.png"></div>
-                <div class="text"><a href="https://www.youtube.com/@chwz_legnica" class="media_link" target="_blank">YouTube</a><img class="arrow" src="./img/arrow.png"></div>
-                <div class="text"><a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="media_link" target="_blank">Instagram</a><img class="arrow" src="./img/arrow.png"></div>
+                <div class="text">
+                    <img class="imgMedia" src="./img/facebook.png">
+                    <a href="https://www.facebook.com/share/17qKNrdMnV/" class="media_link" target="_blank">Facebook</a><img class="arrow" src="./img/arrow.png">
+                </div>
+                <div class="text">
+                    <img class="imgMedia" src="./img/youtube.png">
+                    <a href="https://www.youtube.com/@chwz_legnica" class="media_link" target="_blank">YouTube</a><img class="arrow" src="./img/arrow.png">
+                </div>
+                <div class="text">
+                    <img class="imgMedia" src="./img/instagram1.png">
+                    <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="media_link" target="_blank">Instagram</a><img class="arrow" src="./img/arrow.png">
+                </div>
                 <br>
-                <div><b>Dane bankowe:</b></div>
+                <div class="text">
+                    <img class="imgMedia" src="./img/bankIcon.png">
+                    <div><b>Dane bankowe:</b></div>
+                </div>
                 <div class="text">
                 <div class="email">36 1020 3017 0000 2602 0119 6518</div>
                 <img 
@@ -289,8 +296,6 @@
                 data-success="./img/imgDone.png"
                 >
                 </div>
-                <br>
-                <div class="text"><a href="https://www.youtube.com/@chwz_legnica/streams" class="media_link" target="_blank"><b>Transmisje na żywo</b></a><img class="arrow" src="./img/arrow.png"></div>
             </div>
         </div>
     </div>

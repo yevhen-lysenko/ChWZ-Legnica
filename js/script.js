@@ -11,12 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
           accordion = document.querySelector('.learn_all'),
           accordionContent = document.querySelector('.rules_text'),
           arrow = document.querySelector('.item_arrow'),
-          card = document.querySelector('.conference'),
           rules = document.querySelector('.rules')
-
-    card.addEventListener('click', () => {
-        window.open(card.dataset.link, '_blank', 'noopener');
-    });
 
     function burgerAnimation() {
         lines.forEach(item => {
