@@ -162,6 +162,7 @@ html, body {
     width: 100%;
     padding-top: 5px;
     margin-bottom: 0;
+    line-height: 43px;
   }
   .schedule_text {
     font-weight: 600;
@@ -404,7 +405,7 @@ html, body {
 .tabcontent_header.calendar h2 {
   margin-top: 20px;
   color: #f8fef4;
-  font-family: 'Panton';
+  font-family: 'SFProText';
 }
 
 .calendar_windows {
@@ -789,6 +790,7 @@ ol {
     width: auto;
     margin-left: 0;
     padding-top: 5px;
+    line-height: 27.8px;
   }
   .tabcontent_mobile.services {
     display: block;
