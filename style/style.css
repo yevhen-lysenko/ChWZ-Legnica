@@ -1012,6 +1012,14 @@ ol {
 }
 @media (max-width: 400px) {
   .content {
-    padding: 0 5px;
+    padding: 0 15px;
+  }
+  .service_text {
+    font-size: 10px;
+  }
+}
+@media (max-width: 350px) {
+  .content {
+    padding: 0 10px;
   }
 }
