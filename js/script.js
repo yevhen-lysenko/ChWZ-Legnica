@@ -1,17 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const tabs = document.querySelectorAll('.tabheader__item'),
-          tabsContent = document.querySelectorAll('.tabcontent'),
-          tabsParent = document.querySelector('.tabheader__items'),
-          copy = document.querySelectorAll('.copy'),
-          burger = document.getElementById('burger'),
+    const burger = document.getElementById('burger'),
           lines = document.querySelectorAll('.header_line'),
           board = document.querySelector('.menu_board'),
           ok = document.querySelectorAll('.ok'),
           accordion = document.querySelector('.learn_all'),
           accordionContent = document.querySelector('.rules_text'),
           arrow = document.querySelector('.item_arrow'),
-          rules = document.querySelector('.rules')
+          rules = document.querySelector('.rules'),
+          calendarButton = document.querySelector('.calendar_button'),
+          calendarContainer = document.querySelector('.calendar_container');
+
+
+    function showCalendarContainer() {
+        calendarContainer.classList.toggle('active');
+    }
+
+    calendarButton.addEventListener('click', (e) => {
+        showCalendarContainer()
+    });
 
     function burgerAnimation() {
         lines.forEach(item => {
@@ -75,29 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         accordionAnimation();
     });
 
-
-    //desktop version
-
-    copy.forEach(btn => {
-        btn.addEventListener('click', function () {
-        const email = this.closest('.text').querySelector('.email').innerText;
-
-            // копируем текст
-            navigator.clipboard.writeText(email);
-
-            // меняем картинку
-            const defaultImg = this.dataset.default;
-            const successImg = this.dataset.success;
-
-            this.src = successImg;
-
-            // возвращаем обратно через 3 секунды
-            setTimeout(() => {
-                this.src = defaultImg;
-            }, 1000);
-        });
-    });
-
     showEvents(new Date());
 });
 
@@ -105,7 +89,7 @@ flatpickr("#calendar", {
     inline: true,
     locale: "pl",
     weekNumbers: false, 
-    enable: ["2026-02-01", "2026-02-02", "2026-02-05", "2026-02-06", "2026-02-08", "2026-02-09", "2026-02-12", "2026-02-13", "2026-02-15", "2026-02-16", "2026-02-19", "2026-02-20", "2026-02-22", "2026-02-23", "2026-02-26", "2026-02-27"],
+    enable: ["2026-04-02", "2026-04-03", "2026-04-05", "2026-04-06", "2026-04-09", "2026-04-10", "2026-04-12", "2026-04-13", "2026-04-16", "2026-04-17", "2026-04-19", "2026-04-20", "2026-04-23", "2026-04-24", "2026-04-26", "2026-04-27", "2026-04-30"],
     onChange: function(selectedDates, dateStr, instance) {
         showEvents(dateStr);
     },

@@ -22,6 +22,7 @@
             <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="header_link instagram" target="_blank">Instagram</a>
         </div>
     </div>
+    <a class="calendar_button">Kalendarz spotkań</a>
     <div class="header_menu" id="burger">
         <div class="header_line top"></div>
         <div class="header_line middle"></div>
@@ -29,10 +30,17 @@
     </div>
 </header>
 
-<div class="NewsBlock active  ">
+<div class="calendar_container" id="cal-con">
+    <div class="calendar_windows">
+        <div id="calendar"></div>
+        <div class="calendar_window"></div>
+    </div>
+</div>
+
+<!-- <div class="NewsBlock active  ">
     <div class="icon_exclamation_point"></div>
     <div class="NewsText">Dzisiaj wieczorowego nabożenstwa nie ma!</div>
-</div>
+</div> -->
 
 <div class="menu_board">
     <div class="menu_links ok">
@@ -49,64 +57,78 @@
     </div>
 </div>
 
-<div class="preview_mobile">
-    <div class="preview_mobile_item">
+<div class="preview">
+    <div class="preview_item">
         <img class="preview_logo" src="./img/birdimg1.png" alt="" >
         <div class="preview_title">ChWZ zbór w Legnicy</div>
+        <div class="preview_text">Oficjalna strona Zboru Chrześcijańskiej Wspólnoty Zielonoświątkowej w Legnicy</div>
     </div>
 </div>
 
-<div class="divider"></div>
-
 <div class="content">
     <div class="content_container">
-        <div class="container_video_and_schedule">
-            <div class="tabcontent_mobile video">
-                <div class="tabcontent_header_video">
-                    <img class="header_icons" src="./img/oNasIcon.png">
-                    <h2 class="video_text">O nas</h2>
+        <div class="tabcontent video">
+            <div class="tabcontent_header_video">
+                <div class="header_icons">
+                    <img class="tabcontent_header_img" src="./img/oNasIconPrototype.png">
                 </div>
-                <div class="video">
-                    <iframe 
-                        width="560" 
-                        height="315" 
-                        src="https://www.youtube-nocookie.com/embed/Vxu3nt1C0Dg?si=9y3GLXunYz5-Gnre" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
+                <h2>O nas</h2>
             </div>
-            <div class="tabcontent_mobile services">
-                    <div class="tabcontent_header_schedule">
-                        <img class="header_icons" src="./img/timeIcon.png">
-                        <h2 class="schedule_text">Nabożenstwa</h2>
-                    </div>
-                    <b>Niedziela:</b>
-                    <div>- 10:00 Nabożenstwo poranne</div>
-                    <div>- 18:00 Nabożenstwo wieczorowe</div>
-                    <br>
-                    <b>Poniedziałek:</b>
-                    <div>- 19:00 Modlitwa</div>
-                    <br>
-                    <b>Czwartek:</b>
-                    <div>- 18:00 Nabożenstwo</div>
-                    <br>
-                    <b>Piątek:</b>
-                    <div>- 18:00 Młodzieżowe</div>
-                    <br>
+            <div class="video">
+                <iframe 
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube-nocookie.com/embed/Vxu3nt1C0Dg?si=9y3GLXunYz5-Gnre" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
-        <div class="container_maps_and_calendar">
-            <div class="tabcontent_mobile maps">
+        <div class="container_services_and_maps">
+            <!-- <div class="calendar_container" id="cal-con">
+                <div class="tabcontent_header calendar">
+                    <div class="header_icons">
+                        <img class="tabcontent_header_img" src="./img/calendarIcon.png">
+                    </div>
+                    <h2>Kalendarz spotkań</h2>
+                </div>
+                <div class="calendar_windows">
+                    <div id="calendar"></div>
+                    <div class="calendar_window"></div>
+                </div>
+            </div> -->
+            <div class="tabcontent services">
+                <div class="tabcontent_header">
+                    <div class="header_icons">
+                        <img class="tabcontent_header_img" src="./img/timeIcon.png">
+                    </div>
+                    <h2>Nabożenstwa</h2>
+                </div>
+                <b>Niedziela:</b>
+                <p class="blackout">- 10:00 Nabożenstwo poranne</p>
+                <p class="blackout">- 18:00 Nabożenstwo wieczorowe</p>
+                <br>
+                <b>Poniedziałek:</b>
+                <p class="blackout">- 19:00 Modlitwa</p>
+                <br>
+                <b>Czwartek:</b>
+                <p class="blackout">- 18:00 Nabożenstwo</p>
+                <br>
+                <b>Piątek:</b>
+                <p class="blackout">- 18:00 Młodzieżowe</p>
+            </div>
+            <div class="tabcontent maps">
                 <div class="adres_text">
                     <div class="tabcontent_header maps">
-                        <img class="header_icons maps" src="./img/adresIcon.png">
+                        <div class="header_icons">
+                            <img class="tabcontent_header_img" src="./img/adresIcon.png">
+                        </div>
                         <h2>Adres zboru</h2>
                     </div>
-                    <div><b>ul. Sudecka 3, 59-220 Legnica</b></div>
+                    <b>ul. Sudecka 3, 59-220 Legnica</b>
                 </div>
                 <div class="google_maps">
                     <iframe 
@@ -121,20 +143,12 @@
                     <div id="okay"></div>
                 </div>
             </div>
-            <div class="calendar_container" id="cal-con">
-                <div class="tabcontent_header calendar">
-                    <img class="header_icons" src="./img/calendarIcon.png">
-                    <h2>Kalendarz spotkań</h2>
-                </div>
-                <div class="calendar_windows">
-                    <div id="calendar"></div>
-                    <div class="calendar_window"></div>
-                </div>
-            </div>
         </div>
-        <div class="tabcontent_mobile rules">
+        <div class="tabcontent rules">
              <div class="tabcontent_header">
-                <img class="header_icons" src="./img/cross.png">
+                <div class="header_icons">
+                    <img class="tabcontent_header_img" src="./img/cross.png">
+                </div>
                 <h2 class="rules_name">Zasady wiary</h2>
             </div>
             <div class="rules_text">
@@ -165,136 +179,71 @@
                 <img class="item_arrow" src="./img/itemArrow.png">
             </div>
         </div>
-        <div class="container_pastors_and_contact">
-            <div class="tabcontent_mobile pastors">
-                <div class="tabcontent_header">
-                    <img class="header_icons" src="./img/peopleIcon.png">
-                    <h2>Bracia w służbie</h2>
+        <div class="tabcontent pastors">
+            <div class="tabcontent_header">
+                <div class="header_icons">
+                    <img class="tabcontent_header_img" src="./img/peopleIcon.png">
                 </div>
-                <div class="brothers_container">
-                    <div class="brother" id="top">
-                        <div class="brother_img">
-                            <img src="./img/Adam.png">
-                        </div>
-                        <div class="brother_info">
-                            <div class="brother_text">
-                                <div class="brother_name">Adam Chyży</div>
-                                <div class="service_text">Pastor</div>
-                            </div>
-                            <div class="text">
-                                <div class="mobile_number">+48 518 018 092</div>
-                                <img 
-                                    class="copy" 
-                                    src="./img/imgCopy.png"
-                                    data-default="./img/imgCopy.png"
-                                    data-success="./img/imgDone.png"
-                                >
-                            </div>
-                        </div>
-                    </div>
-                    <div class="brother" id="center">
-                        <div class="brother_img">
-                            <img src="./img/Rafal.png">
-                        </div>
-                        <div class="brother_info">
-                            <div class="brother_text">
-                                <div class="brother_name">Rafał Szczechowski</div>
-                                <div class="service_text">Pastor</div>
-                            </div>
-                            <div class="text">
-                                <div class="mobile_number">+48 607 979 951</div>
-                                <img 
-                                    class="copy" 
-                                    src="./img/imgCopy.png"
-                                    data-default="./img/imgCopy.png"
-                                    data-success="./img/imgDone.png"
-                                >
-                            </div>
-                        </div>
-                    </div>
-                    <div class="brother" id="center">
-                        <div class="brother_img">
-                           <img src="./img/Michal.png">
-                        </div>
-                        <div class="brother_text">
-                            <div class="brother_name">Michał Jawdyk</div>
-                            <div class="service_text">Pastor Sen.</div>
-                        </div>
-                    </div>
-                    <div class="brother" id="center">
-                        <div class="brother_img">
-                            <img src="./img/Roman.png">
-                        </div>
-                        <div class="brother_text">
-                            <div class="brother_name">Roman Jawdyk</div>
-                            <div class="service_text">Pastor Sen.</div>
-                        </div>
-                    </div>
-                    <div class="brother" id="center">
-                        <div class="brother_img">
-                            <img src="./img/Slawek.png">
-                        </div>
-                        <div class="brother_text" id="contact_scroll">
-                            <div class="brother_name">Sławek Potomski</div>
-                            <div class="service_text">Diakon Ds.</div>
-                        </div>
-                    </div>
-                    <div class="brother" id="bottom">
-                        <div class="brother_img">
-                            <img src="./img/Tadeusz.png">
-                        </div>
-                        <div class="brother_text">
-                            <div class="brother_name">Tadeusz Iwanicki</div>
-                            <div class="service_text">Diakon ds.</div>
-                        </div>
-                    </div>
-                </div>
+                <h2>Bracia w służbie</h2>
             </div>
-            <div class="tabcontent_mobile contact">
-                <div class="tabcontent_header">
-                    <img class="header_icons" src="./img/contact_icon.png">
-                    <h2>Kontakt</h2>
+            <div class="brothers_container">
+                <div class="brother" id="top">
+                    <div class="brother_img">
+                        <img src="./img/Adam.png">
+                    </div>
+                    <div class="brother_info">
+                        <div class="brother_text">
+                            <div class="brother_name">Adam Chyży</div>
+                            <div class="service_text">Pastor</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text">
-                    <img class="imgMedia" src="./img/emailIcon.png">
-                    <div><b>Adres e-mail:</b></div>
+                <div class="brother" id="center">
+                    <div class="brother_img">
+                        <img src="./img/Rafal.png">
+                    </div>
+                    <div class="brother_info">
+                        <div class="brother_text">
+                            <div class="brother_name">Rafał Szczechowski</div>
+                            <div class="service_text">Pastor</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text">
-                    <div class="email">legnica@chwz.org.pl</div>
-                    <img 
-                        class="copy" 
-                        src="./img/imgCopy.png"
-                        data-default="./img/imgCopy.png"
-                        data-success="./img/imgDone.png"
-                    >
+                <div class="brother" id="center">
+                    <div class="brother_img">
+                       <img src="./img/Michal.png">
+                    </div>
+                    <div class="brother_text i">
+                        <div class="brother_name">Michał Jawdyk</div>
+                        <div class="service_text">Pastor Senior</div>
+                    </div>
                 </div>
-                <br>
-                <div><b>Media:</b></div>
-                <div class="text">
-                    <img class="imgMedia" src="./img/Facebook.png">
-                    <a href="https://www.facebook.com/share/17qKNrdMnV/" class="media_link" target="_blank">Facebook</a><img class="arrow" src="./img/arrow.png">
+                <div class="brother" id="center">
+                    <div class="brother_img">
+                        <img src="./img/Roman.png">
+                    </div>
+                    <div class="brother_text i">
+                        <div class="brother_name">Roman Jawdyk</div>
+                        <div class="service_text">Pastor Senior</div>
+                    </div>
                 </div>
-                <div class="text">
-                    <img class="imgMedia" src="./img/youtube.png">
-                    <a href="https://www.youtube.com/@chwz_legnica" class="media_link" target="_blank">YouTube</a><img class="arrow" src="./img/arrow.png">
+                <div class="brother" id="center">
+                    <div class="brother_img">
+                        <img src="./img/Slawek.png">
+                    </div>
+                    <div class="brother_text i" id="contact_scroll">
+                        <div class="brother_name">Sławek Potomski</div>
+                        <div class="service_text">Diakon do spraw</div>
+                    </div>
                 </div>
-                <div class="text">
-                    <img class="imgMedia" src="./img/instagram1.png">
-                    <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="media_link" target="_blank">Instagram</a><img class="arrow" src="./img/arrow.png">
-                </div>
-                <br>
-                <div class="text">
-                    <img class="imgMedia" src="./img/bankIcon.png">
-                    <div><b>Dane bankowe:</b></div>
-                </div>
-                <div class="text">
-                <div class="email">36 1020 3017 0000 2602 0119 6518</div>
-                <img 
-                class="copy" 
-                src="./img/imgCopy.png"
-                data-default="./img/imgCopy.png"
-                data-success="./img/imgDone.png"
-                >
+                <div class="brother" id="bottom">
+                    <div class="brother_img">
+                        <img src="./img/Tadeusz.png">
+                    </div>
+                    <div class="brother_text i">
+                        <div class="brother_name">Tadeusz Iwanicki</div>
+                        <div class="service_text">Diakon do spraw</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -302,10 +251,44 @@
 </div>
 
 <footer class="footer">
-    <div class="footer__dane">
+    <div class="contact">
+        <div class="first_desc">
+            <div class="desc">
+                <p><strong>Adres e-mail:</strong></p>
+                <div class="text">
+                    <a href="https://mail.google.com/mail/?view=cm&to=legnica@chwz.org.pl" target="_blank">legnica@chwz.org.pl</a>
+                </div>
+            </div>
+            <br>
+            <div class="desc">
+                <p><strong>Dane bankowe:</strong></p>
+                <a class="email">36 1020 3017 0000 2602 0119 6518</a>
+            </div>
+        </div>
+        <br>
+        <div class="second_desc">
+            <div class="mediaIcons">
+                <a href="https://www.facebook.com/share/17qKNrdMnV/" target="_blank">
+                    <img class="imgMedia" src="./img/Facebook.png" alt="Facebook">
+                </a>
+            </div>
+            <div class="mediaIcons">
+                <a href="https://www.youtube.com/@chwz_legnica" target="_blank">
+                    <img class="imgMedia" src="./img/youtube.png" alt="YouTube">
+                </a>
+            </div>
+            <div class="mediaIcons">
+                <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                    <img class="imgMedia" src="./img/instagram.png" alt="Instagram">
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="footer__dane">
         <div class="footer__dane-title">Dane rejestrowe</div>
         <div class="footer__dane-text">Rejestr Kościołów i Innych Związków Wyznaniowych, dział A poz.18. Decyzja Ministerstwa Spraw Wewnętrznych i Administracji z dnia 20.06.2000 r. <br>  nr W.R./6722-6/18/2000/HG.</div>
-    </div>
+    </div> -->
+    <div class="block_padding"></div>
     <div class="footer_divider"></div>
     <div class="footer__copy">
             <div class="footer__copy-text">© 2026 ChWZ. Wszelkie prawa zastrzeżone</div>
