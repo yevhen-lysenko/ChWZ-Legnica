@@ -1,302 +1,331 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./img/birdIcon.png" type="image/png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/fonts.css">
-    <title>ChWZ Legnica</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CHWZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./style/style.css" />
+<link rel="icon" type="image" href="./img/mainLogo.svg">
 </head>
 <body>
-<header class="header">
-    <div class="header__content">
-        <div class="header_logo">
-            <img class="logo_img" src="./img/birdimg.png" alt="" >
-            <div class="logo_CHWZ">CHWZ</div>
-        </div>
-        <div class="header_links">
-            <a href="https://www.facebook.com/share/17qKNrdMnV/" class="header_link" target="_blank">Facebook</a>
-            <a href="https://www.youtube.com/@chwz_legnica" class="header_link youtube" target="_blank">YouTube</a>
-            <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="header_link instagram" target="_blank">Instagram</a>
-        </div>
-    </div>
-    <a class="calendar_button">Kalendarz spotkań</a>
-    <div class="header_menu" id="burger">
-        <div class="header_line top"></div>
-        <div class="header_line middle"></div>
-        <div class="header_line bottom"></div>
-    </div>
+
+<!-- ═══════════════════ DESKTOP HEADER ═══════════════════ -->
+<header class="desktop-header glass">
+  <img src="./img/ChWZIcon.png" class="logo" onclick="showPage('home')">
+  <nav class="desktop-nav">
+    <a class="active" id="nav-home" onclick="showPage('home')">Strona główna</a>
+    <a id="nav-onas" onclick="showPage('onas')">O nas</a>
+    <a id="nav-kontakt" onclick="showPage('kontakt')">Kontakt</a>
+  </nav>
+  <div class="header-actions">
+    <button class="btn-glass">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Kalendarz spotkań
+    </button>
+    <button class="btn-glass">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </button>
+  </div>
 </header>
 
-<div class="calendar_container" id="cal-con">
-    <div class="calendar_windows">
-        <div id="calendar"></div>
-        <div class="calendar_window"></div>
+<!-- ═══════════════════ MOBILE HEADER ═══════════════════ -->
+<header class="mobile-header glass">
+  <img src="./img/ChWZIcon.png" class="logo" onclick="showPage('home')">
+  <div class="header-actions">
+    <button class="btn-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </button>
+    <button class="btn-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════════════ MOBILE BOTTOM NAV ═══════════════════ -->
+<nav class="mobile-nav">
+  <a class="active" id="mnav-home" onclick="showPage('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Główna
+  </a>
+  <a id="mnav-onas" onclick="showPage('onas')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    O nas
+  </a>
+  <a id="mnav-kontakt" onclick="showPage('kontakt')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Kontakt
+  </a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- STRONA GŁÓWNA                                          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <!-- Замените src на путь к фото церкви, напр: src="church.jpg" -->
+    <img src="./img/mainImg.svg" alt="Kościół CHWZ"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+    <div class="img-placeholder" style="display:none; position:absolute; inset:0;">
+      📷 Dodaj zdjęcie kościoła<br/><small>Zastąp src="YOUR_CHURCH_PHOTO.jpg"</small>
     </div>
+    <div class="hero-overlay">
+      <p class="hero-tagline">Oficjalna strona zboru ChWZ w Legnicy</p>
+      <div class="hero-btns">
+        <button class="btn-glass" onclick="showPage('onas')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          O nas
+        </button>
+        <button class="btn-glass" onclick="showPage('kontakt')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Kontakt
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- <div class="NewsBlock active  ">
-    <div class="icon_exclamation_point"></div>
-    <div class="NewsText">Dzisiaj wieczorowego nabożenstwa nie ma!</div>
-</div> -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- O NAS                                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="page-onas" class="page">
+  <div class="page-content">
 
-<div class="menu_board">
-    <div class="menu_links ok">
-        <img class="imgMedia" src="./img/calendar.png">
-        <a href="#okay" class="header_media_link"><b>Kalendarz spotkań</b></a>
+    <!-- Blok 1: Video -->
+    <div class="block">
+      <h2>Wideo</h2>
+      <div class="video-wrap">
+        <!-- Zastąp src linkiem do YouTube/Vimeo embed -->
+        <iframe src="https://www.youtube.com/embed/Vxu3nt1C0Dg?si=1j7pNH2PIJRtY-lH"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
     </div>
-    <div class="menu_links">
-        <img class="imgMedia" src="./img/live.png">
-        <a href="https://www.youtube.com/@chwz_legnica/streams" class="header_media_link" target="_blank"><b>Transmisje na żywo</b></a>
+
+    <!-- Blok 2: Bracia w służbie -->
+    <div class="block">
+      <h2>Bracia w służbie</h2>
+      <div class="bracia-grid">
+
+        <div class="brat-card">
+          <img src="./img/Adam.svg" class="brat-photo" alt="Adam Chyży">
+          <div class="brat-name">Adam Chyży</div>
+          <div class="brat-role">Pastor</div>
+        </div>
+
+        <div class="brat-card">
+          <img src="./img/Rafal.svg" class="brat-photo" alt="Rafał Szczechowski">
+          <div class="brat-name">Rafał Szczechowski</div>
+          <div class="brat-role">Pastor</div>
+        </div>
+
+        <div class="brat-card">
+          <img src="./img/Roman.svg" class="brat-photo" alt="Roman Jawdyk">
+          <div class="brat-name">Roman Jawdyk</div>
+          <div class="brat-role">Pastor Senior</div>
+        </div>
+
+        <div class="brat-card">
+          <img src="./img/Michal.svg" class="brat-photo" alt="Michał Jawdyk">
+          <div class="brat-name">Michał Jawdyk</div>
+          <div class="brat-role">Pastor Senior</div>
+        </div>
+
+        <div class="brat-card">
+          <img src="./img/Slawek.svg" class="brat-photo" alt="Sławek Potomski">
+          <div class="brat-name">Sławek Potomski</div>
+          <div class="brat-role">Diakon do spraw</div>
+        </div>
+
+        <div class="brat-card">
+          <img src="./img/Tadeusz.svg" class="brat-photo" alt="Tadeusz Iwanicki">
+          <div class="brat-name">Tadeusz Iwanicki</div>
+          <div class="brat-role">Diakon do spraw</div>
+        </div>
+
+      </div>
     </div>
-    <div class="menu_links ok">
-        <img class="imgMedia" src="./img/contact.png">
-        <a href="#contact_scroll" class="header_media_link"><b>Kontakt</b></a>
+
+    <!-- Blok 3: Zasady wiary -->
+    <div class="block">
+      <h2>Zasady wiary</h2>
+      <div class="accordion">
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            Wiara w Boga
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-body">
+            Wierzymy w jednego Boga, Stwórcę nieba i ziemi, który objawia się w trzech osobach: Ojca, Syna i Ducha Świętego.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            Pismo Święte
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-body">
+            Wierzymy, że Pismo Święte jest natchnionym Słowem Bożym, jedyną i nieomylną regułą wiary i życia chrześcijańskiego.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            Zbawienie
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-body">
+            Wierzymy, że zbawienie jest łaską Bożą przez wiarę w Jezusa Chrystusa, który umarł za nasze grzechy i zmartwychwstał.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            Chrzest
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-body">
+            Wierzymy w chrzest przez zanurzenie jako publiczne wyznanie wiary i posłuszeństwo przykazaniom Pana Jezusa.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            Duch Święty
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-body">
+            Wierzymy w działanie Ducha Świętego w życiu wierzących — prowadzi, pociesza i wyposaża w dary do służby.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            Kościół
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion-body">
+            Wierzymy w Kościół jako wspólnotę wierzących zjednoczonych w Chrystusie, powołanych do głoszenia Ewangelii i wzajemnej miłości.
+          </div>
+        </div>
+
+      </div>
     </div>
+
+  </div>
 </div>
 
-<div class="preview">
-    <div class="preview_item">
-        <img class="preview_logo" src="./img/birdimg1.png" alt="" >
-        <div class="preview_title">ChWZ zbór w Legnicy</div>
-        <div class="preview_text">Oficjalna strona Zboru Chrześcijańskiej Wspólnoty Zielonoświątkowej w Legnicy</div>
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- KONTAKT                                                -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="page-kontakt" class="page">
+  <div class="page-content">
+    <div class="kontakt-grid">
+
+      <!-- Lewa kolumna: dane kontaktowe -->
+      <div class="kontakt-block glass block" style="border-radius: var(--radius);">
+        <h2>Kontakt</h2>
+        <p class="subtitle">Skontaktuj się z nami – chętnie odpowiemy na Twoje pytania.</p>
+
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,14 22,4"/></svg>
+          </div>
+          <div class="contact-info">
+            <div class="contact-label">Adres e-mail</div>
+            <div class="contact-value">legnica@chwz.org.pl</div>
+          </div>
+          <div class="contact-actions">
+            <button class="btn-sm btn_e-mail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Napisz
+            </button>
+            <button class="btn-sm" onclick="navigator.clipboard.writeText('legnica@chwz.org.pl')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Skopiuj
+            </button>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contact-info">
+            <div class="contact-label">Telefon</div>
+            <div class="contact-value">+48 518 018 095</div>
+          </div>
+          <div class="contact-actions">
+            <button class="btn-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Zadzwoń
+            </button>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </div>
+          <div class="contact-info">
+            <div class="contact-label">Dane bankowe</div>
+            <div class="contact-value" style="font-size:0.8rem;">36 1020 3017 0000 2602 0119 6518</div>
+          </div>
+          <div class="contact-actions">
+            <button class="btn-sm" onclick="navigator.clipboard.writeText('36102030170000260201196518')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Skopiuj numer konta
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Środkowa kolumna: media społecznościowe -->
+      <div class="kontakt-block social-block glass block" style="border-radius: var(--radius);">
+        <h3>Media społecznościowe</h3>
+        <div class="social-divider"></div>
+
+        <a href="https://www.facebook.com/chwzlegnica?rdid=rj3lqBnJt3i0rerw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17qKNrdMnV%2F#" target="_blank" class="social-btn social-fb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <span class="social-btn-name">Facebook</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a href="https://youtube.com/@chwz_legnica?si=wioYkzaF4rAMDYQ_" target="_blank" class="social-btn social-yt">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="red"/></svg>
+          <span class="social-btn-name">YouTube</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn social-ig">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
+          <span class="social-btn-name">Instagram</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+
+      <!-- Prawa kolumna: mapa -->
+      <div class="kontakt-block map-block glass block" style="border-radius: var(--radius);">
+        <h2>Adres</h2>
+        <p class="subtitle">Odwiedź nas na miejscu – zapraszamy do naszego zboru.</p>
+        <a href="https://maps.google.com/?q=Legnica+CHWZ" target="_blank" class="map-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Otwórz w Mapach
+        </a>
+        <div class="map-wrap">
+          <!-- Zastąp src iframe z Google Maps embed -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.157756580508!2d16.198603976993496!3d51.19774473327705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470f0d0cd3802a19%3A0xf7e6c1f43e9d4848!2zQ2hyemXFm2NpamHFhHNrYSBXc3DDs2xub3RhIFppZWxvbm_Fm3dpxIV0a293YSB3IExlZ25pY3k!5e0!3m2!1sru!2spl!4v1777039335657!5m2!1sru!2spl"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+
     </div>
+  </div>
 </div>
-
-<div class="content">
-    <div class="content_container">
-        <div class="tabcontent video">
-            <div class="tabcontent_header_video">
-                <div class="header_icons">
-                    <img class="tabcontent_header_img" src="./img/oNasIconPrototype.png">
-                </div>
-                <h2>O nas</h2>
-            </div>
-            <div class="video">
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube-nocookie.com/embed/Vxu3nt1C0Dg?si=9y3GLXunYz5-Gnre" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-        <div class="container_services_and_maps">
-            <!-- <div class="calendar_container" id="cal-con">
-                <div class="tabcontent_header calendar">
-                    <div class="header_icons">
-                        <img class="tabcontent_header_img" src="./img/calendarIcon.png">
-                    </div>
-                    <h2>Kalendarz spotkań</h2>
-                </div>
-                <div class="calendar_windows">
-                    <div id="calendar"></div>
-                    <div class="calendar_window"></div>
-                </div>
-            </div> -->
-            <div class="tabcontent services">
-                <div class="tabcontent_header">
-                    <div class="header_icons">
-                        <img class="tabcontent_header_img" src="./img/timeIcon.png">
-                    </div>
-                    <h2>Nabożenstwa</h2>
-                </div>
-                <b>Niedziela:</b>
-                <p class="blackout">- 10:00 Nabożenstwo poranne</p>
-                <p class="blackout">- 18:00 Nabożenstwo wieczorowe</p>
-                <br>
-                <b>Poniedziałek:</b>
-                <p class="blackout">- 19:00 Modlitwa</p>
-                <br>
-                <b>Czwartek:</b>
-                <p class="blackout">- 18:00 Nabożenstwo</p>
-                <br>
-                <b>Piątek:</b>
-                <p class="blackout">- 18:00 Młodzieżowe</p>
-            </div>
-            <div class="tabcontent maps">
-                <div class="adres_text">
-                    <div class="tabcontent_header maps">
-                        <div class="header_icons">
-                            <img class="tabcontent_header_img" src="./img/adresIcon.png">
-                        </div>
-                        <h2>Adres zboru</h2>
-                    </div>
-                    <b>ul. Sudecka 3, 59-220 Legnica</b>
-                </div>
-                <div class="google_maps">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.1577565805082!2d16.198603976993507!3d51.19774473327704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470f0d0cd3802a19%3A0xf7e6c1f43e9d4848!2zQ2hyemXFm2NpamHFhHNrYSBXc3DDs2xub3RhIFppZWxvbm_Fm3dpxIV0a293YSB3IExlZ25pY3k!5e0!3m2!1sru!2spl!4v1770851459669!5m2!1sru!2spl" 
-                        width="600" 
-                        height="450" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                    <div id="okay"></div>
-                </div>
-            </div>
-        </div>
-        <div class="tabcontent rules">
-             <div class="tabcontent_header">
-                <div class="header_icons">
-                    <img class="tabcontent_header_img" src="./img/cross.png">
-                </div>
-                <h2 class="rules_name">Zasady wiary</h2>
-            </div>
-            <div class="rules_text">
-                <ol><b><li>Wierzymy w Jedynego Wszechmocnego Boga: Ojca, Syna i Ducha Świętego.</li>
-                    <li>Pismo Święte jako Słowo Boże, natchnione przez Ducha Świętego, które jest jedynym, najważniejszym autorytetem w sprawach: prawdy, wiary i życia.</li>
-                    <li>Jezusa Chrystusa, Syna Bożego, który przyszedł w ciele na świat- narodził się z Marii dziewicy, aby przez swą męczeńską śmierć i zmartwychwstanizbawić  grzeszników. Jest On jedynym Orędownikiem i Pośrednikiem pomiędzy człowiekiem a Bogiem.</li>
-                    <li>Zbawienie z łaski jako dar Bożej miłości.</li>
-                    <li>Nowonarodzenie z wody i Ducha Świętego, aby wejść do Królestwa Bożego.</li>
-                    <li>Chrzest Duchem Świętym oraz prowadzenie i dary *(charyzmaty) Ducha Świętego.</li>
-                    <li>Konieczność przyjęcia chrztu wodnego (przez zanurzenie). Przyjmowanie Wieczerzy Pańskiej (pod postacią chleba i wina, wraz z umywaniem nóg)Pomazanie olejem     (ku uzdrowieniu).</li>
-                    <li>Kościół (ciało Jezusa Chrystusa), którego głową i budowniczym jest Jezus Chrystus.</li>
-                    <li>Powszechne zmartwychwstanie (wszystkich ludzi) i sąd Boży oraz życie wieczne (zbawionych) i wieczne potępienie.</li>
-                    <li>Odrodzenie (nowe) życie chrześcijanina, to jest takie, którego w szczególności przejawami są:</li>
-                    </b>
-                </ol>
-                <ul>
-                    <b>
-                    <li>modlitwa za władzę i postępowanie uczciwe, sprawiedliwe i święte (w tym bez nałogów);</li>
-                    <li>poszanowanie godności każdego człowieka;</li>
-                    <li>sumienne wykonywanie obowiązków (w domu, szkole, pracy, społeczeństwie);</li>
-                    <li>dbanie o nierozerwalność małżeństwa (związek kobiety i mężczyzny), rodzinę rodzicielstwo i macierzyństwo;</li>
-                    <li>ochrona życia (w tym nieodbywanie służby wojskowej).</li>
-                    </b>
-                </ul>
-            </div>
-            <div class="learn_all">
-                <div class="learn_all_text">Czytać dalej</div>
-                <img class="item_arrow" src="./img/itemArrow.png">
-            </div>
-        </div>
-        <div class="tabcontent pastors">
-            <div class="tabcontent_header">
-                <div class="header_icons">
-                    <img class="tabcontent_header_img" src="./img/peopleIcon.png">
-                </div>
-                <h2>Bracia w służbie</h2>
-            </div>
-            <div class="brothers_container">
-                <div class="brother" id="top">
-                    <div class="brother_img">
-                        <img src="./img/Adam.png">
-                    </div>
-                    <div class="brother_info">
-                        <div class="brother_text">
-                            <div class="brother_name">Adam Chyży</div>
-                            <div class="service_text">Pastor</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="brother" id="center">
-                    <div class="brother_img">
-                        <img src="./img/Rafal.png">
-                    </div>
-                    <div class="brother_info">
-                        <div class="brother_text">
-                            <div class="brother_name">Rafał Szczechowski</div>
-                            <div class="service_text">Pastor</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="brother" id="center">
-                    <div class="brother_img">
-                       <img src="./img/Michal.png">
-                    </div>
-                    <div class="brother_text i">
-                        <div class="brother_name">Michał Jawdyk</div>
-                        <div class="service_text">Pastor Senior</div>
-                    </div>
-                </div>
-                <div class="brother" id="center">
-                    <div class="brother_img">
-                        <img src="./img/Roman.png">
-                    </div>
-                    <div class="brother_text i">
-                        <div class="brother_name">Roman Jawdyk</div>
-                        <div class="service_text">Pastor Senior</div>
-                    </div>
-                </div>
-                <div class="brother" id="center">
-                    <div class="brother_img">
-                        <img src="./img/Slawek.png">
-                    </div>
-                    <div class="brother_text i" id="contact_scroll">
-                        <div class="brother_name">Sławek Potomski</div>
-                        <div class="service_text">Diakon do spraw</div>
-                    </div>
-                </div>
-                <div class="brother" id="bottom">
-                    <div class="brother_img">
-                        <img src="./img/Tadeusz.png">
-                    </div>
-                    <div class="brother_text i">
-                        <div class="brother_name">Tadeusz Iwanicki</div>
-                        <div class="service_text">Diakon do spraw</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer class="footer">
-    <div class="contact">
-        <div class="first_desc">
-            <div class="desc">
-                <p><strong>Adres e-mail:</strong></p>
-                <div class="text">
-                    <a href="https://mail.google.com/mail/?view=cm&to=legnica@chwz.org.pl" target="_blank">legnica@chwz.org.pl</a>
-                </div>
-            </div>
-            <br>
-            <div class="desc">
-                <p><strong>Dane bankowe:</strong></p>
-                <a class="email">36 1020 3017 0000 2602 0119 6518</a>
-            </div>
-        </div>
-        <br>
-        <div class="second_desc">
-            <div class="mediaIcons">
-                <a href="https://www.facebook.com/share/17qKNrdMnV/" target="_blank">
-                    <img class="imgMedia" src="./img/Facebook.png" alt="Facebook">
-                </a>
-            </div>
-            <div class="mediaIcons">
-                <a href="https://www.youtube.com/@chwz_legnica" target="_blank">
-                    <img class="imgMedia" src="./img/youtube.png" alt="YouTube">
-                </a>
-            </div>
-            <div class="mediaIcons">
-                <a href="https://www.instagram.com/chwz_legnica?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
-                    <img class="imgMedia" src="./img/instagram.png" alt="Instagram">
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- <div class="footer__dane">
-        <div class="footer__dane-title">Dane rejestrowe</div>
-        <div class="footer__dane-text">Rejestr Kościołów i Innych Związków Wyznaniowych, dział A poz.18. Decyzja Ministerstwa Spraw Wewnętrznych i Administracji z dnia 20.06.2000 r. <br>  nr W.R./6722-6/18/2000/HG.</div>
-    </div> -->
-    <div class="block_padding"></div>
-    <div class="footer_divider"></div>
-    <div class="footer__copy">
-            <div class="footer__copy-text">© 2026 ChWZ. Wszelkie prawa zastrzeżone</div>
-    </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pl.js"></script>
 
 <script src="./js/script.js"></script>
 </body>
