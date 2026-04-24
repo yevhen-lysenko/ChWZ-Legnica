@@ -14,6 +14,14 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   html { scroll-behavior: smooth; }
 
   body {
@@ -63,6 +71,7 @@
     width: 135px;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    -webkit-tap-highlight-color: transparent;
   }
   .logo:hover { background: var(--glass-hover); }
 
@@ -239,7 +248,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 25%;
+    height: 35%;
     background: linear-gradient(to bottom, transparent, #7a6555);
     pointer-events: none;
   }
@@ -555,6 +564,9 @@
     #page-home .hero { height: calc(100vh - 64px); }
     #page-home .hero-overlay { padding: 24px 14px; }
     #page-home .hero-btns .btn-glass { font-size: 0.9rem; padding: 10px 20px; }
+    #page-home .hero img {
+      height: 90%;
+    }
 
     /* O nas */
     #page-onas .page-content {
