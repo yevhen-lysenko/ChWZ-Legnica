@@ -14,6 +14,11 @@
     // scroll to top
     window.scrollTo(0, 0);
 
+    const indicator = document.querySelector('.nav-indicator');
+      if (name === 'home')    indicator.style.transform = 'translateX(6%)';
+      if (name === 'onas')    indicator.style.transform = 'translateX(100%)';
+      if (name === 'kontakt') indicator.style.transform = 'translateX(194%)';
+
     // if (name === 'home') {
     //   document.querySelectorAll('header').forEach(h => {
     //     h.style.background = 'linear-gradient(133deg, #225085, #2d5a8c, #798da0)';

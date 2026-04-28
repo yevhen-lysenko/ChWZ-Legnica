@@ -169,6 +169,20 @@
     justify-content: space-around;
     align-items: center;
   }
+
+  .nav-indicator {
+    position: absolute;
+    height: calc(100% - 10px);
+    width: 33.33%;
+    background: var(--glass);
+    border-radius: var(--radius-pill);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(6%);
+    top: 5px;
+    left: 0;
+    pointer-events: none;
+  }
+
   .mobile-nav a {
     display: flex;
     flex-direction: column;
@@ -183,7 +197,7 @@
     transition: all 0.2s;
   }
   .mobile-nav a.active {
-    background: var(--glass);
+    background: transparent;
     color: var(--text);
   }
   .mobile-nav a svg { width: 22px; height: 22px; }
