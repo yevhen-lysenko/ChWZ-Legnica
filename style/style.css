@@ -56,6 +56,7 @@
     border-bottom: 1px solid var(--glass-border);
   }
 
+
   .logo {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.5rem;
@@ -69,8 +70,8 @@
     user-select: none;
     transition: background 0.2s;
     width: 135px;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     -webkit-tap-highlight-color: transparent;
   }
   .logo:hover { background: var(--glass-hover); }
@@ -132,8 +133,8 @@
     border-radius: 50%;
     border: 1px solid var(--glass-border);
     background: var(--glass);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     color: var(--text);
     cursor: pointer;
     display: flex;
@@ -161,7 +162,7 @@
     border-radius: var(--radius-pill);
     padding: 8px;
     background: var(--glass);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--glass-border);
     flex-direction: row;
@@ -209,6 +210,16 @@
     display: block;
     transition: transform 8s ease;
   }
+  #page-home .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 15%;
+    background: linear-gradient(to bottom, transparent, #7a6555);
+    pointer-events: none;
+  }
   /* #page-home .hero:hover img { transform: scale(1.03); } */
   #page-home .hero-overlay {
     position: absolute;
@@ -222,7 +233,7 @@
     gap: 32px;
   }
   #page-home .hero-tagline {
-    font-family: sans-serif;
+    font-family: fantasy;
     font-size: 2.1rem;
     font-weight: 300;
     color: var(--text);
@@ -242,7 +253,7 @@
     font-weight: 700;
     letter-spacing: 0.5px;
   }
-  #page-home .hero::after {
+  /* #page-home .hero::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -251,7 +262,7 @@
     height: 35%;
     background: linear-gradient(to bottom, transparent, #7a6555);
     pointer-events: none;
-  }
+  } */
 
   /* placeholder for missing image */
   .img-placeholder {
@@ -402,7 +413,6 @@
 
   .kontakt-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr 1fr;
     gap: 20px;
     align-items: start;
   }
@@ -558,15 +568,39 @@
     header.mobile-header { display: flex; }
     .mobile-nav { display: flex; }
 
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 10%;
+      background: linear-gradient(to bottom, transparent, #7a6555);
+      pointer-events: none;
+    }
+
+    header::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 10%;
+      background: linear-gradient(to top, transparent, #7a6555);
+      pointer-events: none;
+    }
+
+    header.header-transparent::before {
+      display: none;
+    }
+
     .page-content { padding-top: 64px; }
 
     /* Home hero */
     #page-home .hero { height: calc(100vh - 64px); }
     #page-home .hero-overlay { padding: 24px 14px; }
     #page-home .hero-btns .btn-glass { font-size: 0.9rem; padding: 10px 20px; }
-    #page-home .hero img {
-      height: 90%;
-    }
+    #page-home .hero img { height: 100%; }
 
     /* O nas */
     #page-onas .page-content {

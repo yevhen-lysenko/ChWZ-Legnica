@@ -13,6 +13,29 @@
     if (mn) mn.classList.add('active');
     // scroll to top
     window.scrollTo(0, 0);
+
+    // if (name === 'home') {
+    //   document.querySelectorAll('header').forEach(h => {
+    //     h.style.background = 'linear-gradient(133deg, #225085, #2d5a8c, #798da0)';
+    //     h.style.backdropFilter = 'none';
+    //     h.style.webkitBackdropFilter = 'none';
+    //     h.style.borderBottom = 'none';
+    //   });
+    // } else {
+    //   document.querySelectorAll('header').forEach(h => {
+    //     h.style.background = '';
+    //     h.style.backdropFilter = '';
+    //     h.style.webkitBackdropFilter = '';
+    //     h.style.borderBottom = '';
+    //   });
+    // }
+
+    const header = document.querySelector('header.desktop-header, header.mobile-header');
+    if (name === 'home') {
+      document.querySelectorAll('header').forEach(h => h.classList.add('header-transparent'));
+    } else {
+      document.querySelectorAll('header').forEach(h => h.classList.remove('header-transparent'));
+    }
   }
 
   function toggleAccordion(btn) {
@@ -30,7 +53,6 @@
         '_blank'
     );
   });
-
 // flatpickr("#calendar", {
 //     inline: true,
 //     locale: "pl",

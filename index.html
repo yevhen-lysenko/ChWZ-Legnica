@@ -11,7 +11,7 @@
 <body>
 
 <!-- ═══════════════════ DESKTOP HEADER ═══════════════════ -->
-<header class="desktop-header glass">
+<header class="desktop-header glass header-transparent">
   <img src="./img/ChWZIcon.png" class="logo" onclick="showPage('home')">
   <nav class="desktop-nav">
     <a class="active" id="nav-home" onclick="showPage('home')">Strona główna</a>
@@ -31,7 +31,7 @@
 </header>
 
 <!-- ═══════════════════ MOBILE HEADER ═══════════════════ -->
-<header class="mobile-header glass">
+<header class="mobile-header glass header-transparent">
   <img src="./img/ChWZIcon.png" class="logo" onclick="showPage('home')">
   <div class="header-actions">
     <button class="btn-icon">
@@ -65,7 +65,7 @@
 <div id="page-home" class="page active">
   <div class="hero">
     <!-- Замените src на путь к фото церкви, напр: src="church.jpg" -->
-    <img src="./img/mainImg.svg" alt="Kościół CHWZ"
+    <img src="./img/mainImg.svg" class="build-img" alt="Kościół CHWZ"
          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
     <div class="img-placeholder" style="display:none; position:absolute; inset:0;">
       📷 Dodaj zdjęcie kościoła<br/><small>Zastąp src="YOUR_CHURCH_PHOTO.jpg"</small>
@@ -94,7 +94,7 @@
 
     <!-- Blok 1: Video -->
     <div class="block">
-      <h2>Wideo</h2>
+      <h2>Filmik o nas</h2>
       <div class="video-wrap">
         <!-- Zastąp src linkiem do YouTube/Vimeo embed -->
         <iframe src="https://www.youtube.com/embed/Vxu3nt1C0Dg?si=1j7pNH2PIJRtY-lH"
