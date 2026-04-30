@@ -43,6 +43,23 @@
     }
   }
 
+  function copyWithFeedback(text, btn) {
+    navigator.clipboard.writeText(text);
+    const original = btn.innerHTML;
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      Skopiowano`;
+    btn.style.background = 'rgba(80,200,120,0.25)';
+    btn.style.borderColor = 'rgba(80,200,120,0.5)';
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.style.background = '';
+      btn.style.borderColor = '';
+    }, 1500);
+  }
+
   function toggleAccordion(btn) {
     const item = btn.closest('.accordion-item');
     const isOpen = item.classList.contains('open');
