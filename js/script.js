@@ -81,6 +81,8 @@
     pl: {
       btn_lang: 'Polski',
       btn_menu: 'Menu',
+      btn_live: 'Transmisje na żywo',
+      btn_calendar: 'Kalendarz spotkań',
       main_text: 'Oficjalna strona zboru ChWZ w Legnicy',
       nav_home: 'Główna',
       nav_onas: 'O nas',
@@ -109,6 +111,8 @@
     ru: {
       btn_lang: 'Русский',
       btn_menu: 'Меню',
+      btn_live: 'Прямая трансляция',
+      btn_calendar: 'Календарь собраний',
       main_text: 'Официальный сайт церкви ChWZ в Легнице',
       nav_home: 'Главная',
       nav_onas: 'О нас',
@@ -137,6 +141,8 @@
     en: {
       btn_lang: 'English',
       btn_menu: 'Menu',
+      btn_live: 'Live stream',
+      btn_calendar: 'Service schedule',
       main_text: 'Official website of the ChWZ congregation in Legnica',
       nav_home: 'Home',
       nav_onas: 'About us',
@@ -165,6 +171,8 @@
     uk: {
       btn_lang: 'Українська',
       btn_menu: 'Меню',
+      btn_live: 'Пряма трансляція',
+      btn_calendar: 'Календар зібрань',
       main_text: 'Офіційна сторінка церкви ChWZ у Легниці',
       nav_home: 'Головна',
       nav_onas: 'Про нас',
@@ -211,6 +219,22 @@
     if (!e.target.closest('.lang-wrapper')) {
       document.getElementById('lang-dropdown').classList.remove('open');
       document.getElementById('lang-dropdown-mobile').classList.remove('open');
+    }
+  });
+
+  // кнопка меню
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  
+  // закрытие по клику вне
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.lang-wrapper')) {
+      document.getElementById('lang-dropdown').classList.remove('open');
+      document.getElementById('lang-dropdown-mobile').classList.remove('open');
+    }
+    if (!e.target.closest('#mobile-menu') && !e.target.closest('.btn-icon[onclick*="toggleMenu"]')) {
+      document.getElementById('mobile-menu').classList.remove('open');
     }
   });
 // flatpickr("#calendar", {
