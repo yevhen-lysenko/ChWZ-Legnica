@@ -165,13 +165,13 @@
     uk: {
       btn_lang: 'Українська',
       btn_menu: 'Меню',
-      main_text: 'Офіційний сайт церкви ChWZ у Легниці',
+      main_text: 'Офіційна сторінка церкви ChWZ у Легниці',
       nav_home: 'Головна',
       nav_onas: 'Про нас',
       nav_kontakt: 'Контакт',
       hero_tagline: 'Офіційний сайт церкви в Легниці',
       nav_video: 'Відео про нас',
-      nav_bracia: 'Брати в служінні',
+      nav_bracia: 'Брати служителя',
       role_pastor: "Пастор",
       role_pastor_senior: "Старший пастор",
       role_deacon: "Диякон",
@@ -206,6 +206,13 @@
     document.getElementById('lang-dropdown').classList.remove('open');
     document.getElementById('lang-dropdown-mobile').classList.remove('open');
   }
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.lang-wrapper')) {
+      document.getElementById('lang-dropdown').classList.remove('open');
+      document.getElementById('lang-dropdown-mobile').classList.remove('open');
+    }
+  });
 // flatpickr("#calendar", {
 //     inline: true,
 //     locale: "pl",

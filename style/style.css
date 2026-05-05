@@ -109,23 +109,40 @@
   }
 
   .lang-wrapper {
-  position: relative;
+    position: relative;
   }
   .lang-dropdown {
-    display: none;
+    display: block;
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-menu);
     overflow: hidden;
     min-width: 160px;
     z-index: 200;
-  }
+    visibility: hidden;
+    opacity: 0;
+    transform: scaleY(0.1) scaleX(0.1);
+    transform-origin: top right;
+    transition:
+      opacity 0.25s ease,
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+      visibility 0s linear 0.3s;
+    pointer-events: none;
+}
+
   .lang-dropdown.open {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    transform: scaleY(1) scaleX(1);
+    transition:
+      opacity 0.25s ease,
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+      visibility 0s linear 0s;
+    pointer-events: all;
   }
   .lang-dropdown button {
     display: flex;
@@ -293,7 +310,7 @@
   }
   #page-home .hero-tagline {
     font-family: auto;
-    font-size: 2.1rem;
+    font-size: 1.6rem;
     font-weight: 300;
     color: var(--text);
     text-align: center;
