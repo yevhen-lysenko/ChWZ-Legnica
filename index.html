@@ -14,18 +14,26 @@
 <header class="desktop-header glass header-transparent">
   <img src="./img/ChWZIcon.png" class="logo" onclick="showPage('home')">
   <nav class="desktop-nav">
-    <a class="active" id="nav-home" onclick="showPage('home')">Strona główna</a>
-    <a id="nav-onas" onclick="showPage('onas')">O nas</a>
-    <a id="nav-kontakt" onclick="showPage('kontakt')">Kontakt</a>
+    <a class="active" id="nav-home" onclick="showPage('home')" data-i18n="nav_home">Główna</a>
+    <a id="nav-onas" onclick="showPage('onas')" data-i18n="nav_onas">O nas</a>
+    <a id="nav-kontakt" onclick="showPage('kontakt')" data-i18n="nav_kontakt">Kontakt</a>
   </nav>
   <div class="header-actions">
-    <button class="btn-glass">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      Kalendarz spotkań
-    </button>
+    <div class="lang-wrapper">
+      <button class="btn-glass" onclick="document.getElementById('lang-dropdown').classList.toggle('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span data-i18n="btn_lang">Polski</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <button onclick="setLanguage('pl')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="rounded"><rect width="60" height="40" rx="10" ry="10"></rect></clipPath></defs><g clip-path="url(#rounded)"><rect width="60" height="20" fill="#fff"></rect><rect y="20" width="60" height="20" fill="#DC143C"></rect></g></svg>Polski</button>
+        <button onclick="setLanguage('en')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="rounded"><rect width="60" height="40" rx="10" ry="10"></rect></clipPath></defs><g clip-path="url(#rounded)"><rect width="60" height="40" fill="#012169"></rect><line x1="0" y1="0" x2="60" y2="40" stroke="#fff" stroke-width="6"></line><line x1="60" y1="0" x2="0" y2="40" stroke="#fff" stroke-width="6"></line><line x1="0" y1="0" x2="60" y2="40" stroke="#C8102E" stroke-width="3"></line><line x1="60" y1="0" x2="0" y2="40" stroke="#C8102E" stroke-width="3"></line><rect x="24" y="0" width="12" height="40" fill="#fff"></rect><rect x="0" y="14" width="60" height="12" fill="#fff"></rect><rect x="26" y="0" width="8" height="40" fill="#C8102E"></rect><rect x="0" y="16" width="60" height="8" fill="#C8102E"></rect></g></svg>English</button>
+        <button onclick="setLanguage('ru')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="rounded"><rect width="60" height="40" rx="10" ry="10"></rect></clipPath></defs><g clip-path="url(#rounded)"><rect width="60" height="14" fill="#fff"></rect><rect y="13" width="60" height="14" fill="#0039A6"></rect><rect y="26" width="60" height="14" fill="#D52B1E"></rect></g></svg>Русский</button>
+        <button onclick="setLanguage('uk')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="rounded"><rect width="60" height="40" rx="10" ry="10"></rect></clipPath></defs><g clip-path="url(#rounded)"><rect width="60" height="20" fill="#005BBB"></rect><rect y="20" width="60" height="20" fill="#FFD500"></rect></g></svg>Українська</button>
+      </div>
+    </div>
     <button class="btn-glass">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      Menu
+      <span data-i18n="btn_menu">Menu</span>
     </button>
   </div>
 </header>
@@ -34,9 +42,18 @@
 <header class="mobile-header glass header-transparent">
   <img src="./img/ChWZIcon.png" class="logo" onclick="showPage('home')">
   <div class="header-actions">
-    <button class="btn-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    </button>
+    <div class="lang-wrapper">
+      <button class="btn-icon" id="btn-lang-style" onclick="document.getElementById('lang-dropdown-mobile').classList.toggle('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span data-i18n="btn_lang">Polski</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown-mobile">
+        <button onclick="setLanguage('pl')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="rounded-m"><rect width="60" height="40" rx="10" ry="10"></rect></clipPath></defs><g clip-path="url(#rounded-m)"><rect width="60" height="20" fill="#fff"></rect><rect y="20" width="60" height="20" fill="#DC143C"></rect></g></svg>Polski</button>
+        <button onclick="setLanguage('en')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#rounded-m)"><rect width="60" height="40" fill="#012169"></rect><line x1="0" y1="0" x2="60" y2="40" stroke="#fff" stroke-width="6"></line><line x1="60" y1="0" x2="0" y2="40" stroke="#fff" stroke-width="6"></line><line x1="0" y1="0" x2="60" y2="40" stroke="#C8102E" stroke-width="3"></line><line x1="60" y1="0" x2="0" y2="40" stroke="#C8102E" stroke-width="3"></line><rect x="24" y="0" width="12" height="40" fill="#fff"></rect><rect x="0" y="14" width="60" height="12" fill="#fff"></rect><rect x="26" y="0" width="8" height="40" fill="#C8102E"></rect><rect x="0" y="16" width="60" height="8" fill="#C8102E"></rect></g></svg>English</button>
+        <button onclick="setLanguage('ru')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#rounded-m)"><rect width="60" height="14" fill="#fff"></rect><rect y="13" width="60" height="14" fill="#0039A6"></rect><rect y="26" width="60" height="14" fill="#D52B1E"></rect></g></svg>Русский</button>
+        <button onclick="setLanguage('uk')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#rounded-m)"><rect width="60" height="20" fill="#005BBB"></rect><rect y="20" width="60" height="20" fill="#FFD500"></rect></g></svg>Українська</button>
+      </div>
+    </div>
     <button class="btn-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -48,15 +65,15 @@
   <span class="nav-indicator"></span>
   <a class="active" id="mnav-home" onclick="showPage('home')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    Główna
+    <span data-i18n="nav_home">Główna</span>
   </a>
   <a id="mnav-onas" onclick="showPage('onas')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    O nas
+    <span data-i18n="nav_onas">O nas</span>
   </a>
   <a id="mnav-kontakt" onclick="showPage('kontakt')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-    Kontakt
+    <span data-i18n="nav_kontakt">Kontakt</span>
   </a>
 </nav>
 
@@ -72,15 +89,15 @@
       📷 Dodaj zdjęcie kościoła<br/><small>Zastąp src="YOUR_CHURCH_PHOTO.jpg"</small>
     </div>
     <div class="hero-overlay">
-      <p class="hero-tagline">Oficjalna strona zboru ChWZ w Legnicy</p>
+      <p class="hero-tagline" data-i18n="main_text">Oficjalna strona zboru ChWZ w Legnicy</p>
       <div class="hero-btns">
         <button class="btn-glass" onclick="showPage('onas')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          O nas
+          <span data-i18n="nav_onas">O nas</span>
         </button>
         <button class="btn-glass" onclick="showPage('kontakt')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Kontakt
+          <span data-i18n="nav_kontakt">Kontakt</span>
         </button>
       </div>
     </div>
@@ -95,7 +112,7 @@
 
     <!-- Blok 1: Video -->
     <div class="block">
-      <h2>Filmik o nas</h2>
+      <h2 data-i18n="nav_video">Filmik o nas</h2>
       <div class="video-wrap">
         <!-- Zastąp src linkiem do YouTube/Vimeo embed -->
         <iframe src="https://www.youtube.com/embed/Vxu3nt1C0Dg?si=1j7pNH2PIJRtY-lH"
@@ -106,43 +123,43 @@
 
     <!-- Blok 2: Bracia w służbie -->
     <div class="block">
-      <h2>Bracia w służbie</h2>
+      <h2 data-i18n="nav_bracia">Bracia w służbie</h2>
       <div class="bracia-grid">
 
         <div class="brat-card">
           <img src="./img/Adam.svg" class="brat-photo" alt="Adam Chyży">
           <div class="brat-name">Adam Chyży</div>
-          <div class="brat-role">Pastor</div>
+          <div class="brat-role" data-i18n="role_pastor">Pastor</div>
         </div>
 
         <div class="brat-card">
           <img src="./img/Rafal.svg" class="brat-photo" alt="Rafał Szczechowski">
           <div class="brat-name">Rafał Szczechowski</div>
-          <div class="brat-role">Pastor</div>
+          <div class="brat-role" data-i18n="role_pastor">Pastor</div>
         </div>
 
         <div class="brat-card">
           <img src="./img/Roman.svg" class="brat-photo" alt="Roman Jawdyk">
           <div class="brat-name">Roman Jawdyk</div>
-          <div class="brat-role">Pastor Senior</div>
+          <div class="brat-role" data-i18n="role_pastor_senior">Pastor Senior</div>
         </div>
 
         <div class="brat-card">
           <img src="./img/Michal.svg" class="brat-photo" alt="Michał Jawdyk">
           <div class="brat-name">Michał Jawdyk</div>
-          <div class="brat-role">Pastor Senior</div>
+          <div class="brat-role" data-i18n="role_pastor_senior">Pastor Senior</div>
         </div>
 
         <div class="brat-card">
           <img src="./img/Slawek.svg" class="brat-photo" alt="Sławek Potomski">
           <div class="brat-name">Sławek Potomski</div>
-          <div class="brat-role">Diakon do spraw</div>
+          <div class="brat-role" data-i18n="role_deacon">Diakon do spraw</div>
         </div>
 
         <div class="brat-card">
           <img src="./img/Tadeusz.svg" class="brat-photo" alt="Tadeusz Iwanicki">
           <div class="brat-name">Tadeusz Iwanicki</div>
-          <div class="brat-role">Diakon do spraw</div>
+          <div class="brat-role" data-i18n="role_deacon">Diakon do spraw</div>
         </div>
 
       </div>
@@ -150,7 +167,7 @@
 
     <!-- Blok 3: Zasady wiary -->
     <div class="block">
-      <h2>Zasady wiary</h2>
+      <h2 data-i18n="nav_accordion">Zasady wiary</h2>
       <div class="accordion">
 
         <div class="accordion-item">
@@ -228,25 +245,25 @@
 
       <!-- Lewa kolumna: dane kontaktowe -->
       <div class="kontakt-block glass block" style="border-radius: var(--radius);">
-        <h2>Kontakt</h2>
-        <p class="subtitle">Skontaktuj się z nami – chętnie odpowiemy na Twoje pytania.</p>
+        <h2 data-i18n="nav_kontakt">Kontakt</h2>
+        <p class="subtitle" data-i18n="contakt_text">Skontaktuj się z nami – chętnie odpowiemy na Twoje pytania.</p>
 
         <div class="contact-row">
           <div class="contact-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,14 22,4"/></svg>
           </div>
           <div class="contact-info">
-            <div class="contact-label">Adres e-mail</div>
+            <div class="contact-label" data-i18n="label_email">Adres e-mail</div>
             <div class="contact-value">legnica@chwz.org.pl</div>
           </div>
           <div class="contact-actions">
             <button class="btn-sm btn_e-mail">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              Napisz
+              <span data-i18n="btn_message">Napisz</span>
             </button>
             <button class="btn-sm" onclick="copyWithFeedback('legnica@chwz.org.pl', this)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                Skopiuj
+                <span data-i18n="btn_copy">Skopiuj</span>
             </button>
           </div>
         </div>
@@ -256,13 +273,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
           <div class="contact-info">
-            <div class="contact-label">Telefon</div>
+            <div class="contact-label" data-i18n="label_phone">Telefon</div>
             <div class="contact-value">+48 518 018 095</div>
           </div>
           <div class="contact-actions" onclick="window.location.href='tel:+48518018095'">
             <button class="btn-sm">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              Zadzwoń
+              <span data-i18n="btn_call">Zadzwoń</span>
             </button>
           </div>
         </div>
@@ -272,13 +289,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
           </div>
           <div class="contact-info">
-            <div class="contact-label">Dane bankowe</div>
+            <div class="contact-label" data-i18n="label_bank">Dane bankowe</div>
             <div class="contact-value" style="font-size:0.8rem;">36 1020 3017 0000 2602 0119 6518</div>
           </div>
           <div class="contact-actions">
             <button class="btn-sm" onclick="copyWithFeedback('36102030170000260201196518', this)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                Skopiuj numer konta
+                <span data-i18n="btn_copy_bank">Skopiuj numer konta</span>
             </button>
           </div>
         </div>
@@ -286,7 +303,7 @@
 
       <!-- Środkowa kolumna: media społecznościowe -->
       <div class="kontakt-block social-block glass block" style="border-radius: var(--radius);">
-        <h3>Media społecznościowe</h3>
+        <h3 data-i18n="nav_media">Media społecznościowe</h3>
         <div class="social-divider"></div>
 
         <a href="https://www.facebook.com/chwzlegnica?rdid=rj3lqBnJt3i0rerw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17qKNrdMnV%2F#" target="_blank" class="social-btn social-fb">
@@ -310,11 +327,11 @@
 
       <!-- Prawa kolumna: mapa -->
       <div class="kontakt-block map-block glass block" style="border-radius: var(--radius);">
-        <h2>Adres</h2>
-        <p class="subtitle">Odwiedź nas na miejscu – zapraszamy do naszego zboru.</p>
+        <h2 data-i18n="nav_address">Adres</h2>
+        <p class="subtitle" data-i18n="address_text">Odwiedź nas na miejscu – zapraszamy do naszego zboru.</p>
         <a href="https://maps.google.com/?q=Legnica+CHWZ" target="_blank" class="map-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Otwórz w Mapach
+          <span data-i18n="btn_maps">Otwórz w Mapach</span>
         </a>
         <div class="map-wrap">
           <!-- Zastąp src iframe z Google Maps embed -->
