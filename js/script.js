@@ -553,15 +553,21 @@ function initMenuButtons() {
 
   // Десктоп: Shift + клик по логотипу → admin
   // Мобайл: 3 быстрых тапа по логотипу → admin
+// НОВЫЙ КОД — вставь вместо:
   let tapCount = 0, tapTimer = null;
   document.querySelectorAll('.logo').forEach(logo => {
     logo.addEventListener('click', e => { if (e.shiftKey) { e.stopPropagation(); openAdmin(); } });
-    logo.addEventListener('touchend', () => {
+    logo.addEventListener('touchstart', e => {
       tapCount++;
       clearTimeout(tapTimer);
       tapTimer = setTimeout(() => { tapCount = 0; }, 1500);
-      if (tapCount >= 3) { tapCount = 0; openAdmin(); }
-    });
+      if (tapCount >= 3) {
+        tapCount = 0;
+        e.preventDefault();
+        e.stopPropagation();
+        openAdmin();
+      }
+    }, { passive: false });
   });
 }
 
