@@ -194,17 +194,10 @@ document.addEventListener('click', function(e) {
   if (!e.target.closest('.lang-wrapper')) {
     document.getElementById('lang-dropdown').classList.remove('open');
   }
-  if (!e.target.closest('#menu') && !e.target.closest('.btn-icon[onclick*="toggleMenu"], .btn-glass[onclick*="toggleMenu"]')) {
-    document.getElementById('menu').classList.remove('open');
-  }
 });
 
 function toggleLangDropdown() {
   document.getElementById('lang-dropdown').classList.toggle('open');
-}
-
-function toggleMenu() {
-  document.getElementById('menu').classList.toggle('open');
 }
 
   const bar = document.querySelector('.lang-dropdown');
@@ -327,7 +320,6 @@ async function openCalendar() {
   const overlay = document.getElementById('calendar-overlay');
   overlay.style.display = 'flex';
   overlay.classList.remove('hiding');
-  document.getElementById('menu').classList.remove('open');
   const today = new Date();
   calYear  = today.getFullYear();
   calMonth = today.getMonth();
@@ -574,18 +566,6 @@ async function renderAdminList() {
 // INIT
 // ════════════════════════════════════════════════════════
 function initMenuButtons() {
-  document.querySelectorAll('.menu-item').forEach(item => {
-    const span = item.querySelector('[data-i18n="btn_calendar"]');
-    if (span) {
-      item.setAttribute('href', '#');
-      item.onclick = function(e) {
-        e.preventDefault();
-        document.getElementById('menu').classList.remove('open');
-        openCalendar();
-      };
-    }
-  });
-
   let tapCount = 0, tapTimer = null;
   document.querySelectorAll('.logo').forEach(logo => {
     logo.addEventListener('click', e => { if (e.shiftKey) { e.stopPropagation(); openAdmin(); } });

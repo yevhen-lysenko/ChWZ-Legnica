@@ -112,7 +112,7 @@
   .lang-dropdown {
     position: fixed;
     top: 76px;
-    right: 141px;
+    right: 32px;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--glass-border);
@@ -120,7 +120,7 @@
     background: var(--glass);
     overflow: hidden;
     min-width: 160px;
-    z-index: 200;
+    z-index: 300;
     visibility: hidden;
     opacity: 0;
     transform: scaleY(0.1) scaleX(0.1);
@@ -728,7 +728,17 @@
 
     .lang-dropdown {
       top: 65px;
-      right: 66px;
+      right: 14px;
+      left: 14px;
+    }
+
+    .lang-dropdown button {
+      padding: 17px 14px;
+	    border-bottom: 1px solid var(--glass-hover);
+    }
+
+    #last {
+	    border-bottom: none;
     }
 
     .menu {
@@ -769,14 +779,6 @@
     .map-wrap { height: 200px; }
   }
 
-  @media (max-width: 443px) {
-    .lang-dropdown {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      right: 14px;
-      left: 14px;
-    }
-  }
 
   @media (min-width: 769px) {
     #page-onas .page-content { padding-bottom: 60px; }
@@ -805,8 +807,8 @@
   position: fixed;
   top: 76px;
   left: 32px;
-  right: 32px;
-  z-index: 300;
+  /* right: 32px; */
+  z-index: 200;
   border-radius: var(--radius);
   padding: 12px 16px 12px 20px;
   background: rgb(225 17 17 / 33%);
@@ -817,6 +819,7 @@
   align-items: center;
   gap: 10px;
   animation: uwagaSlideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: top 0.3s ease;
 }
 .uwaga-banner #uwaga-text {
   flex: 1;
