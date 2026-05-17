@@ -507,11 +507,12 @@ function initUwagaSwipe() {
 
   banner.addEventListener('touchmove', e => {
     if (!isDragging) return;
+    e.preventDefault();
     const dx = e.touches[0].clientX - startX;
     const dy = e.touches[0].clientY - startY;
     banner.style.transform = `translate(${dx}px, ${Math.min(dy, 0)}px)`;
     banner.style.opacity = 1 - Math.min(Math.sqrt(dx*dx + dy*dy) / 120, 1);
-  }, { passive: true });
+  }, { passive: false });
 
   banner.addEventListener('touchend', e => {
     if (!isDragging) return;
