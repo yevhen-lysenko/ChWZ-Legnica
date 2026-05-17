@@ -733,7 +733,9 @@
     }
 
     .lang-dropdown button {
-      padding: 17px 14px;
+      width: stretch;
+      padding: 17px 0;
+      margin: 0 23px;
 	    border-bottom: 1px solid var(--glass-hover);
     }
 

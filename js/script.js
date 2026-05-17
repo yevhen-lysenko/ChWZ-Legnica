@@ -418,33 +418,62 @@ async function calChangeYear(delta) {
 // ════════════════════════════════════════════════════════
 // UWAGA BANNER
 // ════════════════════════════════════════════════════════
-function getUwagaMsg(lang, exceptionEvs) {
-  if (exceptionEvs.length === 0) {
-    return { pl: 'Uwaga! Dzisiaj nie odbędą się żadne nabożeństwa.', ru: 'Внимание! Сегодня богослужений не будет.', en: 'Notice! There are no services today.', uk: 'Увага! Сьогодні богослужінь не буде.' }[lang];
-  } else {
-    const list = exceptionEvs.map(e => e[lang] || e.pl).join(', ');
-    return {
-      pl: `Uwaga! Dzisiaj zamiast zwykłego programu odbędzie się: ${list}.`,
-      ru: `Внимание! Сегодня вместо обычной программы будет: ${list}.`,
-      en: `Notice! Today instead of the regular program: ${list}.`,
-      uk: `Увага! Сьогодні замість звичайної програми відбудеться: ${list}.`
-    }[lang];
-  }
+function getUwagaMsg(lang, exceptionEvs, isTomorrow = false) {
+  const prefix = {
+    pl: isTomorrow ? 'Uwaga! Jutro zamiast zwykłego programu odbędzie się: ' : 'Uwaga! Dzisiaj zamiast zwykłego programu odbędzie się: ',
+    ru: isTomorrow ? 'Внимание! Завтра вместо обычной программы будет: '     : 'Внимание! Сегодня вместо обычной программы будет: ',
+    en: isTomorrow ? 'Notice! Tomorrow instead of the regular program: '      : 'Notice! Today instead of the regular program: ',
+    uk: isTomorrow ? 'Увага! Завтра замість звичайної програми відбудеться: ': 'Увага! Сьогодні замість звичайної програми відбудеться: ',
+  }[lang];
+
+  const noEvents = {
+    pl: isTomorrow ? 'Uwaga! Jutro nie odbędą się żadne nabożeństwa.'    : 'Uwaga! Dzisiaj nie odbędą się żadne nabożeństwa.',
+    ru: isTomorrow ? 'Внимание! Завтра богослужений не будет.'            : 'Внимание! Сегодня богослужений не будет.',
+    en: isTomorrow ? 'Notice! There are no services tomorrow.'            : 'Notice! There are no services today.',
+    uk: isTomorrow ? 'Увага! Завтра богослужінь не буде.'                : 'Увага! Сьогодні богослужінь не буде.',
+  }[lang];
+
+  if (exceptionEvs.length === 0) return noEvents;
+  const list = exceptionEvs.map(e => e[lang] || e.pl).join(', ');
+  return prefix + list + '.';
 }
 
 async function checkUwagaBanner() {
-  const today = new Date();
-  const key   = dateKey(today.getFullYear(), today.getMonth(), today.getDate());
-  const exc   = await loadExceptions();
-  if (!exc.hasOwnProperty(key)) return;
+  const today    = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
 
-  const normalText   = (weeklySchedule[today.getDay()] || []).map(e => e.pl).join('|');
-  const exceptionEvs = exc[key];
-  if (normalText === exceptionEvs.map(e => e.pl).join('|')) return;
+  const todayKey    = dateKey(today.getFullYear(),    today.getMonth(),    today.getDate());
+  const tomorrowKey = dateKey(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate());
 
+  const exc = await loadExceptions();
+
+  // Проверяем сначала сегодня, потом завтра
+  let targetKey = null;
+  let isTomorrow = false;
+
+  if (exc.hasOwnProperty(todayKey)) {
+    const normalText = (weeklySchedule[today.getDay()] || []).map(e => e.pl).join('|');
+    if (normalText !== exc[todayKey].map(e => e.pl).join('|')) {
+      targetKey = todayKey;
+    }
+  }
+  if (!targetKey && exc.hasOwnProperty(tomorrowKey)) {
+    const normalText = (weeklySchedule[tomorrow.getDay()] || []).map(e => e.pl).join('|');
+    if (normalText !== exc[tomorrowKey].map(e => e.pl).join('|')) {
+      targetKey = tomorrowKey;
+      isTomorrow = true;
+    }
+  }
+
+  if (!targetKey) return;
+
+  const exceptionEvs = exc[targetKey];
   window._uwagaExceptions = exceptionEvs;
+  window._uwagaIsTomorrow = isTomorrow;
+
   const lang = typeof currentLang !== 'undefined' ? currentLang : 'pl';
-  document.getElementById('uwaga-text').textContent = getUwagaMsg(lang, exceptionEvs);
+  document.getElementById('uwaga-text').textContent = getUwagaMsg(lang, exceptionEvs, isTomorrow);
   document.getElementById('uwaga-banner').style.display = 'flex';
 }
 
@@ -452,13 +481,74 @@ function updateUwagaText(lang) {
   if (!window._uwagaExceptions) return;
   const banner = document.getElementById('uwaga-banner');
   if (banner.style.display === 'none') return;
-  document.getElementById('uwaga-text').textContent = getUwagaMsg(lang, window._uwagaExceptions);
+  document.getElementById('uwaga-text').textContent = getUwagaMsg(lang, window._uwagaExceptions, window._uwagaIsTomorrow);
 }
 
 function hideUwaga() {
   const banner = document.getElementById('uwaga-banner');
   banner.classList.add('hiding');
   setTimeout(() => { banner.style.display = 'none'; banner.classList.remove('hiding'); }, 320);
+}
+
+// ════════════════════════════════════════════════════════
+// Swipe-Uwaga-Banner
+// ════════════════════════════════════════════════════════
+function initUwagaSwipe() {
+  const banner = document.getElementById('uwaga-banner');
+  let startX = 0, startY = 0, isDragging = false;
+
+  banner.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isDragging = true;
+    banner.style.animation = 'none'; // отключаем анимацию пока тащим
+    banner.style.transition = 'none';
+  }, { passive: true });
+
+  banner.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    banner.style.transform = `translate(${dx}px, ${Math.min(dy, 0)}px)`;
+    banner.style.opacity = 1 - Math.min(Math.sqrt(dx*dx + dy*dy) / 120, 1);
+  }, { passive: true });
+
+  banner.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    if (dist > 60) {
+      // Улетает в ту сторону
+      const angle = Math.atan2(dy, dx);
+      const flyX = Math.cos(angle) * 300;
+      const flyY = Math.min(Math.sin(angle) * 300, 0);
+      banner.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+      banner.style.transform = `translate(${flyX}px, ${flyY}px)`;
+      banner.style.opacity = '0';
+      setTimeout(() => {
+        banner.style.display = 'none';
+        banner.style.transform = '';
+        banner.style.opacity = '';
+        banner.style.transition = '';
+        banner.style.animation = '';
+      }, 310);
+    } else {
+      // Возвращается назад — с той же анимацией как вылезало
+      banner.style.transition = 'none';
+      banner.style.transform = '';
+      banner.style.opacity = '';
+      // Перезапускаем slideDown анимацию
+      banner.style.animation = 'none';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          banner.style.animation = 'uwagaSlideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both';
+        });
+      });
+    }
+  }, { passive: true });
 }
 
 // ════════════════════════════════════════════════════════
@@ -585,6 +675,7 @@ function initMenuButtons() {
 
 document.addEventListener('DOMContentLoaded', function() {
   initMenuButtons();
+  initUwagaSwipe();
   checkUwagaBanner();
 
   const origSetLang = window.setLanguage;
