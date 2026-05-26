@@ -326,6 +326,8 @@ async function openCalendar() {
   calSelectedDate = dateKey(calYear, calMonth, today.getDate());
   await renderCalendar();
   updateCalEvents(calSelectedDate);
+  stopCalBtnPulse();
+  hideUwaga();  
 }
 
 function closeCalendar() {
@@ -475,6 +477,7 @@ async function checkUwagaBanner() {
   const lang = typeof currentLang !== 'undefined' ? currentLang : 'pl';
   document.getElementById('uwaga-text').textContent = getUwagaMsg(lang, exceptionEvs, isTomorrow);
   document.getElementById('uwaga-banner').style.display = 'flex';
+  startCalBtnPulse(); 
 }
 
 function updateUwagaText(lang) {
@@ -485,71 +488,20 @@ function updateUwagaText(lang) {
 }
 
 function hideUwaga() {
+  stopCalBtnPulse();
   const banner = document.getElementById('uwaga-banner');
   banner.classList.add('hiding');
   setTimeout(() => { banner.style.display = 'none'; banner.classList.remove('hiding'); }, 320);
 }
 
 // ════════════════════════════════════════════════════════
-// Swipe-Uwaga-Banner
+// МИГАНИЕ КНОПКИ КАЛЕНДАРЯ
 // ════════════════════════════════════════════════════════
-function initUwagaSwipe() {
-  const banner = document.getElementById('uwaga-banner');
-  let startX = 0, startY = 0, isDragging = false;
-
-  banner.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    isDragging = true;
-    banner.style.animation = 'none'; // отключаем анимацию пока тащим
-    banner.style.transition = 'none';
-  }, { passive: true });
-
-  banner.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const dx = e.touches[0].clientX - startX;
-    const dy = e.touches[0].clientY - startY;
-    banner.style.transform = `translate(${dx}px, ${Math.min(dy, 0)}px)`;
-    banner.style.opacity = 1 - Math.min(Math.sqrt(dx*dx + dy*dy) / 120, 1);
-  }, { passive: false });
-
-  banner.addEventListener('touchend', e => {
-    if (!isDragging) return;
-    isDragging = false;
-    const dx = e.changedTouches[0].clientX - startX;
-    const dy = e.changedTouches[0].clientY - startY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-
-    if (dist > 60) {
-      // Улетает в ту сторону
-      const angle = Math.atan2(dy, dx);
-      const flyX = Math.cos(angle) * 300;
-      const flyY = Math.min(Math.sin(angle) * 300, 0);
-      banner.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-      banner.style.transform = `translate(${flyX}px, ${flyY}px)`;
-      banner.style.opacity = '0';
-      setTimeout(() => {
-        banner.style.display = 'none';
-        banner.style.transform = '';
-        banner.style.opacity = '';
-        banner.style.transition = '';
-        banner.style.animation = '';
-      }, 310);
-    } else {
-      // Возвращается назад — с той же анимацией как вылезало
-      banner.style.transition = 'none';
-      banner.style.transform = '';
-      banner.style.opacity = '';
-      // Перезапускаем slideDown анимацию
-      banner.style.animation = 'none';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          banner.style.animation = 'uwagaSlideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both';
-        });
-      });
-    }
-  }, { passive: true });
+function startCalBtnPulse() {
+  document.querySelectorAll('.cal-header-btn').forEach(btn => btn.classList.add('cal-btn-pulse'));
+}
+function stopCalBtnPulse() {
+  document.querySelectorAll('.cal-header-btn').forEach(btn => btn.classList.remove('cal-btn-pulse'));
 }
 
 // ════════════════════════════════════════════════════════
@@ -676,7 +628,6 @@ function initMenuButtons() {
 
 document.addEventListener('DOMContentLoaded', function() {
   initMenuButtons();
-  initUwagaSwipe();
   checkUwagaBanner();
 
   const origSetLang = window.setLanguage;
