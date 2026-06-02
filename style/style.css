@@ -1,4 +1,5 @@
  :root {
+    --font-sans: "Google Sans Flex", "Google Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     --bg: #7a6555;
     --bg-dark: #5c4a3a;
     --glass: rgba(255,255,255,0.12);
@@ -10,6 +11,20 @@
     --radius: 20px;
     --radius-sm: 12px;
     --radius-pill: 50px;
+    --border-box-shadow: 1px 1px 1px 0 rgba(255, 255, 255, 0.22) inset, -1px -1px 1px 0 rgba(255, 255, 255, 0.22) inset;
+    --border-box-shadow-center: 0px 1px 1px 0 rgba(255, 255, 255, 0.22) inset, 0px -1px 1px 0 rgba(255, 255, 255, 0.22) inset, 1px 0px 1px 0 rgba(255, 255, 255, 0.22) inset, -1px 0px 1px 0 rgba(255, 255, 255, 0.22) inset;
+  }
+
+  span {
+    font-family: var(--font-sans);
+    margin-bottom: 1px;
+  }
+
+  h2 {
+    font-family: var(--font-sans);
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: var(--text);
   }
 
   @keyframes calBtnPulse {
@@ -71,7 +86,7 @@
     color: var(--text);
     padding: 8px 20px;
     border-radius: var(--radius-pill);
-    border: 1px solid var(--glass-border);
+    border: none;
     background: var(--glass);
     cursor: pointer;
     user-select: none;
@@ -80,6 +95,7 @@
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     -webkit-tap-highlight-color: transparent;
+    box-shadow: var(--border-box-shadow);
   }
   .logo:hover { background: var(--glass-hover); }
 
@@ -123,7 +139,7 @@
     right: 32px;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--glass-border);
+    box-shadow: var(--border-box-shadow-center);
     border-radius: var(--radius);
     background: var(--glass);
     overflow: hidden;
@@ -191,7 +207,7 @@
 
   .btn-icon {
     height: 42px;
-    border: 1px solid var(--glass-border);
+    border: none;
     background: var(--glass);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
@@ -205,6 +221,7 @@
     width: auto;
     padding: 13px;
     border-radius: 50px;
+    box-shadow: var(--border-box-shadow);
   }
   .btn-icon:hover { background: var(--glass-hover); }
 
@@ -285,14 +302,15 @@
     left: 34px; right: 34px;
     z-index: 100;
     border-radius: var(--radius-pill);
-    padding: 8px;
+    padding: 5px;
     background: var(--glass);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--glass-border);
+    border: none;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    box-shadow: var(--border-box-shadow-center);
   }
 
   .nav-indicator {
@@ -372,8 +390,8 @@
     gap: 32px;
   }
   #page-home .hero-tagline {
-    font-family: auto;
-    font-size: 1.6rem;
+    font-family: var(--font-sans);
+    font-size: 1.8rem;
     font-weight: 600;
     width: 362px;
     color: var(--text);
@@ -435,14 +453,10 @@
     background: var(--glass);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
+    /* border: 1px solid var(--glass-border); */
   }
   .block h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 2px;
     margin-bottom: 20px;
-    color: var(--text);
   }
 
   /* Video block */
@@ -492,7 +506,7 @@
   }
   .brat-photo-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
   .brat-name {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 0.9rem;
     margin: 10px 8px 3px;
     line-height: 1.3;
@@ -559,9 +573,6 @@
 
   .kontakt-block { padding: 28px; }
   .kontakt-block h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 2px;
     margin-bottom: 6px;
   }
   .kontakt-block .subtitle {
@@ -610,7 +621,7 @@
     padding: 6px 12px;
     font-size: 0.75rem;
     border-radius: var(--radius-pill);
-    border: 1px solid var(--glass-border);
+    border: none;
     background: rgba(255,255,255,0.1);
     color: var(--text);
     cursor: pointer;
@@ -618,6 +629,7 @@
     display: flex; align-items: center; gap: 5px;
     transition: background 0.2s;
     font-family: 'Lato', sans-serif;
+    box-shadow: var(--border-box-shadow);
   }
   .btn-sm:hover { background: rgba(255,255,255,0.2); }
   .btn-sm svg { width: 12px; height: 12px; }
@@ -651,6 +663,7 @@
     text-decoration: none;
     transition: filter 0.2s;
     justify-content: space-between;
+    box-shadow: var(--border-box-shadow-center);
   }
   .social-btn:hover { filter: brightness(1.1); }
   .social-fb { background: #1877F2; }
@@ -661,9 +674,6 @@
 
   /* Map block */
   .map-block h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 2px;
     margin-bottom: 6px;
   }
   .map-block .subtitle {
@@ -933,7 +943,8 @@
 .cal-nav-btn {
   width: 36px; height: 36px;
   border-radius: 50%;
-  border: 1px solid var(--glass-border);
+  border: none;
+  box-shadow: var(--border-box-shadow);
   background: rgba(255,255,255,0.1);
   color: var(--text);
   cursor: pointer;
@@ -1040,7 +1051,7 @@
   padding: 15px;
   border-radius: var(--radius-pill);
   background: rgba(175, 85, 65, 0.78);
-  border: 1px solid rgba(210, 110, 90, 0.4);
+  border: none;
   color: var(--text);
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
@@ -1048,6 +1059,7 @@
   cursor: pointer;
   letter-spacing: 0.5px;
   transition: background 0.2s;
+  box-shadow: var(--border-box-shadow-center);
 }
 .cal-close-btn:hover { background: rgba(195, 100, 78, 0.9); }
 
