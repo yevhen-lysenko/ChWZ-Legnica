@@ -28,8 +28,8 @@
   }
 
   @keyframes calBtnPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 210, 80, 0); border-color: var(--glass-border); }
-    50%       { box-shadow: 0 0 0 6px rgba(255, 210, 80, 0.35); border-color: rgba(255, 210, 80, 0.8); }
+    0%, 100% { background: var(--glass); }
+    50%       { background: rgba(255, 210, 80, 0.3); }
   }
   .cal-btn-pulse {
     animation: calBtnPulse 1.8s ease-in-out infinite;
@@ -834,7 +834,8 @@
   background: rgb(225 17 17 / 33%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: none;
+  box-shadow: var(--border-box-shadow-center);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -844,14 +845,15 @@
 .uwaga-banner #uwaga-text {
   flex: 1;
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--text);
   line-height: 1.5;
 }
 .uwaga-close {
   width: 24px; height: 24px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: none;
+  box-shadow: var(--border-box-shadow);
   background: rgba(255,255,255,0.1);
   color: var(--text);
   cursor: pointer;
