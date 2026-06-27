@@ -165,7 +165,6 @@ function setLanguage(lang) {
     if (t[key]) el.textContent = t[key];
   });
   document.getElementById('lang-dropdown').classList.remove('open');
-  document.getElementById('uwaga-banner').classList.remove('dropdown-open');
   updateUwagaText(lang);
   const closeSpan = document.querySelector('.cal-close-btn span[data-i18n="btn_close"]');
   if (closeSpan) closeSpan.textContent = calI18n[lang]?.btn_close || 'Zamknij';
@@ -179,16 +178,15 @@ function setLanguage(lang) {
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.lang-wrapper')) {
     document.getElementById('lang-dropdown').classList.remove('open');
-    document.getElementById('uwaga-banner').classList.remove('dropdown-open');
   }
 });
 
 function toggleLangDropdown() {
   document.getElementById('lang-dropdown').classList.toggle('open');
   const isOpen = document.getElementById('lang-dropdown').classList.contains('open');
-  if (window.innerWidth <= 443) {
-    document.getElementById('uwaga-banner').classList.toggle('dropdown-open', isOpen);
-  }
+  // if (window.innerWidth <= 443) {
+  //   document.getElementById('uwaga-banner').classList.toggle('dropdown-open', isOpen);
+  // }
 }
 
 // ════════════════════════════════════════════════════════
@@ -208,12 +206,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // ════════════════════════════════════════════════════════
 const weeklySchedule = {
   0: [
-    { pl: '10:00 Nabożeństwo poranne',     ru: '10:00 Утреннее богослужение',    en: '10:00 Morning service',        uk: '10:00 Ранкове богослужіння' },
-    { pl: '18:00 Nabożeństwo wieczorowe',  ru: '18:00 Вечернее богослужение',    en: '18:00 Evening service',        uk: '18:00 Вечірнє богослужіння' }
+    { pl: 'Nabożeństwo poranne o 10:00',     ru: 'Утреннее богослужение в 10:00',    en: 'Morning service at 10:00',        uk: 'Ранкове богослужіння о 10:00' },
+    { pl: 'Nabożeństwo wieczorowe o 18:00',  ru: 'Вечернее богослужение в 18:00',    en: 'Evening service at 18:00',        uk: 'Вечірнє богослужіння о 18:00' }
   ],
-  1: [{ pl: '19:00 Modlitwa',                ru: '19:00 Молитва',                  en: '19:00 Prayer meeting',         uk: '19:00 Молитва' }],
-  4: [{ pl: '18:00 Nabożeństwo',             ru: '18:00 Богослужение',             en: '18:00 Service',                uk: '18:00 Богослужіння' }],
-  5: [{ pl: '18:00 Młodzieżowe nabożeństwo', ru: '18:00 Молодёжное богослужение',  en: '18:00 Youth service',          uk: '18:00 Молодіжне богослужіння' }]
+  1: [{ pl: 'Modlitwa o 19:00',                ru: 'Молитва в 19:00',                  en: 'Prayer meeting at 19:00',         uk: 'Молитва о 19:00' }],
+  4: [{ pl: 'Nabożeństwo o 18:00',             ru: 'Богослужение в 18:00',             en: 'Service at 18:00',                uk: 'Богослужіння о 18:00' }],
+  5: [{ pl: 'Młodzieżowe nabożeństwo o 18:00', ru: 'Молодёжное богослужение в 18:00',  en: 'Youth service at 18:00',          uk: 'Молодіжне богослужіння о 18:00' }]
 };
 
 // ════════════════════════════════════════════════════════
@@ -311,8 +309,10 @@ const calI18n = {
 let calYear, calMonth, calSelectedDate;
 
 async function openCalendar() {
+  const pulsingDate = window._pulsingDate; // ← сохраняем до сброса
   stopCalBtnPulse();
   hideUwaga();
+  window._pulsingDate = pulsingDate; // ← восстанавливаем после hideUwaga
   const overlay = document.getElementById('calendar-overlay');
   overlay.style.display = 'flex';
   overlay.classList.remove('hiding');
@@ -378,6 +378,7 @@ async function renderCalendar() {
     if (isToday)           cls += ' today';
     if (isSel && !isToday) cls += ' selected';
     if (events.length > 0) cls += ' has-events';
+    if (window._pulsingDate === key) cls += ' day-pulse';
 
     const btn = document.createElement('button');
     btn.className   = cls;
@@ -415,21 +416,40 @@ async function calChangeYear(delta) {
 // UWAGA BANNER
 // ════════════════════════════════════════════════════════
 function getUwagaMsg(lang, exceptionEvs, isTomorrow = false) {
-  const prefix = {
-    pl: isTomorrow ? 'Uwaga! Jutro zamiast zwykłego programu odbędzie się: '  : 'Uwaga! Dzisiaj zamiast zwykłego programu odbędzie się: ',
-    ru: isTomorrow ? 'Внимание! Завтра вместо обычной программы будет: '      : 'Внимание! Сегодня вместо обычной программы будет: ',
-    en: isTomorrow ? 'Notice! Tomorrow instead of the regular program: '       : 'Notice! Today instead of the regular program: ',
-    uk: isTomorrow ? 'Увага! Завтра замість звичайної програми відбудеться: ' : 'Увага! Сьогодні замість звичайної програми відбудеться: ',
+  const dayStr = isTomorrow ? {
+    pl: 'Jutro', ru: 'Завтра', en: 'Tomorrow', uk: 'Завтра'
+  }[lang] : {
+    pl: 'Dzisiaj', ru: 'Сегодня', en: 'Today', uk: 'Сьогодні'
   }[lang];
-  const noEvents = {
-    pl: isTomorrow ? 'Uwaga! Jutro nie odbędą się żadne nabożeństwa.'   : 'Uwaga! Dzisiaj nie odbędą się żadne nabożeństwa.',
-    ru: isTomorrow ? 'Внимание! Завтра богослужений не будет.'          : 'Внимание! Сегодня богослужений не будет.',
-    en: isTomorrow ? 'Notice! There are no services tomorrow.'           : 'Notice! There are no services today.',
-    uk: isTomorrow ? 'Увага! Завтра богослужінь не буде.'               : 'Увага! Сьогодні богослужінь не буде.',
+
+  if (exceptionEvs.length === 0) {
+    return {
+      pl: `Uwaga! ${dayStr} nie odbędą się żadne nabożeństwa.`,
+      ru: `Внимание! ${dayStr} богослужений не будет.`,
+      en: `Notice! ${dayStr} there are no services.`,
+      uk: `Увага! ${dayStr} богослужінь не буде.`
+    }[lang];
+  }
+
+  // Получаем оригинальное расписание дня
+  const targetDate = isTomorrow ? (() => { const d = new Date(); d.setDate(d.getDate()+1); return d; })() : new Date();
+  const originalEvs = weeklySchedule[targetDate.getDay()] || [];
+
+  // Находим только изменённые события
+  const changed = exceptionEvs.filter((ev, idx) => {
+    const orig = originalEvs[idx];
+    if (!orig) return true; // новое событие
+    return orig.pl !== ev.pl || orig.ru !== ev.ru || orig.en !== ev.en || orig.uk !== ev.uk;
+  });
+
+  const list = (changed.length > 0 ? changed : exceptionEvs).map(e => e[lang] || e.pl).join(', ');
+
+  return {
+    pl: `Uwaga! ${dayStr} zamiast zwykłego programu odbędzie się: ${list}.`,
+    ru: `Внимание! ${dayStr} вместо обычной программы будет: ${list}.`,
+    en: `Notice! ${dayStr} instead of the regular program: ${list}.`,
+    uk: `Увага! ${dayStr} замість звичайної програми відбудеться: ${list}.`
   }[lang];
-  if (exceptionEvs.length === 0) return noEvents;
-  const list = exceptionEvs.map(e => e[lang] || e.pl).join(', ');
-  return prefix + list + '.';
 }
 
 async function checkUwagaBanner() {
@@ -457,10 +477,23 @@ async function checkUwagaBanner() {
   window._uwagaExceptions = exceptionEvs;
   window._uwagaIsTomorrow = isTomorrow;
 
+  startCalBtnPulse();
+  startDayPulse(targetKey);
+
   const lang = currentLang || 'pl';
   document.getElementById('uwaga-text').textContent = getUwagaMsg(lang, exceptionEvs, isTomorrow);
   document.getElementById('uwaga-banner').style.display = 'flex';
-  startCalBtnPulse();
+}
+
+function startDayPulse(dateStr) {
+  window._pulsingDate = dateStr;
+}
+
+function stopDayPulse() {
+  window._pulsingDate = null;
+  document.querySelectorAll('.cal-day.day-pulse').forEach(btn => {
+    btn.classList.remove('day-pulse');
+  });
 }
 
 function updateUwagaText(lang) {
@@ -482,64 +515,12 @@ function startCalBtnPulse() {
 }
 function stopCalBtnPulse() {
   document.querySelectorAll('.cal-header-btn').forEach(btn => btn.classList.remove('cal-btn-pulse'));
+  stopDayPulse();
 }
 
 // Swipe to dismiss uwaga banner
 function initUwagaSwipe() {
   const banner = document.getElementById('uwaga-banner');
-  let startX = 0, startY = 0, isDragging = false;
-
-  banner.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    isDragging = true;
-    banner.style.animation = 'none';
-    banner.style.transition = 'none';
-  }, { passive: true });
-
-  banner.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const dx = e.touches[0].clientX - startX;
-    const dy = e.touches[0].clientY - startY;
-    banner.style.transform = `translate(${dx}px, ${Math.min(dy, 0)}px)`;
-    banner.style.opacity = 1 - Math.min(Math.sqrt(dx*dx + dy*dy) / 120, 1);
-  }, { passive: false });
-
-  banner.addEventListener('touchend', e => {
-    if (!isDragging) return;
-    isDragging = false;
-    const dx = e.changedTouches[0].clientX - startX;
-    const dy = e.changedTouches[0].clientY - startY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-
-    if (dist > 60) {
-      const angle = Math.atan2(dy, dx);
-      const flyX = Math.cos(angle) * 300;
-      const flyY = Math.min(Math.sin(angle) * 300, 0);
-      banner.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-      banner.style.transform = `translate(${flyX}px, ${flyY}px)`;
-      banner.style.opacity = '0';
-      setTimeout(() => {
-        banner.style.display = 'none';
-        banner.style.transform = '';
-        banner.style.opacity = '';
-        banner.style.transition = '';
-        banner.style.animation = '';
-        stopCalBtnPulse();
-      }, 310);
-    } else {
-      banner.style.transition = 'none';
-      banner.style.transform = '';
-      banner.style.opacity = '';
-      banner.style.animation = 'none';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          banner.style.animation = 'uwagaSlideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both';
-        });
-      });
-    }
-  }, { passive: true });
 }
 
 // ════════════════════════════════════════════════════════
