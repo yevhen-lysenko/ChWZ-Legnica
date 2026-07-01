@@ -308,7 +308,6 @@ header.mobile-header {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(92,74,58,0.15) 0%, rgba(60,45,32,0.55) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
