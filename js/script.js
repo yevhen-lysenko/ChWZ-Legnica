@@ -22,11 +22,11 @@ function initScrollSpy() {
       setActiveNav(name);
 
       // Хедер прозрачный только на home
-      if (name === 'home') {
-        document.querySelectorAll('header').forEach(h => h.classList.add('header-transparent'));
-      } else {
-        document.querySelectorAll('header').forEach(h => h.classList.remove('header-transparent'));
-      }
+      // if (name === 'home') {
+      //   document.querySelectorAll('header').forEach(h => h.classList.add('header-transparent'));
+      // } else {
+      //   document.querySelectorAll('header').forEach(h => h.classList.remove('header-transparent'));
+      // }
     });
   }, options);
 

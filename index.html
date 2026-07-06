@@ -27,7 +27,10 @@
 
 <!-- ═══════════════════ DESKTOP HEADER ═══════════════════ -->
 <header class="desktop-header glass header-transparent">
-  <img src="./img/MainIcon.svg" class="logo" onclick="scrollToSection('home')">
+  <div class="logo"  onclick="scrollToSection('home')">
+    <img src="./img/BirdLogo.svg" class="logoImg" id="bird">
+    <img src="./img/MainIcon.svg" class="logoImg" id="chwz">
+  </div>
   <nav class="desktop-nav">
     <a class="active" id="nav-home" onclick="scrollToSection('home')" data-i18n="nav_home">Główna</a>
     <a id="nav-onas" onclick="scrollToSection('onas')" data-i18n="nav_onas">O nas</a>
@@ -54,7 +57,10 @@
 
 <!-- ═══════════════════ MOBILE HEADER ═══════════════════ -->
 <header class="mobile-header glass header-transparent">
-  <img src="./img/MainIcon.svg" class="logo" onclick="scrollToSection('home')">
+    <div class="logo" onclick="scrollToSection('home')">
+    <img src="./img/BirdLogo.svg" class="logoImg" id="bird">
+    <img src="./img/MainIcon.svg" class="logoImg" id="chwz"> 
+  </div>
   <div class="header-actions">
     <button class="btn-icon cal-header-btn" onclick="openCalendar()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
@@ -103,7 +109,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <section id="home" class="section-home">
   <div class="hero">
-    <img src="./img/mainImg.svg" class="build-img" alt="Kościół CHWZ"
+    <img src="./img/mainImg4K.svg" class="build-img" alt="Kościół CHWZ"
          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
     <div class="hero-overlay">
       <p class="hero-tagline reveal" data-i18n="main_text">Oficjalna strona zboru ChWZ w Legnicy</p>
@@ -115,7 +121,7 @@
 <!-- SECTION: O NAS                                         -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <section id="onas" class="section-content">
-  <div class="section-inner">
+  <div class="section-inner"  id="section-inner-onas">
 
     <div class="block reveal">
       <h2 data-i18n="nav_video">Filmik o nas</h2>
