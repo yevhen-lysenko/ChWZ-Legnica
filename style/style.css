@@ -65,7 +65,7 @@ header.header-transparent {
   display: flex;
   align-items: center;
   padding: 8px 13px;
-  gap: 1px;
+  gap: 4px;
   border-radius: var(--radius-pill);
   border: none;
   background: var(--bg-buttons);
@@ -324,7 +324,7 @@ header.mobile-header {
   z-index: 1;
 }
 .hero-tagline {
-  font-family: auto;
+  font-family: var(--font-sans);
   font-size: 1.6rem;
   font-weight: 600;
   width: 362px;
@@ -766,7 +766,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
   transform: translateY(0);
 }
 
-/* Задержки для дочерних элементов */ 
+/* Задержки для дочерних элементов */
 .reveal-delay-1 { transition-delay: 0.08s; }
 .reveal-delay-2 { transition-delay: 0.16s; }
 .reveal-delay-3 { transition-delay: 0.24s; }
