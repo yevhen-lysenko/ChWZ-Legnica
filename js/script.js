@@ -77,8 +77,7 @@ function copyWithFeedback(text, btn) {
       <polyline points="20 6 9 17 4 12"/>
     </svg>
     ${translations[currentLang].copied}`;
-  btn.style.background = 'rgba(80,200,120,0.25)';
-  btn.style.borderColor = 'rgba(80,200,120,0.5)';
+  btn.style.background = 'rgb(74 186 112 / 50%)';
   setTimeout(() => {
     btn.innerHTML = original;
     btn.style.background = '';
@@ -193,7 +192,7 @@ function toggleLangDropdown() {
 // EMAIL BUTTON
 // ════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
-  const emailBtn = document.querySelector('.btn_e-mail');
+  const emailBtn = document.querySelector('#btn_e-mail');
   if (emailBtn) {
     emailBtn.addEventListener('click', function() {
       window.open('https://mail.google.com/mail/?view=cm&fs=1&to=legnica@chwz.org.pl', '_blank');
@@ -436,13 +435,21 @@ function getUwagaMsg(lang, exceptionEvs, isTomorrow = false) {
   const originalEvs = weeklySchedule[targetDate.getDay()] || [];
 
   // Находим только изменённые события
+// Находим только изменённые события
   const changed = exceptionEvs.filter((ev, idx) => {
     const orig = originalEvs[idx];
-    if (!orig) return true; // новое событие
+    if (!orig) return true;
     return orig.pl !== ev.pl || orig.ru !== ev.ru || orig.en !== ev.en || orig.uk !== ev.uk;
   });
 
-  const list = (changed.length > 0 ? changed : exceptionEvs).map(e => e[lang] || e.pl).join(', ');
+  const displayEvs = changed.length > 0 ? changed : exceptionEvs;
+  
+  // Добавляем "tylko/только/only/лише" если осталось одно из нескольких
+  const onlyPrefix = (originalEvs.length > 1 && exceptionEvs.length === 1)
+    ? { pl: 'Tylko ', ru: 'Только ', en: 'Only ', uk: 'Лише ' }[lang]
+    : '';
+
+  const list = onlyPrefix + displayEvs.map(e => e[lang] || e.pl).join(', ');
 
   return {
     pl: `Uwaga! ${dayStr} zamiast zwykłego programu odbędzie się: ${list}.`,
