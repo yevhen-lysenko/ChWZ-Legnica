@@ -13,14 +13,14 @@
 <!-- UWAGA BANNER -->
 <div id="uwaga-banner" class="uwaga-banner" style="display:none;">
 <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
-  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
-  <line x1="12" y1="7" x2="12" y2="13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-  <circle cx="12" cy="17" r="1" fill="currentColor"/>
+  <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+  <line x1="12" y1="7" x2="12" y2="13" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="12" cy="17" r="1" fill="white"/>
 </svg>
   <span id="uwaga-text"></span>
   <button class="uwaga-close" onclick="hideUwaga()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
-      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      <line x1="18" y1="6" x2="6" y2="18" stroke="white"/><line x1="6" y1="6" x2="18" y2="18" stroke="white"/>
     </svg>
   </button>
 </div>
@@ -109,8 +109,13 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <section id="home" class="section-home">
   <div class="hero">
-    <img src="./img/mainImg4K.svg" class="build-img" alt="Kościół CHWZ"
-         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+    <picture>
+      <source media="(max-width: 430px)" srcset="./img/previewImgMobileWidth.svg">
+      <source media="(max-width: 843px)" srcset="./img/previewImgWidth.svg">
+      <source media="(max-width: 1463px)" srcset="./img/previewImg.svg">
+      <source media="(min-width: 1463px)" srcset="./img/previewImgMaxWidth.svg">
+      <img src="./img/mainImg.svg" class="build-img" alt="Kościół CHWZ">
+    </picture>
     <div class="hero-overlay">
       <p class="hero-tagline reveal" data-i18n="main_text">Oficjalna strona zboru ChWZ w Legnicy</p>
     </div>
