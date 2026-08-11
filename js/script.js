@@ -296,10 +296,10 @@ function dateKey(y, m, d) {
 // CALENDAR i18n
 // ════════════════════════════════════════════════════════
 const calI18n = {
-  pl: { btn_close: 'Zamknij', no_events: 'Brak wydarzeń', months: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'], dows: ['Su','Mo','Tu','We','Th','Fr','Sa'] },
-  ru: { btn_close: 'Закрыть', no_events: 'Нет событий', months: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], dows: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] },
-  en: { btn_close: 'Close', no_events: 'No events', months: ['January','February','March','April','May','June','July','August','September','October','November','December'], dows: ['Su','Mo','Tu','We','Th','Fr','Sa'] },
-  uk: { btn_close: 'Закрити', no_events: 'Немає подій', months: ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'], dows: ['Нд','Пн','Вт','Ср','Чт','Пт','Сб'] }
+  pl: { btn_close: 'Zamknij', no_events: 'Brak wydarzeń', months: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'], dows: ['Pn','Wt','Śr','Cz','Pt','So','Nd'] },
+  ru: { btn_close: 'Закрыть', no_events: 'Нет событий', months: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], dows: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'] },
+  en: { btn_close: 'Close', no_events: 'No events', months: ['January','February','March','April','May','June','July','August','September','October','November','December'], dows: ['Mo','Tu','We','Th','Fr','Sa','Su'] },
+  uk: { btn_close: 'Закрити', no_events: 'Немає подій', months: ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'], dows: ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'] }
 };
 
 // ════════════════════════════════════════════════════════
@@ -349,14 +349,14 @@ async function renderCalendar() {
   dowRow.innerHTML = '';
   t.dows.forEach((label, i) => {
     const cell = document.createElement('div');
-    cell.className = 'cal-dow-cell' + (i === 0 ? ' sunday' : '');
+    cell.className = 'cal-dow-cell' + (i === 6 ? ' sunday' : '');
     cell.textContent = label;
     dowRow.appendChild(cell);
   });
 
   const grid = document.getElementById('cal-grid');
   grid.innerHTML = '';
-  const firstDow = new Date(calYear, calMonth, 1).getDay();
+  const firstDow = (new Date(calYear, calMonth, 1).getDay() + 6) % 7;
   const daysInMo = new Date(calYear, calMonth + 1, 0).getDate();
 
   for (let i = 0; i < firstDow; i++) {
@@ -371,9 +371,10 @@ async function renderCalendar() {
     const isToday = calYear === today.getFullYear() && calMonth === today.getMonth() && d === today.getDate();
     const isSel  = key === calSelectedDate;
     const events = exc.hasOwnProperty(key) ? exc[key] : (weeklySchedule[dow] || []);
+    const adjustedDow = (dow + 6) % 7;
 
     let cls = 'cal-day';
-    if (dow === 0)         cls += ' sunday';
+    if (adjustedDow === 6)         cls += ' sunday';
     if (isToday)           cls += ' today';
     if (isSel && !isToday) cls += ' selected';
     if (events.length > 0) cls += ' has-events';
