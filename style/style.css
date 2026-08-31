@@ -8,6 +8,7 @@
   --card-shadow: 0 2px 12px rgba(0,0,0,0.06);
   --glass-border: rgba(0,0,0,0.06);
   --text: #000000;
+  --secondary-text: #dedede87;
   --text-muted: #8d8d93;
   --accent: #7a6555;
   --accent-light: rgba(122,101,85,0.12);
@@ -641,12 +642,12 @@ header.mobile-header {
 .admin-screen { display: flex; flex-direction: column; gap: 12px; }
 .admin-logo { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; }
 .admin-title { font-family: var(--font-sans), sans-serif; font-size: 1.6rem; color: var(--text); text-align: center; margin: 0; }
-.admin-subtitle { font-size: 0.82rem; color: var(--text-muted); text-align: center; line-height: 1.5; margin: 0; }
+.admin-subtitle { font-size: 0.82rem; color: var(--secondary-text); text-align: center; line-height: 1.5; margin: 0; }
 .admin-input {
   width: 100%; padding: 11px 14px; border-radius: var(--radius-sm);
   border: 1px solid var(--glass-border); background: rgba(255,255,255,0.08);
   color: var(--text); font-family: 'Lato', sans-serif; font-size: 0.9rem;
-  outline: none; transition: border-color 0.2s, background 0.2s;
+  outline: none; transition: border-color 0.2s, background 0.2s; 
 }
 .admin-input:focus { border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.12); }
 .admin-input::placeholder { color: rgba(245,239,232,0.35); }
@@ -680,7 +681,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
 .admin-logout-btn:hover { background: rgba(255,255,255,0.17); }
 .admin-add-block { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
 .admin-field-row { display: flex; align-items: center; gap: 10px; }
-.admin-label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; width: 72px; flex-shrink: 0; }
+.admin-label { font-size: 0.75rem; font-weight: 700; color: var(--secondary-text); text-transform: uppercase; letter-spacing: 0.5px; width: 72px; flex-shrink: 0; }
 .admin-exc-list-wrap { margin-top: 4px; }
 .admin-list-title { font-family: var(--font-sans), sans-serif; font-size: 1.1rem; margin-bottom: 10px; color: var(--text); }
 .admin-exc-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
@@ -688,7 +689,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
 .admin-exc-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); }
 .admin-exc-item-info { flex: 1; min-width: 0; }
 .admin-exc-date-label { font-size: 0.8rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
-.admin-exc-events-text { font-size: 0.76rem; color: var(--text-muted); line-height: 1.4; }
+.admin-exc-events-text { font-size: 0.76rem; color: var(--secondary-text); line-height: 1.4; }
 .admin-exc-delete { width: 28px; height: 28px; border-radius: 50%; background: rgba(220,100,100,0.15); color: rgba(220,100,100,0.9); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; margin-top: 1px; box-shadow: var(--box-shadow-button)}
 .admin-exc-delete:hover { background: rgba(220,100,100,0.3); }
 .admin-exc-event-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--glass-border); }
