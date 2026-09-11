@@ -324,6 +324,7 @@ header.mobile-header {
   font-family: var(--font-sans);
   font-size: 50px;
   font-weight: 600;
+  margin-top: 150px;
   /* width: 362px; */
   color: #fff;
   text-align: center;

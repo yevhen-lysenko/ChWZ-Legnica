@@ -575,7 +575,7 @@ async function adminAddException() {
 
   if (!date) {
     msgEl.style.cssText = 'display:block;color:rgba(220,100,100,0.95)';
-    msgEl.textContent = 'Wybierz datę!';
+    msgEl.textContent = 'Wybierz datę';
     setTimeout(() => { msgEl.style.display = 'none'; }, 2500);
     return;
   }
