@@ -12,7 +12,7 @@ function scrollToSection(name) {
 
 // IntersectionObserver — меняет активный пункт при скролле
 function initScrollSpy() {
-  const sections = ['home', 'onas', 'kontakt'];
+  const sections = ['home', 'onas', 'brothers', 'rules', 'kontakt'];
   const options = { rootMargin: '-40% 0px -55% 0px', threshold: 0 };
 
   const observer = new IntersectionObserver(entries => {
@@ -46,9 +46,11 @@ function setActiveNav(name) {
 
   const indicator = document.querySelector('.nav-indicator');
   if (indicator) {
-    if (name === 'home')    indicator.style.transform = 'translateX(6%)';
-    if (name === 'onas')    indicator.style.transform = 'translateX(100%)';
-    if (name === 'kontakt') indicator.style.transform = 'translateX(194%)';
+    if (name === 'home')     indicator.style.transform = 'translateX(6%)';
+    if (name === 'onas')     indicator.style.transform = 'translateX(100%)';
+    if (name === 'brothers') indicator.style.transform = 'translateX(194%)';
+    if (name === 'rules')    indicator.style.transform = 'translateX(288%)';
+    if (name === 'kontakt')  indicator.style.transform = 'translateX(393%)';
   }
 }
 
@@ -105,6 +107,7 @@ const translations = {
     hero_title_small: 'Chrześcijańska Wspólnota Zielonoświątkowa',
     nav_home: 'Główna', nav_onas: 'O nas', nav_kontakt: 'Kontakt',
     nav_video: 'Filmik o nas', nav_bracia: 'Bracia w służbie',
+    mnav_bracia: 'Bracia', mnav_accordion: 'Zasady',
     role_pastor: 'Pastor', role_pastor_senior: 'Pastor Senior', role_deacon: 'Diakon do spraw',
     nav_accordion: 'Zasady wiary',
     contakt_text: 'Skontaktuj się z nami – chętnie odpowiemy na Twoje pytania.',
@@ -123,6 +126,7 @@ const translations = {
     hero_title_small: 'Христианская пятидесятническая община',
     nav_home: 'Главная', nav_onas: 'О нас', nav_kontakt: 'Контакт',
     nav_video: 'Видео о нас', nav_bracia: 'Братья в служении',
+    mnav_bracia: 'Братья', mnav_accordion: 'Основы',
     role_pastor: 'Пастор', role_pastor_senior: 'Старший пастор', role_deacon: 'Диакон',
     nav_accordion: 'Основы веры',
     contakt_text: 'Свяжитесь с нами — мы с радостью ответим на ваши вопросы.',
@@ -141,6 +145,7 @@ const translations = {
     hero_title_small: 'Christian Pentecostal Community',
     nav_home: 'Home', nav_onas: 'About us', nav_kontakt: 'Contact',
     nav_video: 'A video about us', nav_bracia: 'Brothers in ministry',
+    mnav_bracia: 'Brothers', mnav_accordion: 'Rules',
     role_pastor: 'Pastor', role_pastor_senior: 'Senior Pastor', role_deacon: 'Deacon',
     nav_accordion: 'Articles of faith',
     contakt_text: 'Contact us – we will gladly answer your questions.',
@@ -159,6 +164,7 @@ const translations = {
     hero_title_small: 'Християнська п’ятидесятницька громада',
     nav_home: 'Головна', nav_onas: 'Про нас', nav_kontakt: 'Контакт',
     nav_video: 'Відео про нас', nav_bracia: 'Брати служителя',
+    mnav_bracia: 'Брати', mnav_accordion: 'Основи',
     role_pastor: 'Пастор', role_pastor_senior: 'Старший пастор', role_deacon: 'Диякон',
     nav_accordion: 'Основи віри',
     contakt_text: 'Зв\'яжіться з нами — ми із задоволенням відповімо на ваші запитання.',

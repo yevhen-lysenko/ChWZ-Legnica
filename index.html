@@ -35,9 +35,21 @@
   <nav class="desktop-nav">
     <a class="active" id="nav-home" onclick="scrollToSection('home')" data-i18n="nav_home">Główna</a>
     <a id="nav-onas" onclick="scrollToSection('onas')" data-i18n="nav_onas">O nas</a>
+    <a id="nav-brothers" onclick="scrollToSection('brothers')" data-i18n="nav_bracia">Bracia w służbie</a>
+    <a id="nav-rules" onclick="scrollToSection('rules')" data-i18n="nav_accordion">Zasady wiary</a>
     <a id="nav-kontakt" onclick="scrollToSection('kontakt')" data-i18n="nav_kontakt">Kontakt</a>
   </nav>
   <div class="header-actions">
+    <a class="btn-glass link-to-liveStream" href="https://www.youtube.com/@chwz_legnica/streams" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#DC143C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+          <circle cx="12" cy="12" r="2.2" fill="#DC143C" stroke="none"/>
+          <path d="M8.5 8.5a5 5 0 0 0 0 7"/>
+          <path d="M5.5 5.5a9 9 0 0 0 0 13"/>
+          <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+          <path d="M18.5 5.5a9 9 0 0 1 0 13"/>
+        </svg>
+      <span data-i18n="btn_live">Transmisja na żywo</span>
+    </a>
     <button class="btn-glass cal-header-btn" onclick="openCalendar()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
         <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -88,6 +100,16 @@
   <button onclick="setLanguage('uk')"><svg width="24" height="16" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="r4"><rect width="60" height="40" rx="10" ry="10"/></clipPath></defs><g clip-path="url(#r4)"><rect width="60" height="20" fill="#005BBB"/><rect y="20" width="60" height="20" fill="#FFD500"/></g></svg>Українська</button>
 </div>
 
+<a class="btn-icon link-to-liveStream-mobile" href="https://www.youtube.com/@chwz_legnica/streams" target="_blank">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#DC143C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+    <circle cx="12" cy="12" r="2.2" fill="#DC143C" stroke="none"/>
+    <path d="M8.5 8.5a5 5 0 0 0 0 7"/>
+    <path d="M5.5 5.5a9 9 0 0 0 0 13"/>
+    <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+    <path d="M18.5 5.5a9 9 0 0 1 0 13"/>
+  </svg>
+</a>
+
 <!-- ═══════════════════ MOBILE BOTTOM NAV ═══════════════════ -->
 <nav class="mobile-nav">
   <span class="nav-indicator"></span>
@@ -96,8 +118,16 @@
     <span data-i18n="nav_home">Główna</span>
   </a>
   <a id="mnav-onas" onclick="scrollToSection('onas')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="8" r="0.9" fill="currentColor" stroke="none"/><path d="M12 11v5"/></svg>
     <span data-i18n="nav_onas">O nas</span>
+  </a>
+  <a id="mnav-brothers" onclick="scrollToSection('brothers')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span data-i18n="mnav_bracia">Bracia</span>
+  </a>
+  <a id="mnav-rules" onclick="scrollToSection('rules')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M7 4h10a2.5 2.5 0 0 1 2.5 2.5v13"/><path d="M19.5 19.5a2.5 2.5 0 0 1-5 0v-15"/><path d="M7 4a2.5 2.5 0 0 0-2.5 2.5v10.5a2.5 2.5 0 0 0 2.5 2.5h7.5"/><path d="M8.5 9.5h6"/><path d="M8.5 13h6"/><path d="M8.5 16h3.5"/></svg>
+    <span data-i18n="mnav_accordion">Zasady</span>
   </a>
   <a id="mnav-kontakt" onclick="scrollToSection('kontakt')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.18 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -134,11 +164,11 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <!-- SECTION: O NAS                                         -->
 <!-- ═══════════════════════════════════════════════════════ -->
-<section id="onas" class="section-content">
+<section class="section-content">
   <div class="section-inner"  id="section-inner-onas">
 
-    <div class="block reveal">
-      <h2 data-i18n="nav_video">Filmik o nas</h2>
+    <div id="onas" class="block reveal">
+      <h2 data-i18n="nav_video">Słowo od Pastora</h2>
       <div class="video-wrap">
         <iframe src="https://www.youtube.com/embed/Vxu3nt1C0Dg?si=1j7pNH2PIJRtY-lH"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -146,7 +176,7 @@
       </div>
     </div>
 
-    <div class="block reveal">
+    <div class="block reveal" id="brothers">
       <h2 data-i18n="nav_bracia">Bracia w służbie</h2>
       <div class="bracia-grid">
         <div class="brat-card reveal reveal-delay-1">
@@ -182,7 +212,7 @@
       </div>
     </div>
 
-    <div class="block reveal">
+    <div class="block reveal" id="rules">
       <h2 data-i18n="nav_accordion">Zasady wiary</h2>
       <div class="accordion">
         <div class="accordion-item">
@@ -216,11 +246,11 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <!-- SECTION: KONTAKT                                       -->
 <!-- ═══════════════════════════════════════════════════════ -->
-  <div id="kontakt" style="scroll-margin-top: 70px;"></div>
+  <div style="scroll-margin-top: 70px;"></div>
   <div class="section-inner" id="section-inner-kontakt">
     <div class="kontakt-grid">
 
-      <div class="kontakt-block glass block reveal" style="border-radius: var(--radius);">
+      <div id="kontakt" class="kontakt-block glass block reveal" style="border-radius: var(--radius);">
         <h2 data-i18n="nav_kontakt">Kontakt</h2>
         <p class="subtitle" data-i18n="contakt_text">Skontaktuj się z nami – chętnie odpowiemy na Twoje pytania.</p>
         <div class="contact-row">
