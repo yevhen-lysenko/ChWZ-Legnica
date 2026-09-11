@@ -828,7 +828,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
       -webkit-text-fill-color: transparent;
       background-clip: text;
       filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
-      line-height: 1.1;
+      line-height: 0.9;
   }
 
 
@@ -842,6 +842,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
       align-items: center;
       gap: 10px;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+      margin-top: 10px;
   }
 
   .hero-title-sub-mobile::before,
