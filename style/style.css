@@ -331,6 +331,54 @@ header.mobile-header {
   letter-spacing: 1.5px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
+
+.hero-title-wrap-mobile {
+  display: none;
+}
+
+.hero-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 115px;
+  text-align: center;
+}
+
+.hero-title-small {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 4vw, 50px); /* адаптивно, не растягивается на всю ширину */
+  font-weight: 500; /* было 300 — слишком тонко и плохо читается на светлом фоне */
+  line-height: 1.2;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.65); /* усилена тень для контраста на светлом небе */
+  letter-spacing: 0.5px;
+}
+
+.hero-title-sub {
+  margin-top: 14px;
+  font-family: 'Playfair Display', serif; /* единый шрифт с заголовком вместо Lato */
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  color: #f2ede4; /* чуть тёплый оттенок вместо чистого белого — мягче сочетается с serif */
+  letter-spacing: 1px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* .hero-title-sub::before,
+.hero-title-sub::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 40px;
+  background: #c8922a;
+} */
+
 .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 .hero-btns .btn-glass { font-size: 1rem; padding: 12px 28px; font-weight: 700; letter-spacing: 0.5px; }
 
@@ -530,11 +578,6 @@ header.mobile-header {
 
   .hero-tagline {
     font-size: 32px;
-  }
-}
-@media (max-width: 396px) {
-  .hero-tagline {
-    font-size: 26px;
   }
 }
 
@@ -739,7 +782,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
   .bracia-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
   .brat-name { font-size: 0.8rem; }
 
-  .hero-overlay { padding: 24px 14px; }
+  .hero-overlay { padding: 24px 14px; margin-top: 115px;}
   .hero-btns .btn-glass { font-size: 0.9rem; padding: 10px 20px; }
 
   .kontakt-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -752,6 +795,78 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
 
   .btn-sm:hover { background: rgba(255,255,255,0.1); color: var(--text); }
   .map-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+}
+
+@media (max-width: 509px) {
+  .hero-title-wrap {
+    display: none;
+  }
+
+  .hero-title-wrap-mobile {
+	  display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #0e0e0e66;
+    box-shadow: 0px 0px 55px 55px #0e0e0e66;
+    border: none;
+  }
+
+
+  .hero-title-small-mobile {
+      font-family: 'Playfair Display', serif;
+      font-size: 33px;
+      color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-title-main-mobile {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      background: linear-gradient(180deg, #eeeeee 0%, #b67e53 50%, #e1e1e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+      line-height: 1.1;
+  }
+
+
+  .hero-title-sub-mobile {
+      font-family: 'Lato', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-title-sub-mobile::before,
+  .hero-title-sub-mobile::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: #fff;
+  }
+}
+
+@media (max-width: 396px) {
+  .hero-tagline {
+    font-size: 31px;
+  }
+  .hero-title-small-mobile {
+    font-size: 28px;
+  }
+  .hero-title-main-mobile {
+    font-size: 43px;
+  }
+  .hero-title-sub-mobile {
+    font-size: 19px;
+  }
 }
 
 @media (max-width: 443px) {
