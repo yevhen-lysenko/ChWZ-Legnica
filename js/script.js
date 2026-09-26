@@ -90,8 +90,27 @@ function copyWithFeedback(text, btn) {
 function toggleAccordion(btn) {
   const item = btn.closest('.accordion-item');
   const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+
+  document.querySelectorAll('.accordion-item').forEach(i => {
+    i.classList.remove('open');
+    resetReadMore(i);
+  });
+
   if (!isOpen) item.classList.add('open');
+}
+
+function toggleReadMore(btn) {
+  const content = btn.previousElementSibling;
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open');
+  btn.textContent = isOpen ? 'Czytać dalej' : 'Zwiń';
+}
+
+function resetReadMore(item) {
+  const rm = item.querySelector('.read-more-content');
+  const rmBtn = item.querySelector('.read-more-btn');
+  if (rm) rm.classList.remove('open');
+  if (rmBtn) rmBtn.textContent = 'Czytać dalej';
 }
 
 // ════════════════════════════════════════════════════════

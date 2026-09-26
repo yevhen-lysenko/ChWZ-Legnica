@@ -25,6 +25,11 @@
   --radius-menu: 20px;
 }
 
+ul {
+  padding-left: 20px;
+  margin-top: 0;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 button { -webkit-tap-highlight-color: transparent; border: none}
 a { -webkit-tap-highlight-color: transparent; }
@@ -202,6 +207,10 @@ nav.desktop-nav a:hover { opacity: 0.75; }
   box-shadow: var(--border-box-shadow);
 }
 .btn-icon:hover { background: var(--bg); }
+
+.link-to-liveStream-mobile {
+  display: none;
+}
 
 /* Cal btn pulse */
 @keyframes calBtnPulse {
@@ -474,6 +483,27 @@ header.mobile-header {
 .accordion-item.open .accordion-trigger svg { transform: rotate(180deg); }
 .accordion-body { display: none; padding: 0 0 16px; font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
 .accordion-item.open .accordion-body { display: block; }
+
+.accordion-body p { margin-bottom: 12px; }
+.accordion-body p:last-child { margin-bottom: 0; }
+
+.read-more-content { display: none; }
+.read-more-content.open { display: block; }
+
+.read-more-btn {
+  display: block;
+  margin-top: 6px;
+  background: none;
+  color: var(--accent);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: opacity 0.2s;
+}
+.read-more-btn:hover { opacity: 0.7; }
 
 /* ═══════════════════════════════════════════════════════ */
 /* KONTAKT                                                 */
@@ -825,6 +855,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
   .map-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
 
   .link-to-liveStream-mobile {
+    display: flex;
     position: fixed;
     bottom: 89px;
     right: 14px;
