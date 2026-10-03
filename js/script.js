@@ -103,14 +103,23 @@ function toggleReadMore(btn) {
   const content = btn.previousElementSibling;
   const isOpen = content.classList.contains('open');
   content.classList.toggle('open');
-  btn.textContent = isOpen ? 'Czytać dalej' : 'Zwiń';
+  btn.textContent = isOpen ? btn.dataset.labelDefault : btn.dataset.labelCollapse;
+
+  // Если сворачиваем (было открыто, значит сейчас закрываем) — скроллим к заголовку
+  if (isOpen) {
+    const item = btn.closest('.accordion-item');
+    const trigger = item.querySelector('.accordion-trigger');
+    const headerH = window.innerWidth <= 768 ? 64 : 70;
+    const top = trigger.getBoundingClientRect().top + window.scrollY - headerH - 12;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
 }
 
 function resetReadMore(item) {
-  const rm = item.querySelector('.read-more-content');
-  const rmBtn = item.querySelector('.read-more-btn');
-  if (rm) rm.classList.remove('open');
-  if (rmBtn) rmBtn.textContent = 'Czytać dalej';
+  item.querySelectorAll('.read-more-content').forEach(rm => rm.classList.remove('open'));
+  item.querySelectorAll('.read-more-btn').forEach(btn => {
+    btn.textContent = btn.dataset.labelDefault || btn.textContent;
+  });
 }
 
 // ════════════════════════════════════════════════════════
@@ -129,6 +138,8 @@ const translations = {
     mnav_bracia: 'Bracia', mnav_accordion: 'Zasady',
     role_pastor: 'Pastor', role_pastor_senior: 'Pastor Senior', role_deacon: 'Diakon do spraw',
     nav_accordion: 'Zasady wiary', rules_text: 'Poznaj fundamentalne wartości, którymi się kierujemy.',
+    art_god_title: 'Bóg – Ojciec, Syn i Duch Święty', art_jesus_title: 'Jezus Chrystus – Syn Boży', art_bible_title: 'Pismo Święte – Słowo Boże',
+    art_salvation_title: 'Zbawienie z łaski', art_baptism_title: 'Chrzest wodny', art_supper_title: 'Wieczerza Pańska',
     contakt_text: 'Skontaktuj się z nami – chętnie odpowiemy na Twoje pytania.',
     label_email: 'Adres e-mail', btn_message: 'Napisz', btn_copy: 'Skopiuj', copied: 'Skopiowano',
     label_phone: 'Telefon', btn_call: 'Zadzwoń', label_bank: 'Dane bankowe', label_registration: 'Dane rejestrowe',
@@ -148,6 +159,8 @@ const translations = {
     mnav_bracia: 'Братья', mnav_accordion: 'Основы', 
     role_pastor: 'Пастор', role_pastor_senior: 'Старший пастор', role_deacon: 'Диакон',
     nav_accordion: 'Основы веры', rules_text: 'Познакомьтесь с основами христианской веры и принципами, которыми мы живём.',
+    art_god_title: 'Бог – Отец, Сын и Святой Дух', art_jesus_title: 'Иисус Христос – Сын Божий', art_bible_title: 'Священное Писание – Слово Божье',
+    art_salvation_title: 'Спасение по благодати', art_baptism_title: 'Водное крещение', art_supper_title: 'Вечеря Господня',
     contakt_text: 'Свяжитесь с нами — мы с радостью ответим на ваши вопросы.',
     label_email: 'Адрес электронной почты', btn_message: 'Написать', btn_copy: 'Скопировать', copied: 'Скопировано',
     label_phone: 'Телефон', btn_call: 'Позвонить', label_bank: 'Банковские данные', label_registration: 'Регистрационные данные',
@@ -167,6 +180,8 @@ const translations = {
     mnav_bracia: 'Brothers', mnav_accordion: 'Rules',
     role_pastor: 'Pastor', role_pastor_senior: 'Senior Pastor', role_deacon: 'Deacon',
     nav_accordion: 'Articles of faith', rules_text: 'Discover the basics of the Christian faith and the principles that guide our lives.',
+    art_god_title: 'God – Father, Son, and Holy Spirit', art_jesus_title: 'Jesus Christ – The Son of God', art_bible_title: 'Holy Scripture – The Word of God',
+    art_salvation_title: 'Salvation by Grace', art_baptism_title: 'Water Baptism', art_supper_title: "The Lord's Supper",
     contakt_text: 'Contact us – we will gladly answer your questions.',
     label_email: 'Email Address', btn_message: 'Message', btn_copy: 'Copy', copied: 'Copied',
     label_phone: 'Phone', btn_call: 'To call', label_bank: 'Bank details', label_registration: 'Registration details',
@@ -186,6 +201,8 @@ const translations = {
     mnav_bracia: 'Брати', mnav_accordion: 'Основи',
     role_pastor: 'Пастор', role_pastor_senior: 'Старший пастор', role_deacon: 'Диякон',
     nav_accordion: 'Основи віри', rules_text: 'Дізнайтеся про основи християнської віри та принципи, якими ми керуємося в житті.',
+    art_god_title: 'Бог – Отець, Син і Святий Дух', art_jesus_title: 'Ісус Христос – Син Божий', art_bible_title: 'Святе Письмо – Слово Боже',
+    art_salvation_title:'Спасіння з благодаті', art_baptism_title: 'Водне хрещення', art_supper_title: 'Вечеря Господня',
     contakt_text: 'Зв\'яжіться з нами — ми із задоволенням відповімо на ваші запитання.',
     label_email: 'Адреса електронної пошти', btn_message: 'Написати', btn_copy: 'Скопіювати', copied: 'Скопійовано',
     label_phone: 'Телефон', btn_call: 'Зателефонувати', label_bank: 'Банківські дані', label_registration: 'Реєстраційні дані',
@@ -203,6 +220,9 @@ function setLanguage(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key]) el.textContent = t[key];
+  });
+  document.querySelectorAll('.lang-content').forEach(el => {
+    el.classList.toggle('active', el.dataset.lang === lang);
   });
   document.getElementById('lang-dropdown').classList.remove('open');
   updateUwagaText(lang);

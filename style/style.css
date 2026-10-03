@@ -25,6 +25,8 @@
   --radius-menu: 20px;
 }
 
+
+
 ul {
   padding-left: 20px;
   margin-top: 0;
@@ -504,6 +506,9 @@ header.mobile-header {
   transition: opacity 0.2s;
 }
 .read-more-btn:hover { opacity: 0.7; }
+
+.lang-content { display: none; }
+.lang-content.active { display: block; }
 
 /* ═══════════════════════════════════════════════════════ */
 /* KONTAKT                                                 */
