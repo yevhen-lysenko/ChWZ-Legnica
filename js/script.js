@@ -36,6 +36,34 @@ function initScrollSpy() {
   });
 }
 
+let liveStreamTimer = null;
+
+function handleLiveStreamClick(e, el) {
+  if (!el.classList.contains('expanded')) {
+    e.preventDefault();
+    el.classList.add('expanded');
+    clearTimeout(liveStreamTimer);
+    liveStreamTimer = setTimeout(() => {
+      el.classList.remove('expanded');
+    }, 3000);
+    return false;
+  }
+  // уже раскрыто — второй клик идёт по ссылке
+  clearTimeout(liveStreamTimer);
+  el.classList.remove('expanded');
+  return true;
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.link-to-liveStream-mobile')) {
+    const btn = document.querySelector('.link-to-liveStream-mobile.expanded');
+    if (btn) {
+      clearTimeout(liveStreamTimer);
+      btn.classList.remove('expanded');
+    }
+  }
+});
+
 function setActiveNav(name) {
   document.querySelectorAll('nav.desktop-nav a').forEach(a => a.classList.remove('active'));
   document.querySelectorAll('.mobile-nav a').forEach(a => a.classList.remove('active'));
