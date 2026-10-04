@@ -855,7 +855,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
   .lang-dropdown { top: 65px; right: 14px; left: 14px;}
 
   .lang-dropdown button {
-    width: stretch;
+    width: calc(100% - 46px);
     margin: 0 23px;
     padding: 17px 0;
     border-bottom: 1px solid var(--glass-border);
