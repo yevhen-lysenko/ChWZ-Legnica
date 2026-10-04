@@ -119,21 +119,53 @@ function toggleAccordion(btn) {
   const item = btn.closest('.accordion-item');
   const isOpen = item.classList.contains('open');
 
-  document.querySelectorAll('.accordion-item').forEach(i => {
-    i.classList.remove('open');
-    resetReadMore(i);
+  document.querySelectorAll('.accordion-item.open').forEach(openItem => {
+    collapseAccordionBody(openItem);
   });
 
-  if (!isOpen) item.classList.add('open');
+  if (!isOpen) {
+    expandAccordionBody(item);
+  }
+}
+
+function expandAccordionBody(item) {
+  item.classList.add('open');
+  const body = item.querySelector('.accordion-body');
+  body.style.maxHeight = body.scrollHeight + 'px';
+
+  function onEnd(e) {
+    if (e.target !== body || e.propertyName !== 'max-height') return;
+    body.style.maxHeight = 'none';
+    body.removeEventListener('transitionend', onEnd);
+  }
+  body.addEventListener('transitionend', onEnd);
+}
+
+function collapseAccordionBody(item) {
+  const body = item.querySelector('.accordion-body');
+
+  if (getComputedStyle(body).maxHeight === 'none') {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    void body.offsetHeight; // форсируем reflow, чтобы браузер зафиксировал стартовую высоту
+  }
+
+  item.classList.remove('open');
+  requestAnimationFrame(() => {
+    body.style.maxHeight = '0px';
+  });
+  resetReadMore(item);
 }
 
 function toggleReadMore(btn) {
   const content = btn.previousElementSibling;
   const isOpen = content.classList.contains('open');
-  content.classList.toggle('open');
-  btn.textContent = isOpen ? btn.dataset.labelDefault : btn.dataset.labelCollapse;
 
-  // Если сворачиваем (было открыто, значит сейчас закрываем) — скроллим к заголовку
+  if (isOpen) {
+    collapseReadMore(content, btn);
+  } else {
+    expandReadMore(content, btn);
+  }
+
   if (isOpen) {
     const item = btn.closest('.accordion-item');
     const trigger = item.querySelector('.accordion-trigger');
@@ -143,8 +175,39 @@ function toggleReadMore(btn) {
   }
 }
 
+function expandReadMore(content, btn) {
+  content.classList.add('open');
+  content.style.maxHeight = content.scrollHeight + 'px';
+  btn.textContent = btn.dataset.labelCollapse;
+
+  function onEnd(e) {
+    if (e.target !== content || e.propertyName !== 'max-height') return;
+    content.style.maxHeight = 'none';
+    content.removeEventListener('transitionend', onEnd);
+  }
+  content.addEventListener('transitionend', onEnd);
+}
+
+function collapseReadMore(content, btn) {
+  if (getComputedStyle(content).maxHeight === 'none') {
+    content.style.maxHeight = content.scrollHeight + 'px';
+    void content.offsetHeight;
+  }
+  content.classList.remove('open');
+  requestAnimationFrame(() => {
+    content.style.maxHeight = '0px';
+  });
+  btn.textContent = btn.dataset.labelDefault;
+}
+
 function resetReadMore(item) {
-  item.querySelectorAll('.read-more-content').forEach(rm => rm.classList.remove('open'));
+  item.querySelectorAll('.read-more-content').forEach(rm => {
+    rm.classList.remove('open');
+    rm.style.transition = 'none';
+    rm.style.maxHeight = '0px';
+    void rm.offsetHeight;
+    rm.style.transition = '';
+  });
   item.querySelectorAll('.read-more-btn').forEach(btn => {
     btn.textContent = btn.dataset.labelDefault || btn.textContent;
   });

@@ -265,7 +265,7 @@ header.mobile-header {
   width: 20%;
   background: var(--bg);
   border-radius: var(--radius-pill);
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
   transform: translateX(6%);
   top: 5px;
   left: 0;
@@ -481,16 +481,39 @@ header.mobile-header {
   transition: opacity 0.2s;
 }
 .accordion-trigger:hover { opacity: 0.8; }
-.accordion-trigger svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.3s; }
+.accordion-trigger svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
 .accordion-item.open .accordion-trigger svg { transform: rotate(180deg); }
-.accordion-body { display: none; padding: 0 0 16px; font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
-.accordion-item.open .accordion-body { display: block; }
+
+.accordion-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease,
+              padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion-item.open .accordion-body {
+  opacity: 1;
+  padding: 0 0 16px;
+}
 
 .accordion-body p { margin-bottom: 12px; }
 .accordion-body p:last-child { margin-bottom: 0; }
 
-.read-more-content { display: none; }
-.read-more-content.open { display: block; }
+.read-more-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s ease;
+}
+.read-more-content.open {
+  opacity: 1;
+}
 
 .read-more-btn {
   display: block;
@@ -861,14 +884,15 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
 
   .link-to-liveStream-mobile {
     display: flex;
+    align-items: center;
     position: fixed;
     bottom: 89px;
     right: 14px;
     overflow: hidden;
-    transition: padding 0.3s ease, gap 0.3s ease;
-    gap: 0
+    gap: 0;
+    transition: gap 0.38s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
+  
   .link-to-liveStream-mobile .live-label {
     display: inline-block;
     max-width: 0;
@@ -879,7 +903,9 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
     font-weight: 700;
     color: #DC143C;
     font-family: 'Lato', sans-serif;
-    transition: max-width 0.3s ease, opacity 0.2s ease 0.05s;
+    will-change: max-width, opacity;
+    transition: max-width 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.28s ease-out;
   }
   
   .link-to-liveStream-mobile.expanded {
@@ -889,6 +915,8 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
   .link-to-liveStream-mobile.expanded .live-label {
     max-width: 160px;
     opacity: 1;
+    transition: max-width 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.28s ease-in 0.08s;
   }
 }
 
