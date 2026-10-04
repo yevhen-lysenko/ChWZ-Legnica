@@ -1,0 +1,10 @@
+diff a/js/script.js b/js/script.js	(rejected hunks)
+@@ -315,7 +315,7 @@
+   document.querySelectorAll('.lang-content').forEach(el => {
+     el.classList.toggle('active', el.dataset.lang === lang);
+   });
+-  document.getElementById('lang-dropdown').classList.remove('open');
++  closeLangDropdown();
+   updateUwagaText(lang);
+   const closeSpan = document.querySelector('.cal-close-btn span[data-i18n="btn_close"]');
+   if (closeSpan) closeSpan.textContent = calI18n[lang]?.btn_close || 'Zamknij';

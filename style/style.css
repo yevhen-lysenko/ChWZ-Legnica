@@ -674,7 +674,7 @@ header.mobile-header {
   position: fixed; inset: 0; z-index: 400;
   display: flex; align-items: center; justify-content: center;
   background: rgb(53 53 53 / 31%); backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(6px); padding: 16px;
+  -webkit-backdrop-filter: blur(20px); padding: 16px;
   animation: calBgIn 0.25s cubic-bezier(0.76, 0.76, 0.26, 0.24) both;
 }
 .calendar-overlay.hiding { animation: calBgOut 0.22s ease forwards; }
