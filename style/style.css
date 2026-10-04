@@ -682,7 +682,7 @@ header.mobile-header {
 @keyframes calBgOut { from { opacity:1; } to { opacity:0; } }
 
 .cal-modal {
-  display: flex; flex-direction: column; align-items: stretch;
+  display: flex; flex-direction: column;
   gap: 12px; width: 100%; max-width: 400px;
   animation: calModalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
 }
