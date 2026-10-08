@@ -280,26 +280,26 @@ const translations = {
     nav_address: 'Address', address_text: 'Visit our gathering – we invite you to our church.',
     btn_maps: 'Open in Maps', btn_close: 'Close'
   },
-  uk: {
-    btn_lang: 'Українська', btn_live: 'Пряма трансляція',
-    btn_calendar: 'Календар зібрань',
-    hero_title_small_mobile: 'Християнська Громада',
-    hero_title_main_mobile: 'П’ятидесятників',
-    hero_title_sub_mobile: 'Церква в Легниці',
-    hero_title_small: 'Християнська п’ятидесятницька громада',
-    nav_home: 'Головна', nav_onas: 'Про нас', nav_kontakt: 'Контакт',
-    nav_video: 'Відео про нас', nav_bracia: 'Брати служителя',
-    mnav_bracia: 'Брати', mnav_accordion: 'Основи',
-    role_pastor: 'Пастор', role_pastor_senior: 'Старший пастор', role_deacon: 'Диякон',
-    nav_accordion: 'Основи віри', rules_text: 'Дізнайтеся про основи християнської віри та принципи, якими ми керуємося в житті.',
-    art_god_title: 'Бог – Отець, Син і Святий Дух', art_jesus_title: 'Ісус Христос – Син Божий', art_bible_title: 'Святе Письмо – Слово Боже',
-    art_salvation_title:'Спасіння з благодаті', art_baptism_title: 'Водне хрещення', art_supper_title: 'Вечеря Господня',
-    contakt_text: 'Зв\'яжіться з нами — ми із задоволенням відповімо на ваші запитання.',
-    label_email: 'Адреса електронної пошти', btn_message: 'Написати', btn_copy: 'Скопіювати', copied: 'Скопійовано',
-    label_phone: 'Телефон', btn_call: 'Зателефонувати', label_bank: 'Банківські дані', label_registration: 'Реєстраційні дані',
-    btn_copy_bank: 'Скопіювати номер рахунку', nav_media: 'Соціальні мережі', media_text: 'Знайдете нас тут',
-    nav_address: 'Адреса', address_text: 'Відвідайте наше зібрання — запрошуємо до нашої церкви.',
-    btn_maps: 'Відкрити в картах', btn_close: 'Закрити'
+  de: {
+    btn_lang: 'Deutsch', btn_live: 'Live-Übertragung',
+    btn_calendar: 'Terminkalender',
+    hero_title_small_mobile: 'Christliche Gemeinschaft',
+    hero_title_main_mobile: 'der Pfingstler',
+    hero_title_sub_mobile: 'Gemeinde in Legnica',
+    hero_title_small: 'Christliche Pfingstgemeinschaft',
+    nav_home: 'Startseite', nav_onas: 'Über uns', nav_kontakt: 'Kontakt',
+    nav_video: 'Video über uns', nav_bracia: 'Brüder im Dienst',
+    mnav_bracia: 'Brüder', mnav_accordion: 'Grundsätze',
+    role_pastor: 'Pastor', role_pastor_senior: 'Seniorpastor', role_deacon: 'Diakon',
+    nav_accordion: 'Glaubensgrundsätze', rules_text: 'Lernen Sie die grundlegenden Werte kennen, von denen wir uns leiten lassen.',
+    art_god_title: 'Gott – Vater, Sohn und Heiliger Geist', art_jesus_title: 'Jesus Christus – der Sohn Gottes', art_bible_title: 'Die Heilige Schrift – das Wort Gottes',
+    art_salvation_title: 'Errettung aus Gnade', art_baptism_title: 'Wassertaufe', art_supper_title: 'Das Abendmahl des Herrn',
+    contakt_text: 'Kontaktieren Sie uns – wir beantworten gerne Ihre Fragen.',
+    label_email: 'E-Mail-Adresse', btn_message: 'Schreiben', btn_copy: 'Kopieren', copied: 'Kopiert',
+    label_phone: 'Telefon', btn_call: 'Anrufen', label_bank: 'Bankdaten', label_registration: 'Registrierungsdaten',
+    btn_copy_bank: 'Kontonummer kopieren', nav_media: 'Soziale Medien', media_text: 'Hier finden Sie uns.',
+    nav_address: 'Adresse', address_text: 'Besuchen Sie uns vor Ort – wir laden Sie herzlich in unsere Gemeinde ein.',
+    btn_maps: 'In Google Maps öffnen', btn_close: 'Schließen'
   }
 };
 
@@ -357,12 +357,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // ════════════════════════════════════════════════════════
 const weeklySchedule = {
   0: [
-    { pl: 'Nabożeństwo poranne o 10:00',     ru: 'Утреннее богослужение в 10:00',    en: 'Morning service at 10:00',        uk: 'Ранкове богослужіння о 10:00' },
-    { pl: 'Nabożeństwo wieczorowe o 18:00',  ru: 'Вечернее богослужение в 18:00',    en: 'Evening service at 18:00',        uk: 'Вечірнє богослужіння о 18:00' }
+    { pl: 'Nabożeństwo poranne o 10:00',     ru: 'Утреннее богослужение в 10:00',    en: 'Morning service at 10:00',        de: 'Morgengottesdienst um 10:00 Uhr' },
+    { pl: 'Nabożeństwo wieczorowe o 18:00',  ru: 'Вечернее богослужение в 18:00',    en: 'Evening service at 18:00',        de: 'Abendgottesdienst um 18:00 Uhr' }
   ],
-  1: [{ pl: 'Modlitwa o 19:00',                ru: 'Молитва в 19:00',                  en: 'Prayer meeting at 19:00',         uk: 'Молитва о 19:00' }],
-  4: [{ pl: 'Nabożeństwo o 18:00',             ru: 'Богослужение в 18:00',             en: 'Service at 18:00',                uk: 'Богослужіння о 18:00' }],
-  5: [{ pl: 'Młodzieżowe nabożeństwo o 18:00', ru: 'Молодёжное богослужение в 18:00',  en: 'Youth service at 18:00',          uk: 'Молодіжне богослужіння о 18:00' }]
+  1: [{ pl: 'Modlitwa o 19:00',                ru: 'Молитва в 19:00',                  en: 'Prayer meeting at 19:00',         de: 'Gebetstreffen um 19:00 Uhr' }],
+  4: [{ pl: 'Nabożeństwo o 18:00',             ru: 'Богослужение в 18:00',             en: 'Service at 18:00',                de: 'Gottesdienst um 18:00 Uhr' }],
+  5: [{ pl: 'Młodzieżowe nabożeństwo o 18:00', ru: 'Молодёжное богослужение в 18:00',  en: 'Youth service at 18:00',          de: 'Jugendgottesdienst um 18:00 Uhr' }]
 };
 
 // ════════════════════════════════════════════════════════
@@ -388,7 +388,7 @@ async function loadExceptions() {
     rows.forEach(row => {
       if (!raw[row.date]) raw[row.date] = [];
       raw[row.date][row.event_index] = {
-        pl: row.pl||'', ru: row.ru||'', en: row.en||'', uk: row.uk||''
+        pl: row.pl||'', ru: row.ru||'', en: row.en||'', de: row.de||''
       };
     });
     exceptionsCache = {};
@@ -414,13 +414,13 @@ async function loadExceptions() {
   }
 }
 
-async function saveException(date, eventIndex, pl, ru, en, uk) {
+async function saveException(date, eventIndex, pl, ru, en, de) {
   exceptionsCache = null;
   await fetch(`${API}?date=eq.${date}&event_index=eq.${eventIndex}`, { method: 'DELETE', headers: sbHeaders });
   await fetch(API, {
     method: 'POST',
     headers: { ...sbHeaders, 'Prefer': 'return=minimal' },
-    body: JSON.stringify({ date, event_index: eventIndex, pl, ru, en, uk })
+    body: JSON.stringify({ date, event_index: eventIndex, pl, ru, en, de })
   });
 }
 
@@ -451,7 +451,7 @@ const calI18n = {
   pl: { btn_close: 'Zamknij', no_events: 'Brak wydarzeń', months: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'], dows: ['Pn','Wt','Śr','Cz','Pt','So','Nd'] },
   ru: { btn_close: 'Закрыть', no_events: 'Нет событий', months: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], dows: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'] },
   en: { btn_close: 'Close', no_events: 'No events', months: ['January','February','March','April','May','June','July','August','September','October','November','December'], dows: ['Mo','Tu','We','Th','Fr','Sa','Su'] },
-  uk: { btn_close: 'Закрити', no_events: 'Немає подій', months: ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'], dows: ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'] }
+  de: { btn_close: 'Schließen', no_events: 'Keine Veranstaltungen', months: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'], dows: ['Mo','Di','Mi','Do','Fr','Sa','So'] }
 };
 
 // ════════════════════════════════════════════════════════
@@ -569,9 +569,9 @@ async function calChangeYear(delta) {
 // ════════════════════════════════════════════════════════
 function getUwagaMsg(lang, exceptionEvs, isTomorrow = false) {
   const dayStr = isTomorrow ? {
-    pl: 'Jutro', ru: 'Завтра', en: 'Tomorrow', uk: 'Завтра'
+    pl: 'Jutro', ru: 'Завтра', en: 'Tomorrow', de: 'Morgen'
   }[lang] : {
-    pl: 'Dzisiaj', ru: 'Сегодня', en: 'Today', uk: 'Сьогодні'
+    pl: 'Dzisiaj', ru: 'Сегодня', en: 'Today', de: 'Heute'
   }[lang];
 
   if (exceptionEvs.length === 0) {
@@ -579,7 +579,7 @@ function getUwagaMsg(lang, exceptionEvs, isTomorrow = false) {
       pl: `Uwaga! ${dayStr} nie odbędą się żadne nabożeństwa.`,
       ru: `Внимание! ${dayStr} богослужений не будет.`,
       en: `Notice! ${dayStr} there are no services.`,
-      uk: `Увага! ${dayStr} богослужінь не буде.`
+      de: `Achtung! ${dayStr} finden keine Gottesdienste statt.`
     }[lang];
   }
 
@@ -599,7 +599,7 @@ function getUwagaMsg(lang, exceptionEvs, isTomorrow = false) {
   
   // Добавляем "tylko/только/only/лише" если осталось одно из нескольких
   const onlyPrefix = (originalEvs.length > 1 && exceptionEvs.length === 1)
-    ? { pl: 'Tylko ', ru: 'Только ', en: 'Only ', uk: 'Лише ' }[lang]
+    ? { pl: 'Tylko ', ru: 'Только ', en: 'Only ', de: 'Nur ' }[lang]
     : '';
 
   const list = onlyPrefix + displayEvs.map(e => e[lang] || e.pl).join(', ');
@@ -608,7 +608,7 @@ function getUwagaMsg(lang, exceptionEvs, isTomorrow = false) {
     pl: `Uwaga! ${dayStr} zamiast zwykłego programu odbędzie się: ${list}.`,
     ru: `Внимание! ${dayStr} вместо обычной программы будет: ${list}.`,
     en: `Notice! ${dayStr} instead of the regular program: ${list}.`,
-    uk: `Увага! ${dayStr} замість звичайної програми відбудеться: ${list}.`
+    de: `Achtung! ${dayStr} findet anstelle des gewohnten Programms statt: ${list}.`
   }[lang];
 }
 
@@ -722,7 +722,7 @@ async function adminAddException() {
   const pl         = document.getElementById('admin-exc-pl').value.trim();
   const ru         = document.getElementById('admin-exc-ru').value.trim();
   const en         = document.getElementById('admin-exc-en').value.trim();
-  const uk         = document.getElementById('admin-exc-uk').value.trim();
+  const de         = document.getElementById('admin-exc-de').value.trim();
   const msgEl      = document.getElementById('admin-add-msg');
 
   if (!date) {
@@ -734,8 +734,8 @@ async function adminAddException() {
   msgEl.style.cssText = 'display:block;color:rgba(245,239,232,0.6)';
   msgEl.textContent = 'Zapisywanie...';
   try {
-    await saveException(date, eventIndex, pl||null, ru||null, en||null, uk||null);
-    ['admin-exc-date','admin-exc-pl','admin-exc-ru','admin-exc-en','admin-exc-uk'].forEach(id => document.getElementById(id).value = '');
+    await saveException(date, eventIndex, pl||null, ru||null, en||null, de||null);
+    ['admin-exc-date','admin-exc-pl','admin-exc-ru','admin-exc-en','admin-exc-de'].forEach(id => document.getElementById(id).value = '');
     msgEl.style.cssText = 'display:block;color:rgba(100,200,130,0.95)';
     msgEl.textContent = 'Wyjątek zapisany!';
     setTimeout(() => { msgEl.style.display = 'none'; }, 2500);

@@ -938,16 +938,16 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
 
   .hero-title-small-mobile {
       font-family: 'Playfair Display', serif;
-      font-size: 33px;
+      font-size: 30px;
       color: #ffffff;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   }
 
   .hero-title-main-mobile {
       font-family: 'Playfair Display', serif;
-      font-size: 48px;
+      font-size: 45px;
       font-weight: 700;
-      background: linear-gradient(180deg, #eeeeee 0%, #b67e53 50%, #e1e1e1 100%);
+      background: linear-gradient(180deg, #eeeeee 0%, #9d7c6e 40%, #9d7c6e 50%, #9d7c6e 60%, #E1E1E1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -958,7 +958,7 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
 
   .hero-title-sub-mobile {
       font-family: 'Lato', sans-serif;
-      font-size: 24px;
+      font-size: 21px;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 4px;
