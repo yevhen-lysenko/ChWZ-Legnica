@@ -234,7 +234,8 @@ const translations = {
     contakt_text: 'Skontaktuj się z nami – chętnie odpowiemy na Twoje pytania.',
     label_email: 'Adres e-mail', btn_message: 'Napisz', btn_copy: 'Skopiuj', copied: 'Skopiowano',
     label_phone: 'Telefon', btn_call: 'Zadzwoń', label_bank: 'Dane bankowe', label_registration: 'Dane rejestrowe',
-    btn_copy_bank: 'Skopiuj numer konta', nav_media: 'Media społecznościowe', media_text: 'Znajdziesz nas tutaj.',
+    btn_copy_bank: 'Skopiuj numer konta', sched_title: 'Godziny nabożeństw', sched_text: 'Regularne spotkania. Ewentualne zmiany w planie sprawdzisz w kalendarzu.',
+    btn_check_calendar: 'Sprawdź w kalendarzu', nav_media: 'Media społecznościowe', media_text: 'Znajdziesz nas tutaj.',
     nav_address: 'Adres', address_text: 'Odwiedź nas na miejscu – zapraszamy do naszego zboru.',
     btn_maps: 'Otwórz w Mapach', btn_close: 'Zamknij'
   },
@@ -255,7 +256,8 @@ const translations = {
     contakt_text: 'Свяжитесь с нами — мы с радостью ответим на ваши вопросы.',
     label_email: 'Адрес электронной почты', btn_message: 'Написать', btn_copy: 'Скопировать', copied: 'Скопировано',
     label_phone: 'Телефон', btn_call: 'Позвонить', label_bank: 'Банковские данные', label_registration: 'Регистрационные данные',
-    btn_copy_bank: 'Скопировать номер счёта', nav_media: 'Социальные сети', media_text: 'Ты найдёшь нас здесь.',
+    btn_copy_bank: 'Скопировать номер счёта', sched_title: 'Расписание богослужений', sched_text: 'Регулярные собрания. Возможные изменения в расписании можно проверить в календаре.',
+    btn_check_calendar: 'Проверить в календаре', nav_media: 'Социальные сети', media_text: 'Ты найдёшь нас здесь.',
     nav_address: 'Адрес', address_text: 'Посетите наше собрание — приглашаем в нашу церковь.',
     btn_maps: 'Открыть в картах', btn_close: 'Закрыть'
   },
@@ -276,7 +278,8 @@ const translations = {
     contakt_text: 'Contact us – we will gladly answer your questions.',
     label_email: 'Email Address', btn_message: 'Message', btn_copy: 'Copy', copied: 'Copied',
     label_phone: 'Phone', btn_call: 'To call', label_bank: 'Bank details', label_registration: 'Registration details',
-    btn_copy_bank: 'Copy the account number', nav_media: 'Social media', media_text: 'You will find us here.',
+    btn_copy_bank: 'Copy the account number', sched_title: 'Service times', sched_text: 'Regular meetings. Any schedule changes can be checked in the calendar.',
+    btn_check_calendar: 'Check the calendar', nav_media: 'Social media', media_text: 'You will find us here.',
     nav_address: 'Address', address_text: 'Visit our gathering – we invite you to our church.',
     btn_maps: 'Open in Maps', btn_close: 'Close'
   },
@@ -297,7 +300,8 @@ const translations = {
     contakt_text: 'Kontaktieren Sie uns – wir beantworten gerne Ihre Fragen.',
     label_email: 'E-Mail-Adresse', btn_message: 'Schreiben', btn_copy: 'Kopieren', copied: 'Kopiert',
     label_phone: 'Telefon', btn_call: 'Anrufen', label_bank: 'Bankdaten', label_registration: 'Registrierungsdaten',
-    btn_copy_bank: 'Kontonummer kopieren', nav_media: 'Soziale Medien', media_text: 'Hier finden Sie uns.',
+    btn_copy_bank: 'Kontonummer kopieren', sched_title: 'Gottesdienstzeiten', sched_text: 'Regelmäßige Versammlungen. Mögliche Änderungen im Zeitplan finden Sie im Kalender.',
+    btn_check_calendar: 'Im Kalender prüfen', nav_media: 'Soziale Medien', media_text: 'Hier finden Sie uns.',
     nav_address: 'Adresse', address_text: 'Besuchen Sie uns vor Ort – wir laden Sie herzlich in unsere Gemeinde ein.',
     btn_maps: 'In Google Maps öffnen', btn_close: 'Schließen'
   }
@@ -315,6 +319,7 @@ function setLanguage(lang) {
   document.querySelectorAll('.lang-content').forEach(el => {
     el.classList.toggle('active', el.dataset.lang === lang);
   });
+  renderSchedule();
   document.getElementById('lang-dropdown').classList.remove('open');
   updateUwagaText(lang);
   const closeSpan = document.querySelector('.cal-close-btn span[data-i18n="btn_close"]');
@@ -448,11 +453,29 @@ function dateKey(y, m, d) {
 // CALENDAR i18n
 // ════════════════════════════════════════════════════════
 const calI18n = {
-  pl: { btn_close: 'Zamknij', no_events: 'Brak wydarzeń', months: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'], dows: ['Pn','Wt','Śr','Cz','Pt','So','Nd'] },
-  ru: { btn_close: 'Закрыть', no_events: 'Нет событий', months: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], dows: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'] },
-  en: { btn_close: 'Close', no_events: 'No events', months: ['January','February','March','April','May','June','July','August','September','October','November','December'], dows: ['Mo','Tu','We','Th','Fr','Sa','Su'] },
-  de: { btn_close: 'Schließen', no_events: 'Keine Veranstaltungen', months: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'], dows: ['Mo','Di','Mi','Do','Fr','Sa','So'] }
+  pl: { btn_close: 'Zamknij', no_events: 'Brak wydarzeń', months: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'], dows: ['Pn','Wt','Śr','Cz','Pt','So','Nd'], daysFull: ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'] },
+  ru: { btn_close: 'Закрыть', no_events: 'Нет событий', months: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], dows: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'], daysFull: ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'] },
+  en: { btn_close: 'Close', no_events: 'No events', months: ['January','February','March','April','May','June','July','August','September','October','November','December'], dows: ['Mo','Tu','We','Th','Fr','Sa','Su'], daysFull: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'] },
+  de: { btn_close: 'Schließen', no_events: 'Keine Veranstaltungen', months: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'], dows: ['Mo','Di','Mi','Do','Fr','Sa','So'], daysFull: ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'] }
 };
+
+const scheduleOrder = [1, 4, 5, 0]; // пн, чт, пт, вс
+
+function renderSchedule() {
+  const list = document.getElementById('schedule-list');
+  if (!list) return;
+  const lang = currentLang || 'pl';
+  list.innerHTML = scheduleOrder.map(dow => {
+    const events = weeklySchedule[dow] || [];
+    return `
+      <div class="schedule-row">
+        <div class="schedule-day">${calI18n[lang].daysFull[dow]}</div>
+        <div class="schedule-events">
+          ${events.map(e => `<span class="schedule-event">${e[lang] || e.pl}</span>`).join('')}
+        </div>
+      </div>`;
+  }).join('');
+}
 
 // ════════════════════════════════════════════════════════
 // CALENDAR OPEN / CLOSE / RENDER
@@ -819,4 +842,5 @@ document.addEventListener('DOMContentLoaded', function() {
   initAdminAccess();
   initUwagaSwipe();
   checkUwagaBanner();
+  renderSchedule();
 });
