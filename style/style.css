@@ -557,11 +557,11 @@ header.mobile-header {
   display: flex; align-items: center; gap: 5px;
   transition: background 0.2s; font-family: 'Lato', sans-serif; box-shadow: 0 1px 1px 0 #9d7c6e inset, 0 -1px 1px 0 #9d7c6e inset;
 }
-#btn_e-mail {
+#btn_color {
   background: #9d7c6e;
   color: #fff;
 }
-#btn_e-mail:hover {
+#btn_color:hover {
   background: #8a685a;
 }
 .btn-sm:hover { background: #9d7c6e; color: #fff }
