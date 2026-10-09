@@ -237,7 +237,8 @@ const translations = {
     btn_copy_bank: 'Skopiuj numer konta', sched_title: 'Godziny nabożeństw', sched_text: 'Regularne spotkania. Ewentualne zmiany w planie sprawdzisz w kalendarzu.',
     btn_check_calendar: 'Sprawdź w kalendarzu', nav_media: 'Media społecznościowe', media_text: 'Znajdziesz nas tutaj.',
     nav_address: 'Adres', address_text: 'Odwiedź nas na miejscu – zapraszamy do naszego zboru.',
-    btn_maps: 'Otwórz w Mapach', btn_close: 'Zamknij'
+    btn_maps: 'Otwórz w Mapach', reg_register: 'Rejestr kościołów i innych związków wyznaniowych dział A poz. 18.',
+    reg_decision: 'Decyzja Ministerstwa Spraw Wewnętrznych i Administracji z dnia 20.06.2000 r. nr W.R./6722-6/18/2000/HG.', btn_close: 'Zamknij'
   },
   ru: {
     btn_lang: 'Русский', btn_live: 'Прямая трансляция',
@@ -259,7 +260,8 @@ const translations = {
     btn_copy_bank: 'Скопировать номер счёта', sched_title: 'Расписание богослужений', sched_text: 'Регулярные собрания. Возможные изменения в расписании можно проверить в календаре.',
     btn_check_calendar: 'Проверить в календаре', nav_media: 'Социальные сети', media_text: 'Ты найдёшь нас здесь.',
     nav_address: 'Адрес', address_text: 'Посетите наше собрание — приглашаем в нашу церковь.',
-    btn_maps: 'Открыть в картах', btn_close: 'Закрыть'
+    btn_maps: 'Открыть в картах', reg_register: 'Реестр церквей и других религиозных объединений, раздел A, поз. 18.',
+    reg_decision: 'Решение Министерства внутренних дел и администрации от 20.06.2000 г. № W.R./6722-6/18/2000/HG.', btn_close: 'Закрыть'
   },
   en: {
     btn_lang: 'English', btn_live: 'Live stream',
@@ -281,7 +283,8 @@ const translations = {
     btn_copy_bank: 'Copy the account number', sched_title: 'Service times', sched_text: 'Regular meetings. Any schedule changes can be checked in the calendar.',
     btn_check_calendar: 'Check the calendar', nav_media: 'Social media', media_text: 'You will find us here.',
     nav_address: 'Address', address_text: 'Visit our gathering – we invite you to our church.',
-    btn_maps: 'Open in Maps', btn_close: 'Close'
+    btn_maps: 'Open in Maps', reg_register: 'Register of churches and other religious associations, section A, item 18.',
+    reg_decision: 'Decision of the Ministry of the Interior and Administration of 20.06.2000, no. W.R./6722-6/18/2000/HG.', btn_close: 'Close'
   },
   de: {
     btn_lang: 'Deutsch', btn_live: 'Live-Übertragung',
@@ -303,7 +306,8 @@ const translations = {
     btn_copy_bank: 'Kontonummer kopieren', sched_title: 'Gottesdienstzeiten', sched_text: 'Regelmäßige Versammlungen. Mögliche Änderungen im Zeitplan finden Sie im Kalender.',
     btn_check_calendar: 'Im Kalender prüfen', nav_media: 'Soziale Medien', media_text: 'Hier finden Sie uns.',
     nav_address: 'Adresse', address_text: 'Besuchen Sie uns vor Ort – wir laden Sie herzlich in unsere Gemeinde ein.',
-    btn_maps: 'In Google Maps öffnen', btn_close: 'Schließen'
+    btn_maps: 'In Google Maps öffnen', reg_register: 'Register der Kirchen und anderen Religionsgemeinschaften, Abteilung A, Pos. 18.',
+    reg_decision: 'Entscheidung des Ministeriums für Inneres und Verwaltung vom 20.06.2000, Nr. W.R./6722-6/18/2000/HG.', btn_close: 'Schließen'
   }
 };
 
