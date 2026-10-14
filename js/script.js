@@ -386,67 +386,118 @@ const sbHeaders = {
   'Content-Type': 'application/json'
 };
 
-let exceptionsCache = null;
+const API_PERIODS = `${SUPABASE_URL}/rest/v1/period_exceptions`;
 
-async function loadExceptions() {
-  if (exceptionsCache) return exceptionsCache;
+let scheduleData = null; // { singles: {date: [...]}, periods: [...] }
+function getData() { return scheduleData || { singles: {}, periods: [] }; }
+
+async function loadScheduleData() {
+  if (scheduleData) return scheduleData;
   try {
-    const res = await fetch(`${API}?select=*&order=date,event_index`, { headers: sbHeaders });
-    const rows = await res.json();
-    const raw = {};
+    const [r1, r2] = await Promise.all([
+      fetch(`${API}?select=*&order=date,event_index`, { headers: sbHeaders }),
+      fetch(`${API_PERIODS}?select=*&order=id`, { headers: sbHeaders })
+    ]);
+    const rows = await r1.json();
+    const periods = r2.ok ? await r2.json() : [];
+    const singles = {};
     rows.forEach(row => {
-      if (!raw[row.date]) raw[row.date] = [];
-      raw[row.date][row.event_index] = {
-        pl: row.pl||'', ru: row.ru||'', en: row.en||'', de: row.de||''
+      if (!singles[row.date]) singles[row.date] = [];
+      singles[row.date][row.event_index] = {
+        cancel: !(row.pl || row.ru || row.en || row.de),
+        pl: row.pl || '', ru: row.ru || '', en: row.en || '', de: row.de || ''
       };
     });
-    exceptionsCache = {};
-    Object.keys(raw).forEach(date => {
-      const d = new Date(date + 'T12:00:00');
-      const base = (weeklySchedule[d.getDay()] || []).map(e => ({...e}));
-      const overrides = raw[date];
-      const result = [...base];
-      overrides.forEach((ov, idx) => {
-        if (!ov) return;
-        if (!ov.pl && !ov.ru && !ov.en && !ov.uk) {
-          result[idx] = null;
-        } else {
-          result[idx] = { pl: ov.pl, ru: ov.ru, en: ov.en, uk: ov.uk };
-        }
-      });
-      exceptionsCache[date] = result.filter(e => e !== null);
-    });
-    return exceptionsCache;
-  } catch(e) {
+    scheduleData = { singles, periods: Array.isArray(periods) ? periods : [] };
+    return scheduleData;
+  } catch (e) {
     console.error('Supabase load error:', e);
-    return {};
+    return getData();
   }
 }
 
 async function saveException(date, eventIndex, pl, ru, en, de) {
-  exceptionsCache = null;
+  scheduleData = null;
   await fetch(`${API}?date=eq.${date}&event_index=eq.${eventIndex}`, { method: 'DELETE', headers: sbHeaders });
-  await fetch(API, {
+  const res = await fetch(API, {
     method: 'POST',
     headers: { ...sbHeaders, 'Prefer': 'return=minimal' },
     body: JSON.stringify({ date, event_index: eventIndex, pl, ru, en, de })
   });
+  if (!res.ok) throw new Error(await res.text());
 }
 
 async function deleteException(date, eventIndex = null) {
-  exceptionsCache = null;
-  if (eventIndex !== null) {
-    await fetch(`${API}?date=eq.${date}&event_index=eq.${eventIndex}`, { method: 'DELETE', headers: sbHeaders });
+  scheduleData = null;
+  const url = eventIndex !== null
+    ? `${API}?date=eq.${date}&event_index=eq.${eventIndex}`
+    : `${API}?date=eq.${date}`;
+  await fetch(url, { method: 'DELETE', headers: sbHeaders });
+}
+
+async function savePeriod(row) {
+  scheduleData = null;
+  const res = await fetch(API_PERIODS, {
+    method: 'POST',
+    headers: { ...sbHeaders, 'Prefer': 'return=minimal' },
+    body: JSON.stringify(row)
+  });
+  if (!res.ok) throw new Error(await res.text());
+}
+
+async function deletePeriod(id) {
+  scheduleData = null;
+  const res = await fetch(`${API_PERIODS}?id=eq.${id}`, { method: 'DELETE', headers: sbHeaders });
+  if (!res.ok) throw new Error(await res.text());
+}
+
+// ── Расчёт расписания дня: недельное → период → один день ──
+function normEvent(o) {
+  const any = o.pl || o.ru || o.en || o.de || '';
+  return { pl: o.pl || any, ru: o.ru || o.pl || any, en: o.en || o.pl || any, de: o.de || o.pl || any };
+}
+
+function periodApplies(p, dateStr, dow) {
+  return dateStr >= p.date_from && dateStr <= p.date_to && (p.weekday == null || Number(p.weekday) === dow);
+}
+
+function applyPeriodRule(slots, p) {
+  const val = (p.pl || p.ru || p.en || p.de) ? normEvent(p) : null;
+  if (p.event_index == null) {
+    for (let i = 0; i < slots.length; i++) slots[i] = null;
+    if (val) slots[0] = val;
   } else {
-    await fetch(`${API}?date=eq.${date}`, { method: 'DELETE', headers: sbHeaders });
+    slots[p.event_index] = val;
   }
 }
 
+function baseSlots(dateStr) {
+  const dow = new Date(dateStr + 'T12:00:00').getDay();
+  return (weeklySchedule[dow] || []).map(e => ({ ...e }));
+}
+
+function slotsFor(dateStr, withSingles = true) {
+  const dow = new Date(dateStr + 'T12:00:00').getDay();
+  const data = getData();
+  const slots = baseSlots(dateStr);
+  data.periods.forEach(p => { if (periodApplies(p, dateStr, dow)) applyPeriodRule(slots, p); });
+  if (withSingles && data.singles[dateStr]) {
+    data.singles[dateStr].forEach((o, idx) => {
+      if (o) slots[idx] = o.cancel ? null : normEvent(o);
+    });
+  }
+  const out = Array.from(slots, s => s || null);
+  while (out.length && out[out.length - 1] === null) out.pop();
+  return out;
+}
+
+function slotSig(e) { return e ? [e.pl, e.ru, e.en, e.de].join('|') : ''; }
+function slotsSig(slots) { return slots.map(slotSig).join('¦'); }
+function dayHasChanges(dateStr) { return slotsSig(baseSlots(dateStr)) !== slotsSig(slotsFor(dateStr)); }
+
 async function getEventsForDate(dateStr) {
-  const exc = await loadExceptions();
-  if (exc.hasOwnProperty(dateStr)) return exc[dateStr];
-  const d = new Date(dateStr + 'T12:00:00');
-  return weeklySchedule[d.getDay()] || [];
+  await loadScheduleData();
+  return slotsFor(dateStr).filter(Boolean);
 }
 
 function dateKey(y, m, d) {
@@ -487,10 +538,8 @@ function renderSchedule() {
 let calYear, calMonth, calSelectedDate;
 
 async function openCalendar() {
-  const pulsingDate = window._pulsingDate; // ← сохраняем до сброса
   stopCalBtnPulse();
   hideUwaga();
-  window._pulsingDate = pulsingDate; // ← восстанавливаем после hideUwaga
   const overlay = document.getElementById('calendar-overlay');
   overlay.style.display = 'flex';
   overlay.classList.remove('hiding');
@@ -519,7 +568,7 @@ async function renderCalendar() {
   const lang = currentLang || 'pl';
   const t = calI18n[lang];
   const today = new Date();
-  const exc = await loadExceptions();
+  await loadScheduleData();
 
   document.getElementById('cal-month-label').textContent = t.months[calMonth];
   document.getElementById('cal-year-label').textContent  = calYear;
@@ -549,7 +598,7 @@ async function renderCalendar() {
     const dow    = new Date(calYear, calMonth, d).getDay();
     const isToday = calYear === today.getFullYear() && calMonth === today.getMonth() && d === today.getDate();
     const isSel  = key === calSelectedDate;
-    const events = exc.hasOwnProperty(key) ? exc[key] : (weeklySchedule[dow] || []);
+    const events = slotsFor(key).filter(Boolean);
     const adjustedDow = (dow + 6) % 7;
 
     let cls = 'cal-day';
@@ -557,7 +606,7 @@ async function renderCalendar() {
     if (isToday)           cls += ' today';
     if (isSel && !isToday) cls += ' selected';
     if (events.length > 0) cls += ' has-events';
-    if (window._pulsingDate === key) cls += ' day-pulse';
+    if (dayHasChanges(key)) cls += ' day-changed';
 
     const btn = document.createElement('button');
     btn.className   = cls;
@@ -592,109 +641,205 @@ async function calChangeYear(delta) {
 }
 
 // ════════════════════════════════════════════════════════
-// UWAGA BANNER
+// UWAGA — УВЕДОМЛЕНИЯ
 // ════════════════════════════════════════════════════════
-function getUwagaMsg(lang, exceptionEvs, isTomorrow = false) {
-  const dayStr = isTomorrow ? {
-    pl: 'Jutro', ru: 'Завтра', en: 'Tomorrow', de: 'Morgen'
-  }[lang] : {
-    pl: 'Dzisiaj', ru: 'Сегодня', en: 'Today', de: 'Heute'
-  }[lang];
+const UWAGA_DAYS_AHEAD = 7;        // за сколько дней показывать
+const REMEMBER_DISMISSED = true;   // закрытое уведомление не показывать снова
+const DISMISS_KEY = 'uwaga_dismissed';
 
-  if (exceptionEvs.length === 0) {
-    return {
-      pl: `Uwaga! ${dayStr} nie odbędą się żadne nabożeństwa.`,
-      ru: `Внимание! ${dayStr} богослужений не будет.`,
-      en: `Notice! ${dayStr} there are no services.`,
-      de: `Achtung! ${dayStr} finden keine Gottesdienste statt.`
-    }[lang];
+const uwagaI18n = {
+  pl: {
+    today: 'Dzisiaj', tomorrow: 'Jutro', only: 'Tylko ',
+    allDays: 'każdy dzień', allServices: 'wszystkie nabożeństwa',
+    daysOn: ['w niedzielę','w poniedziałek','we wtorek','w środę','w czwartek','w piątek','w sobotę'],
+    none:      d => `Uwaga! ${d} nie odbędą się żadne nabożeństwa.`,
+    instead:   (d, list) => `Uwaga! ${d} zamiast zwykłego programu odbędzie się: ${list}.`,
+    cancelled: (r, day, what) => `Uwaga! ${r} (${day}) – odwołane: ${what}.`,
+    changed:   (r, day, what) => `Uwaga! ${r} (${day}) – zmiana w programie: ${what}.`
+  },
+  ru: {
+    today: 'Сегодня', tomorrow: 'Завтра', only: 'Только ',
+    allDays: 'каждый день', allServices: 'все богослужения',
+    daysOn: ['в воскресенье','в понедельник','во вторник','в среду','в четверг','в пятницу','в субботу'],
+    none:      d => `Внимание! ${d} богослужений не будет.`,
+    instead:   (d, list) => `Внимание! ${d} вместо обычной программы будет: ${list}.`,
+    cancelled: (r, day, what) => `Внимание! ${r} (${day}) – отменено: ${what}.`,
+    changed:   (r, day, what) => `Внимание! ${r} (${day}) – изменение в программе: ${what}.`
+  },
+  en: {
+    today: 'Today', tomorrow: 'Tomorrow', only: 'Only ',
+    allDays: 'every day', allServices: 'all services',
+    daysOn: ['on Sunday','on Monday','on Tuesday','on Wednesday','on Thursday','on Friday','on Saturday'],
+    none:      d => `Notice! ${d} there are no services.`,
+    instead:   (d, list) => `Notice! ${d} instead of the regular program: ${list}.`,
+    cancelled: (r, day, what) => `Notice! ${r} (${day}) – cancelled: ${what}.`,
+    changed:   (r, day, what) => `Notice! ${r} (${day}) – schedule change: ${what}.`
+  },
+  de: {
+    today: 'Heute', tomorrow: 'Morgen', only: 'Nur ',
+    allDays: 'jeden Tag', allServices: 'alle Gottesdienste',
+    daysOn: ['am Sonntag','am Montag','am Dienstag','am Mittwoch','am Donnerstag','am Freitag','am Samstag'],
+    none:      d => `Achtung! ${d} finden keine Gottesdienste statt.`,
+    instead:   (d, list) => `Achtung! ${d} findet anstelle des gewohnten Programms statt: ${list}.`,
+    cancelled: (r, day, what) => `Achtung! ${r} (${day}) – abgesagt: ${what}.`,
+    changed:   (r, day, what) => `Achtung! ${r} (${day}) – Programmänderung: ${what}.`
+  }
+};
+
+const UWAGA_ICON = '<svg viewBox="0 0 24 24" fill="none" width="24" height="24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="13" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="white"/></svg>';
+const UWAGA_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+let uwagaItems = [];
+
+function loadDismissed() {
+  try { return JSON.parse(localStorage.getItem(DISMISS_KEY) || '[]'); } catch (e) { return []; }
+}
+function rememberDismissed(key) {
+  try {
+    const arr = loadDismissed();
+    if (!arr.includes(key)) {
+      arr.push(key);
+      localStorage.setItem(DISMISS_KEY, JSON.stringify(arr.slice(-100)));
+    }
+  } catch (e) {}
+}
+
+function fmtDM(dateStr, withYear) {
+  const [y, m, d] = dateStr.split('-');
+  return withYear ? `${d}.${m}.${y}` : `${d}.${m}`;
+}
+
+function uwagaWindowDays() {
+  const t = new Date(), days = [];
+  for (let i = 0; i <= UWAGA_DAYS_AHEAD; i++) {
+    const d = new Date(t.getFullYear(), t.getMonth(), t.getDate() + i);
+    days.push({ offset: i, key: dateKey(d.getFullYear(), d.getMonth(), d.getDate()), dow: d.getDay() });
+  }
+  return days;
+}
+
+function uwagaDayMessage(lang, day, ref, cur) {
+  const u = uwagaI18n[lang] || uwagaI18n.pl;
+  let d;
+  if (day.offset === 0) d = u.today;
+  else if (day.offset === 1) d = u.tomorrow;
+  else {
+    const on = u.daysOn[day.dow];
+    d = `${on.charAt(0).toUpperCase()}${on.slice(1)} (${fmtDM(day.key, false)})`;
   }
 
-  // Получаем оригинальное расписание дня
-  const targetDate = isTomorrow ? (() => { const d = new Date(); d.setDate(d.getDate()+1); return d; })() : new Date();
-  const originalEvs = weeklySchedule[targetDate.getDay()] || [];
+  const finalEvs = cur.filter(Boolean);
+  if (!finalEvs.length) return u.none(d);
 
-  // Находим только изменённые события
-// Находим только изменённые события
-  const changed = exceptionEvs.filter((ev, idx) => {
-    const orig = originalEvs[idx];
-    if (!orig) return true;
-    return orig.pl !== ev.pl || orig.ru !== ev.ru || orig.en !== ev.en || orig.uk !== ev.uk;
-  });
+  const changed = cur.filter((ev, i) => ev && slotSig(ev) !== slotSig(ref[i]));
+  const shown = changed.length ? changed : finalEvs;
+  const only = (ref.filter(Boolean).length > 1 && finalEvs.length === 1) ? u.only : '';
+  return u.instead(d, only + shown.map(e => e[lang] || e.pl).join(', '));
+}
 
-  const displayEvs = changed.length > 0 ? changed : exceptionEvs;
-  
-  // Добавляем "tylko/только/only/лише" если осталось одно из нескольких
-  const onlyPrefix = (originalEvs.length > 1 && exceptionEvs.length === 1)
-    ? { pl: 'Tylko ', ru: 'Только ', en: 'Only ', de: 'Nur ' }[lang]
-    : '';
+function makePeriodItem(p) {
+  const cancel = !(p.pl || p.ru || p.en || p.de);
+  const allEvents = p.event_index == null;
+  const baseEv = (cancel && !allEvents) ? (weeklySchedule[p.weekday] || [])[p.event_index] : null;
+  if (cancel && !allEvents && !baseEv) return null; // отменять нечего
 
-  const list = onlyPrefix + displayEvs.map(e => e[lang] || e.pl).join(', ');
+  const curYear = String(new Date().getFullYear());
+  const withYear = p.date_from.slice(0, 4) !== curYear || p.date_to.slice(0, 4) !== curYear;
 
   return {
-    pl: `Uwaga! ${dayStr} zamiast zwykłego programu odbędzie się: ${list}.`,
-    ru: `Внимание! ${dayStr} вместо обычной программы будет: ${list}.`,
-    en: `Notice! ${dayStr} instead of the regular program: ${list}.`,
-    de: `Achtung! ${dayStr} findet anstelle des gewohnten Programms statt: ${list}.`
-  }[lang];
+    key: `period:${p.id}:${p.date_from}:${p.date_to}:${p.weekday}:${p.event_index}:${p.pl || ''}`,
+    dismissed: false,
+    getText(lang) {
+      const u = uwagaI18n[lang] || uwagaI18n.pl;
+      const t = calI18n[lang] || calI18n.pl;
+      const range = `${fmtDM(p.date_from, withYear)}–${fmtDM(p.date_to, withYear)}`;
+      const day = p.weekday == null ? u.allDays : t.daysFull[p.weekday];
+      if (cancel) {
+        const what = allEvents ? u.allServices : (baseEv[lang] || baseEv.pl);
+        return u.cancelled(range, day, what);
+      }
+      return u.changed(range, day, normEvent(p)[lang]);
+    }
+  };
 }
 
-async function checkUwagaBanner() {
-  const today    = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
+function buildUwagaItems() {
+  const items = [];
+  const days = uwagaWindowDays();
 
-  const todayKey    = dateKey(today.getFullYear(),    today.getMonth(),    today.getDate());
-  const tomorrowKey = dateKey(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate());
-  const exc = await loadExceptions();
-
-  let targetKey = null, isTomorrow = false;
-
-  if (exc.hasOwnProperty(todayKey)) {
-    const normalText = (weeklySchedule[today.getDay()] || []).map(e => e.pl).join('|');
-    if (normalText !== exc[todayKey].map(e => e.pl).join('|')) targetKey = todayKey;
-  }
-  if (!targetKey && exc.hasOwnProperty(tomorrowKey)) {
-    const normalText = (weeklySchedule[tomorrow.getDay()] || []).map(e => e.pl).join('|');
-    if (normalText !== exc[tomorrowKey].map(e => e.pl).join('|')) { targetKey = tomorrowKey; isTomorrow = true; }
-  }
-  if (!targetKey) return;
-
-  const exceptionEvs = exc[targetKey];
-  window._uwagaExceptions = exceptionEvs;
-  window._uwagaIsTomorrow = isTomorrow;
-
-  startCalBtnPulse();
-  startDayPulse(targetKey);
-
-  const lang = currentLang || 'pl';
-  document.getElementById('uwaga-text').textContent = getUwagaMsg(lang, exceptionEvs, isTomorrow);
-  document.getElementById('uwaga-banner').style.display = 'flex';
-}
-
-function startDayPulse(dateStr) {
-  window._pulsingDate = dateStr;
-}
-
-function stopDayPulse() {
-  window._pulsingDate = null;
-  document.querySelectorAll('.cal-day.day-pulse').forEach(btn => {
-    btn.classList.remove('day-pulse');
+  // 1) изменения на период: одно уведомление на правило
+  getData().periods.forEach(p => {
+    if (!days.some(day => periodApplies(p, day.key, day.dow))) return;
+    const item = makePeriodItem(p);
+    if (item) items.push(item);
   });
+
+  // 2) изменения на один день: по уведомлению на дату
+  days.forEach(day => {
+    const ref = slotsFor(day.key, false);
+    const cur = slotsFor(day.key, true);
+    if (slotsSig(ref) === slotsSig(cur)) return;
+    items.push({
+      key: `day:${day.key}:${slotsSig(cur)}`,
+      dismissed: false,
+      getText: lang => uwagaDayMessage(lang, day, ref, cur)
+    });
+  });
+
+  return items;
+}
+
+function renderUwagaStack() {
+  const stack = document.getElementById('uwaga-stack');
+  if (!stack) return;
+  const lang = currentLang || 'pl';
+  stack.innerHTML = '';
+  uwagaItems.forEach((item, i) => {
+    if (item.dismissed) return;
+    const el = document.createElement('div');
+    el.className = 'uwaga-banner';
+    el.dataset.i = i;
+    el.style.animationDelay = `${i * 0.08}s`;
+    el.innerHTML = `${UWAGA_ICON}<span class="uwaga-text"></span><button class="uwaga-close" aria-label="Close">${UWAGA_CLOSE}</button>`;
+    el.querySelector('.uwaga-text').textContent = item.getText(lang);
+    el.querySelector('.uwaga-close').addEventListener('click', () => hideUwagaItem(i));
+    stack.appendChild(el);
+  });
+}
+
+function hideUwagaItem(i, remember = true) {
+  const item = uwagaItems[i];
+  if (!item || item.dismissed) return;
+  item.dismissed = true;
+  if (remember && REMEMBER_DISMISSED) rememberDismissed(item.key);
+  const el = document.querySelector(`#uwaga-stack .uwaga-banner[data-i="${i}"]`);
+  if (el) {
+    el.style.animationDelay = '0s';
+    el.classList.add('hiding');
+    setTimeout(() => el.remove(), 320);
+  }
+}
+
+// Вызывается при открытии календаря: прячет всё без запоминания
+function hideUwaga() {
+  stopCalBtnPulse();
+  uwagaItems.forEach((_, i) => hideUwagaItem(i, false));
 }
 
 function updateUwagaText(lang) {
-  if (!window._uwagaExceptions) return;
-  const banner = document.getElementById('uwaga-banner');
-  if (banner.style.display === 'none') return;
-  document.getElementById('uwaga-text').textContent = getUwagaMsg(lang, window._uwagaExceptions, window._uwagaIsTomorrow);
+  document.querySelectorAll('#uwaga-stack .uwaga-banner').forEach(el => {
+    const item = uwagaItems[el.dataset.i];
+    if (item) el.querySelector('.uwaga-text').textContent = item.getText(lang);
+  });
 }
 
-function hideUwaga() {
-  stopCalBtnPulse();
-  const banner = document.getElementById('uwaga-banner');
-  banner.classList.add('hiding');
-  setTimeout(() => { banner.style.display = 'none'; banner.classList.remove('hiding'); }, 320);
+async function checkUwagaBanner() {
+  await loadScheduleData();
+  const dismissed = REMEMBER_DISMISSED ? loadDismissed() : [];
+  uwagaItems = buildUwagaItems().filter(it => !dismissed.includes(it.key));
+  if (!uwagaItems.length) return;
+  startCalBtnPulse();
+  renderUwagaStack();
 }
 
 function startCalBtnPulse() {
@@ -702,12 +847,6 @@ function startCalBtnPulse() {
 }
 function stopCalBtnPulse() {
   document.querySelectorAll('.cal-header-btn').forEach(btn => btn.classList.remove('cal-btn-pulse'));
-  stopDayPulse();
-}
-
-// Swipe to dismiss uwaga banner
-function initUwagaSwipe() {
-  const banner = document.getElementById('uwaga-banner');
 }
 
 // ════════════════════════════════════════════════════════
@@ -773,15 +912,82 @@ async function adminAddException() {
   }
 }
 
+const ESC_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ESC_MAP[c]);
+
+function adminSwitchPane(name) {
+  document.querySelectorAll('.admin-tab').forEach(b => b.classList.toggle('active', b.dataset.pane === name));
+  document.getElementById('admin-pane-single').style.display = name === 'single' ? 'flex' : 'none';
+  document.getElementById('admin-pane-period').style.display = name === 'period' ? 'flex' : 'none';
+}
+
+async function adminAddPeriod() {
+  const v = id => document.getElementById(id).value.trim();
+  const msgEl = document.getElementById('admin-per-msg');
+  const ERR = 'rgba(220,100,100,0.95)', OK = 'rgba(100,200,130,0.95)';
+  const showMsg = (text, color, hideAfter) => {
+    msgEl.style.cssText = `display:block;color:${color}`;
+    msgEl.textContent = text;
+    if (hideAfter) setTimeout(() => { msgEl.style.display = 'none'; }, hideAfter);
+  };
+
+  const from = v('admin-per-from'), to = v('admin-per-to');
+  const dowRaw = v('admin-per-dow'), idxRaw = v('admin-per-index');
+
+  if (!from || !to)                         return showMsg('Wybierz daty „Od" i „Do"', ERR, 3000);
+  if (to < from)                            return showMsg('Data „Do" nie może być wcześniejsza niż „Od"', ERR, 3000);
+  if (dowRaw === '' || idxRaw === '')       return showMsg('Wybierz dzień tygodnia i wydarzenie', ERR, 3000);
+  if (dowRaw === 'all' && idxRaw !== 'all') return showMsg('Dla „Każdy dzień" wybierz „Wszystkie wydarzenia"', ERR, 3500);
+
+  const row = {
+    date_from: from,
+    date_to: to,
+    weekday: dowRaw === 'all' ? null : parseInt(dowRaw),
+    event_index: idxRaw === 'all' ? null : parseInt(idxRaw),
+    pl: v('admin-per-pl') || null,
+    ru: v('admin-per-ru') || null,
+    en: v('admin-per-en') || null,
+    de: v('admin-per-de') || null
+  };
+
+    showMsg('Zapisywanie...', 'rgba(245,239,232,0.6)');
+  try {
+    await savePeriod(row);
+  } catch (e) {
+    console.error('savePeriod:', e);
+    return showMsg('Błąd zapisu: ' + String(e.message).slice(0, 200), ERR);
+  }
+
+  ['admin-per-from','admin-per-to','admin-per-dow','admin-per-index',
+   'admin-per-pl','admin-per-ru','admin-per-en','admin-per-de']
+    .forEach(id => document.getElementById(id).value = '');
+  showMsg('Okres zapisany!', OK, 2500);
+  try { await renderAdminList(); } catch (e) { console.error('renderAdminList:', e); }
+}
+
+const DAYS_PL = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'];
 async function adminDeleteException(date, eventIndex = null) {
   await deleteException(date, eventIndex);
   await renderAdminList();
 }
 
+async function adminDeletePeriod(id) {
+  await deletePeriod(id);
+  await renderAdminList();
+}
+
 async function renderAdminList() {
-  exceptionsCache = null;
-  const res  = await fetch(`${API}?select=*&order=date,event_index`, { headers: sbHeaders });
-  const rows = await res.json();
+  scheduleData = null;
+  const [r1, r2] = await Promise.all([
+    fetch(`${API}?select=*&order=date,event_index`, { headers: sbHeaders }),
+    fetch(`${API_PERIODS}?select=*&order=date_from,id`, { headers: sbHeaders })
+  ]);
+  const rows = await r1.json();
+  const periods = r2.ok ? await r2.json() : [];
+
+  const TRASH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>`;
+
+  // ── один день ──
   const list  = document.getElementById('admin-exc-list');
   const noExc = document.getElementById('admin-no-exc');
   list.innerHTML = '';
@@ -793,22 +999,14 @@ async function renderAdminList() {
   });
 
   const keys = Object.keys(byDate).sort();
-  if (keys.length === 0) { noExc.style.display = 'block'; return; }
-  noExc.style.display = 'none';
-
+  noExc.style.display = keys.length ? 'none' : 'block';
   keys.forEach(date => {
-    const dateRows = byDate[date];
     const item = document.createElement('div');
     item.className = 'admin-exc-item';
-    const eventsHtml = dateRows.map(row => `
+    const eventsHtml = byDate[date].map(row => `
       <div class="admin-exc-event-row">
-        <span>#${row.event_index + 1}: ${row.pl || '<em>usuń</em>'}</span>
-        <button class="admin-exc-delete" onclick="adminDeleteException('${date}', ${row.event_index})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13">
-            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/>
-            <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
-          </svg>
-        </button>
+        <span>#${row.event_index + 1}: ${esc(row.pl) || '<em>usuń</em>'}</span>
+        <button class="admin-exc-delete" onclick="adminDeleteException('${date}', ${row.event_index})">${TRASH}</button>
       </div>`).join('');
     item.innerHTML = `
       <div class="admin-exc-item-info" style="width:100%">
@@ -817,6 +1015,23 @@ async function renderAdminList() {
       </div>`;
     list.appendChild(item);
   });
+
+  // ── периоды ──
+  const perList = document.getElementById('admin-per-list');
+  const noPer   = document.getElementById('admin-no-per');
+  noPer.style.display = periods.length ? 'none' : 'block';
+  perList.innerHTML = periods.map(p => `
+    <div class="admin-exc-item">
+      <div class="admin-exc-item-info" style="width:100%">
+        <div class="admin-exc-date-label">${p.date_from} → ${p.date_to}</div>
+        <div class="admin-exc-events-text">
+          <div class="admin-exc-event-row">
+            <span>${p.weekday == null ? 'Każdy dzień' : DAYS_PL[p.weekday]} · ${p.event_index == null ? 'wszystkie wyd.' : '#' + (p.event_index + 1)}: ${esc(p.pl) || '<em>odwołane</em>'}</span>
+            <button class="admin-exc-delete" onclick="adminDeletePeriod(${p.id})">${TRASH}</button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
 }
 
 // ════════════════════════════════════════════════════════
@@ -844,7 +1059,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initScrollSpy();
   initScrollReveal();
   initAdminAccess();
-  initUwagaSwipe();
   checkUwagaBanner();
   renderSchedule();
 });

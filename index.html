@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CHWZ</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./style/style.css?v=2" />
+<link rel="stylesheet" href="./style/style.css?v=3" />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
 <link rel="icon" type="image" href="./img/mainLogo.svg">
 <meta name="format-detection" content="telephone=no, email=no, address=no, date=no">
@@ -13,19 +13,7 @@
 <body>
 
 <!-- UWAGA BANNER -->
-<div id="uwaga-banner" class="uwaga-banner" style="display:none;">
-<svg viewBox="0 0 24 24" fill="none" width="24" height="24">
-  <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
-  <line x1="12" y1="7" x2="12" y2="13" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-  <circle cx="12" cy="17" r="1" fill="white"/>
-</svg>
-  <span id="uwaga-text"></span>
-  <button class="uwaga-close" onclick="hideUwaga()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
-      <line x1="18" y1="6" x2="6" y2="18" stroke="white"/><line x1="6" y1="6" x2="18" y2="18" stroke="white"/>
-    </svg>
-  </button>
-</div>
+<div id="uwaga-stack" class="uwaga-stack"></div>
 
 <!-- ═══════════════════ DESKTOP HEADER ═══════════════════ -->
 <header class="desktop-header glass header-transparent">
@@ -1007,7 +995,7 @@
       </div>
       <h2 class="admin-title">Panel administracyjny</h2>
       <p class="admin-subtitle">Wprowadź hasło, aby zarządzać wyjątkami w kalendarzu</p>
-      <input type="password" id="admin-password-input" class="admin-input" placeholder="Hasło... 1.2.0" onkeydown="if(event.key==='Enter') adminLogin()"/>
+      <input type="password" id="admin-password-input" class="admin-input" placeholder="Hasło... 1.3.0" onkeydown="if(event.key==='Enter') adminLogin()"/>
       <div id="admin-login-error" class="admin-error" style="display:none;">Nieprawidłowe hasło</div>
       <div class="admin-btns-row">
         <button class="admin-btn-secondary" onclick="closeAdmin()">Anuluj</button>
@@ -1022,53 +1010,129 @@
           Wyloguj
         </button>
       </div>
-      <p class="admin-subtitle" style="margin-bottom:16px;">Dodaj lub usuń wyjątek dla konkretnej daty</p>
-      <div class="admin-add-block">
-        <div class="admin-field-row">
-          <label class="admin-label">Data</label>
-          <input type="date" id="admin-exc-date" class="admin-input admin-input-sm"/>
-        </div>
-        <div class="admin-field-row">
-          <label class="admin-label">Wyd. #</label>
-          <select id="admin-exc-index" class="admin-input admin-input-sm">
-            <option value="0">1 - wydarzenie</option>
-            <option value="1">2 - wydarzenie</option>
-            <option value="2">3 - wydarzenie</option>
-          </select>
-        </div>
-        <div class="admin-field-row">
-          <label class="admin-label">🇵🇱 PL</label>
-          <input type="text" id="admin-exc-pl" class="admin-input admin-input-sm" placeholder="np. 17:00 Wieczerza (lub puste = usuń wydarzenie)"/>
-        </div>
-        <div class="admin-field-row">
-          <label class="admin-label">🇷🇺 RU</label>
-          <input type="text" id="admin-exc-ru" class="admin-input admin-input-sm" placeholder="напр. 17:00 Вечеря"/>
-        </div>
-        <div class="admin-field-row">
-          <label class="admin-label">🇬🇧 EN</label>
-          <input type="text" id="admin-exc-en" class="admin-input admin-input-sm" placeholder="e.g. 17:00 Lord's Supper"/>
-        </div>
-        <div class="admin-field-row">
-          <label class="admin-label">🇩🇪 DE</label>
-          <input type="text" id="admin-exc-de" class="admin-input admin-input-sm" placeholder="z.B. 17:00 Abendmahl"/>
-        </div>
-        <p class="admin-subtitle" style="margin:0;">Pozostaw pole puste — wydarzenie zostanie usunięte z harmonogramu na ten dzień.</p>
-        <button class="admin-btn-primary admin-btn-full" onclick="adminAddException()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Dodaj / zmień wyjątek
-        </button>
-        <div id="admin-add-msg" class="admin-success" style="display:none;"></div>
+    
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-pane="single" onclick="adminSwitchPane('single')">Jeden dzień</button>
+        <button class="admin-tab" data-pane="period" onclick="adminSwitchPane('period')">Okres</button>
       </div>
-      <div class="admin-exc-list-wrap">
-        <h3 class="admin-list-title">Aktywne wyjątki</h3>
-        <div class="admin-exc-list" id="admin-exc-list"></div>
-        <div id="admin-no-exc" class="admin-no-exc">Brak wyjątków</div>
+    
+      <!-- ═══ JEDEN DZIEŃ ═══ -->
+      <div id="admin-pane-single" class="admin-screen">
+        <p class="admin-subtitle">Dodaj lub usuń wyjątek dla konkretnej daty</p>
+        <div class="admin-add-block">
+          <div class="admin-field-row">
+            <label class="admin-label">Data</label>
+            <input type="date" id="admin-exc-date" class="admin-input admin-input-sm"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">Wyd. #</label>
+            <select id="admin-exc-index" class="admin-input admin-input-sm">
+              <option value="0">1 - wydarzenie</option>
+              <option value="1">2 - wydarzenie</option>
+              <option value="2">3 - wydarzenie</option>
+            </select>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">🇵🇱 PL</label>
+            <input type="text" id="admin-exc-pl" class="admin-input admin-input-sm" placeholder="np. 17:00 Wieczerza (lub puste = usuń wydarzenie)"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">🇷🇺 RU</label>
+            <input type="text" id="admin-exc-ru" class="admin-input admin-input-sm" placeholder="напр. 17:00 Вечеря"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">🇬🇧 EN</label>
+            <input type="text" id="admin-exc-en" class="admin-input admin-input-sm" placeholder="e.g. 17:00 Lord's Supper"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">🇩🇪 DE</label>
+            <input type="text" id="admin-exc-de" class="admin-input admin-input-sm" placeholder="z.B. 17:00 Abendmahl"/>
+          </div>
+          <p class="admin-subtitle" style="margin:0;">Aby wydarzenie zostało usunięte w wybranym dniu, pozostaw te pola puste.</p>
+          <button class="admin-btn-primary admin-btn-full" onclick="adminAddException()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Dodaj / zmień wyjątek
+          </button>
+          <div id="admin-add-msg" class="admin-success" style="display:none;"></div>
+        </div>
+        <div class="admin-exc-list-wrap">
+          <h3 class="admin-list-title">Aktywne wyjątki</h3>
+          <div class="admin-exc-list" id="admin-exc-list"></div>
+          <div id="admin-no-exc" class="admin-no-exc">Brak wyjątków</div>
+        </div>
       </div>
+    
+      <!-- ═══ OKRES ═══ -->
+      <div id="admin-pane-period" class="admin-screen" style="display:none;">
+        <p class="admin-subtitle">Zmiana w programie na cały okres (np. Tydzień Modlitw przed Wieczerzą Pańską)</p>
+        <div class="admin-add-block">
+          <div class="admin-field-row">
+            <label class="admin-label">Od</label>
+            <input type="date" id="admin-per-from" class="admin-input admin-input-sm"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">Do</label>
+            <input type="date" id="admin-per-to" class="admin-input admin-input-sm"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">Dzień</label>
+            <select id="admin-per-dow" class="admin-input admin-input-sm">
+              <option value="" disabled selected>Wybierz…</option>
+              <option value="all">Każdy dzień</option>
+              <option value="1">Poniedziałek</option>
+              <option value="2">Wtorek</option>
+              <option value="3">Środa</option>
+              <option value="4">Czwartek</option>
+              <option value="5">Piątek</option>
+              <option value="6">Sobota</option>
+              <option value="0">Niedziela</option>
+            </select>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">Wyd. #</label>
+            <select id="admin-per-index" class="admin-input admin-input-sm">
+              <option value="" disabled selected>Wybierz…</option>
+              <option value="all">Wszystkie wydarzenia</option>
+              <option value="0">1 - wydarzenie</option>
+              <option value="1">2 - wydarzenie</option>
+              <option value="2">3 - wydarzenie</option>
+            </select>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">🇵🇱 PL</label>
+            <input type="text" id="admin-per-pl" class="admin-input admin-input-sm" placeholder="np. 17:00 Wieczerza (lub puste = odwołane)"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">🇷🇺 RU</label>
+            <input type="text" id="admin-per-ru" class="admin-input admin-input-sm" placeholder="напр. 17:00 Вечеря"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">🇬🇧 EN</label>
+            <input type="text" id="admin-per-en" class="admin-input admin-input-sm" placeholder="e.g. 17:00 Lord's Supper"/>
+          </div>
+          <div class="admin-field-row">
+            <label class="admin-label">🇩🇪 DE</label>
+            <input type="text" id="admin-per-de" class="admin-input admin-input-sm" placeholder="z.B. 17:00 Abendmahl"/>
+          </div>
+          <p class="admin-subtitle" style="margin:0;">Puste pola = wydarzenie odwołane w całym okresie. „Każdy dzień" działa tylko z „Wszystkie wydarzenia".</p>
+          <button class="admin-btn-primary admin-btn-full" onclick="adminAddPeriod()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Dodaj okres
+          </button>
+          <div id="admin-per-msg" class="admin-success" style="display:none;"></div>
+        </div>
+        <div class="admin-exc-list-wrap">
+          <h3 class="admin-list-title">Aktywne okresy</h3>
+          <div class="admin-exc-list" id="admin-per-list"></div>
+          <div id="admin-no-per" class="admin-no-exc">Brak okresów</div>
+        </div>
+      </div>
+    
       <button class="admin-btn-secondary admin-btn-full" onclick="closeAdmin()">Zamknij panel</button>
     </div>
   </div>
 </div>
 
-<script src="./js/script.js?v=2"></script>
+<script src="./js/script.js?v=3"></script>
 </body>
 </html>
