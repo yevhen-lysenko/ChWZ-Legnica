@@ -644,7 +644,7 @@ async function calChangeYear(delta) {
 // UWAGA — УВЕДОМЛЕНИЯ
 // ════════════════════════════════════════════════════════
 const UWAGA_DAYS_AHEAD = 7;        // за сколько дней показывать
-const REMEMBER_DISMISSED = true;   // закрытое уведомление не показывать снова
+const REMEMBER_DISMISSED = false;   // закрытое уведомление не показывать снова
 const DISMISS_KEY = 'uwaga_dismissed';
 
 const uwagaI18n = {

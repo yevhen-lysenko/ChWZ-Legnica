@@ -65,8 +65,9 @@ header {
 }
 
 header.header-transparent {
-  background: transparent;
+  background: #ffffff14;
   border-bottom-color: transparent;
+  box-shadow: 0px 5px 20px 0px #ffffff14;
 }
 
 .logo {
@@ -93,6 +94,36 @@ header.header-transparent {
 }
 .logoImg#chwz {
   width: 95px;
+}
+
+/* Квадратный логотип на десктопе: половина в шапке, половина свисает вниз */
+header.desktop-header {
+  --header-h: 70px;
+  height: var(--header-h);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+header.desktop-header .logo {
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    height: 96px;
+    padding: 0;
+    border-radius: 24px;
+    align-self: flex-start;
+    margin-top: calc(var(--header-h) - 96px / 2);
+}
+
+header.desktop-header .logo #bird {
+  position: absolute;
+  width: 76px;
+  margin-right: 56px;
+}
+header.desktop-header .logo #chwz {
+  margin-top: 55px;
+  margin-left: 55px;
+  width: 65px;
 }
 
 nav.desktop-nav {
@@ -681,7 +712,7 @@ header.mobile-header {
 .uwaga-banner .uwaga-text { flex: 1; font-size: 0.88rem; font-weight: 700; color: var(--bg-ligth); line-height: 1.5; }
 .uwaga-stack {
   position: fixed;
-  top: 78px; left: 32px;
+  top: 78px; right: 34px;
   z-index: 100;
   display: flex; flex-direction: column; gap: 8px;
   max-width: min(560px, calc(100vw - 64px));
@@ -1129,4 +1160,3 @@ input[type="date"].admin-input::-webkit-calendar-picker-indicator { filter: inve
 .reveal-delay-4 { transition-delay: 0.32s; }
 .reveal-delay-5 { transition-delay: 0.40s; }
 .reveal-delay-6 { transition-delay: 0.48s; }
-
