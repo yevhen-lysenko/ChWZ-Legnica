@@ -89,11 +89,6 @@ header.header-transparent {
 }
 .logo:hover { background: var(--bg); }
 
-.logoImg {
-  transform: translateZ(0);
-  shape-rendering: geometricPrecision;
-}
-
 .logoImg#bird {
   width: 25px;
 }
